@@ -30,12 +30,12 @@
     <div class="app-container">
         
         <%-- SIDEBAR INCLUDE --%>
-        <jsp:include page="sidebar.jsp" />
+        <jsp:include page="SidebarAdmin.jsp" />
 
         <div class="main-container">
             
             <%-- HEADER INCLUDE --%>
-            <jsp:include page="header.jsp" />
+            <jsp:include page="HeaderAdmin.jsp" />
 
             <main class="page-content">
                 
@@ -158,7 +158,7 @@
             </main>
 
             <%-- FOOTER INCLUDE --%>
-            <jsp:include page="footer.jsp" />
+            <jsp:include page="FooterAdmin.jsp" />
 
         </div>
     </div>
