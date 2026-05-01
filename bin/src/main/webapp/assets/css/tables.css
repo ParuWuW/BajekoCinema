@@ -1,0 +1,204 @@
+/* TOOLBAR START */
+.toolbar-search {
+    flex-grow: 1;
+    max-width: 480px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.toolbar-search i {
+    position: absolute;
+    left: 16px;
+    color: var(--text-muted);
+}
+
+.toolbar-search input {
+    width: 100%;
+    background-color: var(--bg-panel);
+    border: 1px solid var(--bg-border);
+    color: var(--text-main);
+    padding: 12px 16px 12px 48px;
+    border-radius: var(--border-radius-sm);
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+.toolbar-search input:focus {
+    outline: none;
+    border-color: var(--text-muted);
+}
+
+.toolbar-filters {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-filter, .btn-sort {
+    background-color: var(--bg-panel);
+    color: var(--text-main);
+    border: 1px solid var(--bg-border);
+    padding: 10px 20px;
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+.btn-filter:hover, .btn-sort:hover {
+    background-color: var(--bg-hover);
+}
+
+/* TABLE */
+.table-container {
+    background-color: var(--bg-panel);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    padding: 24px;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--bg-border);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+td {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--bg-border);
+    vertical-align: middle;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.movie-cell {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.movie-img {
+    width: 48px;
+    height: 64px;
+    border-radius: 6px;
+    object-fit: cover;
+    background-color: var(--bg-hover);
+}
+
+.movie-info h5 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.movie-info span {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+.user-info span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.price-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.price-control i {
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.price-control i:hover {
+    color: var(--text-main);
+}
+
+.actions {
+    display: flex;
+    gap: 16px;
+}
+
+.actions button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.actions button:hover {
+    color: var(--text-main);
+}
+
+.actions button.delete:hover {
+    color: var(--accent-red);
+}
+
+.table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0 0 0;
+}
+
+.showing-text {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pagination {
+    display: flex;
+    gap: 8px;
+}
+
+.page-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background-color: var(--bg-panel);
+    border: 1px solid var(--bg-border);
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.page-btn:hover {
+    background-color: var(--bg-hover);
+}
+
+.page-btn.active {
+    background-color: var(--accent-yellow);
+    color: var(--text-dark);
+    border-color: var(--accent-yellow);
+}
