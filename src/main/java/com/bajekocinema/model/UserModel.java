@@ -5,6 +5,7 @@ public class UserModel {
 	private String Username;
 	private String UserPhoneNumber;
 	private String UserEmail;
+	private String Password;
 	private String Image;
 	/**
 	 * @return the username
@@ -53,6 +54,18 @@ public class UserModel {
 	 */
 	public void setImage(String image) {
 		Image = image;
+	}
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return Password;
+	}
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		Password = password;
 	}
 	
 
