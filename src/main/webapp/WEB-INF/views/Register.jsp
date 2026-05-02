@@ -8,7 +8,7 @@
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/register.css">
 </head>
 <body>
 
@@ -34,26 +34,33 @@
 
                 <form action="" method="POST" class="register-form">
                     <div class="input-group">
-					    <input type="email" id="email" name="email" placeholder=" " required>
+					    <input type="email" id="email" name="UserEmail" placeholder=" ">
 					    <label for="email">EMAIL ADDRESS</label>
 					</div>
 					
 					<div class="input-group">
-					    <input type="text" id="fullName" name="fullName" placeholder=" " required>
+					    <input type="text" id="fullName" name="Username" placeholder=" ">
 					    <label for="fullName">FULL NAME</label>
 					</div>
 					
 					<div class="input-group">
-					    <input type="text" id="phone" name="phone" placeholder=" " required>
+					    <input type="text" id="phone" name="UserPhoneNumber" placeholder=" ">
 					    <label for="phone">PHONE NUMBER</label>
 					</div>
 					
 					<div class="input-group">
-					    <input type="password" id="password" name="password" placeholder=" " required>
+					    <input type="file" id="profilePicture" name="UserProfilePicture" placeholder=" ">
+					    <label for="profilePicture">Profile Picture</label>
+					</div>
+					
+					<div class="input-group">
+					    <input type="password" id="password" name="Password" placeholder=" ">
 					    <label for="password">PASSWORD</label>
 					</div>
 
                     <button type="submit" class="signup-btn">SIGN UP</button>
+                    
+                    <!-- image -->
 
                     <p class="terms-text">
                         By entering, you agree to our
