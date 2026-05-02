@@ -14,7 +14,7 @@ import com.bajekocinema.services.RegisterService;
 /**
  * Servlet implementation class RegisterServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/Register" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/register" })
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,7 +31,7 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("WEB-INF/views/Register.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/pages/Register.jsp").forward(request, response);
 	}
 
 	/**
