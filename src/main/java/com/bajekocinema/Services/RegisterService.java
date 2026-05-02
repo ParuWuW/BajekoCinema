@@ -1,4 +1,4 @@
-package com.bajekocinema.Services;
+package com.bajekocinema.services;
 
 import com.bajekocinema.DAO.UserDAO;
 import com.bajekocinema.Utils.PasswordUtil;

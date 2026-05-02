@@ -9,7 +9,7 @@ import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 
-import com.bajekocinema.Services.RegisterService;
+import com.bajekocinema.services.RegisterService;
 
 /**
  * Servlet implementation class RegisterServlet
