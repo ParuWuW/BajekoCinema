@@ -363,7 +363,7 @@
 
     </main>
 
-    <jsp:include page="Front_Footer.jsp" />
+    <jsp:include page="Footer.jsp" />
 
 </body>
 </html>
