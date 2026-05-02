@@ -1,4 +1,4 @@
-package com.bajekocinema.Utils;
+package com.bajekocinema.utils;
 
 import org.mindrot.jbcrypt.BCrypt;
 

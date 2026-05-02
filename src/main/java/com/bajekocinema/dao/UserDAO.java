@@ -1,4 +1,4 @@
-package com.bajekocinema.DAO;
+package com.bajekocinema.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bajekocinema.Utils.DBconfig;
 import com.bajekocinema.model.UserModel;
+import com.bajekocinema.utils.DBconfig;
 
 public class UserDAO {
 	
