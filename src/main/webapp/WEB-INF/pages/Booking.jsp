@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +9,11 @@
     <title>BAJEKO Cinema | Project Hail Mary</title>
 
     <!-- Global/Shared Styles -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/home.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Home.css">
     <!-- Booking Specific Styles -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/booking.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/header.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Booking.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Footer.css">
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,7 +24,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="booking-page-body">
-    <% request.setAttribute("activePage", "home"); %>
     <jsp:include page="Header.jsp" />
 
     <main class="booking-page">

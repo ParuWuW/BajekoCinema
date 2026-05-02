@@ -2,7 +2,7 @@
 <footer>
     <div class="footer-content" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
         <div class="footer-logo">
-            <img src="${pageContext.request.contextPath}/assets/img/logo.png" alt="Bajeko Cinema Logo" style="height: 60px;">
+            <img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="Bajeko Cinema Logo" style="height: 60px;">
         </div>
 
         <div class="footer-col">

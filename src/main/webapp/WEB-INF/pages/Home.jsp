@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page isELIgnored = "false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,20 +9,14 @@
     <title>BAJEKO Cinema | Home</title>
 
     <!-- External Stylesheet -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/home.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css//Home.css">
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Google Fonts: Montserrat + Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
     <meta name="description" content="BAJEKO Cinema — Experience the luminescent gallery. Book tickets, watch trailers, and explore now showing and coming soon movies.">
 </head>
 <body>
-    <% request.setAttribute("activePage", "home"); %>
+    <c:set var="activePage" value="home" scope="request" />
     <jsp:include page = "Header.jsp"/>
 
     <!-- Hero Section -->

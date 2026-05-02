@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page isELIgnored = "false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -258,7 +261,9 @@
     </style>
 </head>
 <body>
-    
+    <c:set var="activePage" value="home" scope="request" />
+    <jsp:include page = "Header.jsp"/>
+        
     <main class="about-container">
         
         <header class="page-header">
