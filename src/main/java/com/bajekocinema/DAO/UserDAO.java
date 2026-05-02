@@ -11,14 +11,14 @@ import com.bajekocinema.model.UserModel;
 
 public class UserDAO {
 	
-	public void insertUser(String Username, String UserPhoneNumber, String UserEmail, String Password, String Image) throws Exception {
+	public void insertUser(String Username, int userPhoneNumber, String UserEmail, String Password, String Image) throws Exception {
 		Connection con = DBconfig.getConnection();
 		
 		String sql = "INSERT INTO user (Username, UserPhoneNumber, UserEmail, Password, Image)" + "VALUES (?,?,?,?,?,)";
 		
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setString(1, Username);
-        pst.setString(2, UserPhoneNumber);
+        pst.setInt(2, userPhoneNumber);
         pst.setString(3, UserEmail);
         pst.setString(4, Password);
         pst.setString(5, Image);
@@ -39,7 +39,7 @@ public class UserDAO {
 		while(rs.next()) {
 			UserModel s = new UserModel();
 			s.setUsername(rs.getString("Username"));
-			s.setUserPhoneNumber(rs.getString("UserPhoneNumber"));
+			s.setUserPhoneNumber(rs.getInt("UserPhoneNumber"));
 			s.setUserEmail(rs.getString("UserEmail"));
 			s.setPassword(rs.getString("Password"));
 			s.setImage(rs.getString("Image"));
