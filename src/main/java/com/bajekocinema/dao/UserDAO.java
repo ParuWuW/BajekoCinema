@@ -50,5 +50,20 @@ public class UserDAO {
 		con.close();
 		return users;
 	}
+	public UserModel getUserByEmail(String UserEmail) throws Exception {
+	    Connection con = DBconfig.getConnection();
+	    String sql = "SELECT UserEmail, Password FROM user WHERE UserEmail = ?";
+	    PreparedStatement pst = con.prepareStatement(sql);
+	    pst.setString(1, UserEmail);
+	    ResultSet rs = pst.executeQuery();
+
+	    if (rs.next()) {
+	        UserModel user = new UserModel();
+	        user.setUserEmail(rs.getString("UserEmail"));
+	        user.setPassword(rs.getString("Password"));
+	        return user;
+	    }
+	    return null;
+	}
 
 }
