@@ -9,9 +9,8 @@ import java.io.IOException;
 
 import com.bajekocinema.model.UserModel;
 import com.bajekocinema.services.LoginService;
-import com.hashing.model.StudentModel;
-import com.hashing.utils.CookieUtil;
-import com.hashing.utils.SessionUtil;
+import com.bajekocinema.utils.CookieUtil;
+import com.bajekocinema.utils.SessionUtil;
 
 /**
  * Servlet implementation class LoginServlet
@@ -50,9 +49,9 @@ public class LoginServlet extends HttpServlet {
         String Password = request.getParameter("Password");
 
         // validation
-        if (UserEmail == null || Password == null || UserEmail.isEmpty() || password.isEmpty()) {
+        if (UserEmail == null || Password == null || UserEmail.isEmpty() || Password.isEmpty()) {
         	request.setAttribute("error", "Email and Password are required");
-        	request.getRequestDispatcher("/WEB-INF/pages/Login.jsp").forward(req, resp);
+        	request.getRequestDispatcher("/WEB-INF/pages/Login.jsp").forward(request, response);
             return;
         }
 
@@ -78,7 +77,7 @@ public class LoginServlet extends HttpServlet {
 
         } else {
             request.setAttribute("error", "Invalid email or password");
-            request.getRequestDispatcher("/WEB-INF/pages/Login.jsp").forward(req, resp);
+            request.getRequestDispatcher("/WEB-INF/pages/Login.jsp").forward(request, response);
         }
 	}
 
