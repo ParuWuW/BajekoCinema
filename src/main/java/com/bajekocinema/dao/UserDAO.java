@@ -65,5 +65,26 @@ public class UserDAO {
 	    }
 	    return null;
 	}
+	
+	public UserModel getUserProfileByEmail(String userEmail) throws Exception {
+	    Connection con = DBconfig.getConnection();
+	    String sql = "SELECT UserEmail, Username, UserPhoneNumber, Password, Image FROM user WHERE UserEmail = ?";
+	    PreparedStatement pst = con.prepareStatement(sql);
+	    pst.setString(1, userEmail);
+	    ResultSet rs = pst.executeQuery();
+
+	    if (rs.next()) {
+	        UserModel user = new UserModel();
+	        user.setUserEmail(rs.getString("UserEmail"));
+	        user.setUsername(rs.getString("Username"));
+	        user.setUserPhoneNumber(rs.getInt("UserPhoneNumber"));
+	        user.setPassword(rs.getString("Password"));
+	        user.setImage(rs.getString("Image"));
+	        return user;
+	    }
+	    return null;
+	}
+	
+	
 
 }

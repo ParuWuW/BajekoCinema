@@ -10,11 +10,12 @@
 <body>
 
 
+
 <div class="profile-wrapper">
     <div class="profile-card">
 
         <div class="avatar-section">
-            <img src="${user.profileImage}" alt="Profile Picture" class="avatar-img" />
+            <img src="${user.image}" alt="Profile Picture" class="avatar-img" />
             <span class="avatar-name">${user.username}</span>
         </div>
 
@@ -29,12 +30,12 @@
 
             <div class="field-group">
                 <label class="field-label">Email Address</label>
-                <div class="field-value">${user.email}</div>
+                <div class="field-value">${user.userEmail}</div>
             </div>
 
             <div class="field-group">
                 <label class="field-label">Phone Number</label>
-                <div class="field-value">${empty user.phone ? 'Not provided' : user.phone}</div>
+                <div class="field-value">${user.userPhoneNumber}</div>
             </div>
 
             <div class="field-group">
