@@ -11,14 +11,14 @@ import com.bajekocinema.utils.DBconfig;
 
 public class UserDAO {
 	
-	public void insertUser(String Username, int userPhoneNumber, String UserEmail, String Password, String Image) throws Exception {
+	public void insertUser(String Username, String userPhoneNumber, String UserEmail, String Password, String Image) throws Exception {
 		Connection con = DBconfig.getConnection();
 		
 		String sql = "INSERT INTO user (Username, UserPhoneNumber, UserEmail, Password, Image)" + "VALUES (?,?,?,?,?)";
 		
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setString(1, Username);
-        pst.setInt(2, userPhoneNumber);
+        pst.setString(2, userPhoneNumber);
         pst.setString(3, UserEmail);
         pst.setString(4, Password);
         pst.setString(5, Image);
@@ -39,7 +39,7 @@ public class UserDAO {
 		while(rs.next()) {
 			UserModel s = new UserModel();
 			s.setUsername(rs.getString("Username"));
-			s.setUserPhoneNumber(rs.getInt("UserPhoneNumber"));
+			s.setUserPhoneNumber(rs.getString("UserPhoneNumber"));
 			s.setUserEmail(rs.getString("UserEmail"));
 			s.setPassword(rs.getString("Password"));
 			s.setImage(rs.getString("Image"));
@@ -77,7 +77,7 @@ public class UserDAO {
 	        UserModel user = new UserModel();
 	        user.setUserEmail(rs.getString("UserEmail"));
 	        user.setUsername(rs.getString("Username"));
-	        user.setUserPhoneNumber(rs.getInt("UserPhoneNumber"));
+	        user.setUserPhoneNumber(rs.getString("UserPhoneNumber"));
 	        user.setPassword(rs.getString("Password"));
 	        user.setImage(rs.getString("Image"));
 	        return user;

@@ -3,7 +3,7 @@ package com.bajekocinema.model;
 public class UserModel {
 	
 	private String Username;
-	private int UserPhoneNumber;
+	private String UserPhoneNumber;
 	private String UserEmail;
 	private String Password;
 	private String Image;
@@ -22,13 +22,13 @@ public class UserModel {
 	/**
 	 * @return the userPhoneNumber
 	 */
-	public int getUserPhoneNumber() {
+	public String getUserPhoneNumber() {
 		return UserPhoneNumber;
 	}
 	/**
 	 * @param userPhoneNumber the userPhoneNumber to set
 	 */
-	public void setUserPhoneNumber(int userPhoneNumber) {
+	public void setUserPhoneNumber(String userPhoneNumber) {
 		UserPhoneNumber = userPhoneNumber;
 	}
 	/**
