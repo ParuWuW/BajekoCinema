@@ -15,7 +15,7 @@
     <div class="profile-card">
 
         <div class="avatar-section">
-            <img src="${user.image}" alt="Profile Picture" class="avatar-img" />
+            <img src="${pageContext.request.contextPath}/${user.image}" alt="Profile Picture" class="avatar-img" />
             <span class="avatar-name">${user.username}</span>
         </div>
 
