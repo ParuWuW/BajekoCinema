@@ -15,12 +15,11 @@
 </head>
 <body>
 
-    <!-- Page wrapper with cinema background -->
     <div class="page-shell">
 
         <%--<jsp:include page="Header.jsp">  --%>
 
-        <!-- Main hero/login area -->
+        <!-- login area -->
         <main class="hero-section">
             <div class="hero-overlay"></div>
 

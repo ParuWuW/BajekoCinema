@@ -9,7 +9,7 @@
     <title>BAJEKO Cinema | Home</title>
 
     <!-- External Stylesheet -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css//Home.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Home.css">
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -27,7 +27,7 @@
             style="background-image: url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=2070&auto=format&fit=crop');">
         </div>
 
-        <div class="hero-content">
+        <div class="hero-content"> 
             <span class="hero-label">STREAMING EXCLUSIVELY AT BAJEKO</span>
             <h1 class="hero-title">PROJECT HAIL<br>MARY</h1>
             <p class="hero-desc">A lone astronaut must save the earth from disaster in this edge-of-your-seat
