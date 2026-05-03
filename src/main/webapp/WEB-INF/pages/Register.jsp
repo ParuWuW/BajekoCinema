@@ -8,7 +8,7 @@
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/register.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Register.css">
 </head>
 <body>
 
@@ -32,7 +32,7 @@
                     <a href="register.jsp" class="tab-link active">SIGN UP</a>
                 </div>
 
-                <form action="" method="POST" class="register-form">
+                <form action="${pageContext.request.contextPath}/register" method="POST" class="register-form" enctype="multipart/form-data">
                     <div class="input-group">
 					    <input type="email" id="email" name="UserEmail" placeholder=" ">
 					    <label for="email">EMAIL ADDRESS</label>

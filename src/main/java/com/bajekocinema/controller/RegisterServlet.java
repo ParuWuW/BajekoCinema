@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import jakarta.servlet.annotation.MultipartConfig;
 
 import java.io.IOException;
 
@@ -14,6 +15,7 @@ import com.bajekocinema.services.RegisterService;
 /**
  * Servlet implementation class RegisterServlet
  */
+@MultipartConfig
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

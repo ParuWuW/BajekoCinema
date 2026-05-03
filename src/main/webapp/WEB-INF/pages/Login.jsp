@@ -11,14 +11,14 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
     <!-- External CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Login.css">
 </head>
 <body>
 
     <!-- Page wrapper with cinema background -->
     <div class="page-shell">
 
-        <jsp:include page="Header.jsp">
+        <%--<jsp:include page="Header.jsp">  --%>
 
         <!-- Main hero/login area -->
         <main class="hero-section">
@@ -70,7 +70,7 @@
             </section>
         </main>
 
-        <jsp:include page="Footer.jsp" />
+        <%--<jsp:include page="Footer.jsp" />--%>
 
     </div>
 
