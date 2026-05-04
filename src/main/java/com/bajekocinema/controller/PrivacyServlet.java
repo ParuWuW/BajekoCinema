@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class PrivacyServlet
  */
-@WebServlet("/PrivacyServlet")
+@WebServlet("/privacyPolicy")
 public class PrivacyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

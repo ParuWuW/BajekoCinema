@@ -20,6 +20,10 @@ public class AuthenticationFilter implements Filter {
     private static final String LOGIN = "/login";
     private static final String REGISTER = "/register";
     private static final String HOME = "/home";
+    private static final String TERMS_OF_SERVICE = "/termsOfService";
+    private static final String PRIVACY_POLICY = "/privacyPolicy";
+    private static final String ABOUT_US = "/aboutUs";
+    private static final String CONTACT_US = "/contactUs";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -51,7 +55,7 @@ public class AuthenticationFilter implements Filter {
         boolean isLoggedIn = (user != null);
 
  
-        boolean isPublic = path.equals(LOGIN) || path.equals(REGISTER) || path.equals(HOME);
+        boolean isPublic = path.equals(LOGIN) || path.equals(REGISTER) || path.equals(HOME) || path.equals(TERMS_OF_SERVICE) || path.equals(PRIVACY_POLICY) || path.equals(ABOUT_US) || path.equals(CONTACT_US) ;
 
         if (!isLoggedIn) {
             if (isPublic) {

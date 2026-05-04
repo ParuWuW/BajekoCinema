@@ -21,6 +21,7 @@
         <section class="register-section">
             <div class="hero-branding">
                 <img src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Bajeko Cinema Logo" class="hero-logo">
+                <h1>BAJEKO <span>Cinema</span></h1>
                 <p>THE LUMINESCENT GALLERY EXPERIENCE</p>
             </div>
 
