@@ -1,48 +1,52 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-    String currentURI = request.getRequestURI();
-    boolean isDashboard = currentURI.endsWith("dashboard.jsp");
-    boolean isMovies = currentURI.endsWith("movies.jsp");
-    boolean isUsers = currentURI.endsWith("users.jsp");
-    // Default to dashboard if root or unknown
-    if (!isDashboard && !isMovies && !isUsers) {
-        isDashboard = true; 
-    }
-%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <aside class="sidebar">
+    
+    <!-- Logo / Brand -->
     <div class="brand">
-        <!-- Placeholder for mascot/logo -->
-        <img src="https://ui-avatars.com/api/?name=BC&background=FFB300&color=000&rounded=true&bold=true" alt="BajekoCinema Logo">
         <span>BajekoCinema</span>
     </div>
 
+    <!-- Main Menu -->
     <div class="nav-section">
         <div class="nav-title">Main Menu</div>
-        <a href="${pageContext.request.contextPath}/dashboard" class="nav-item <%= isDashboard ? "active" : "" %>">
-            <i class="ph ph-squares-four"></i>
+
+        <a href="${pageContext.request.contextPath}/dashboard"
+           class="nav-item ${currentPage == 'dashboard' ? 'active' : ''}">
             Dashboard
         </a>
-        <a href="${pageContext.request.contextPath}/movies" class="nav-item <%= isMovies ? "active" : "" %>">
-            <i class="ph ph-film-strip"></i>
+
+        <a href="${pageContext.request.contextPath}/movies"
+           class="nav-item ${currentPage == 'movies' ? 'active' : ''}">
             Movies
         </a>
-        <a href="${pageContext.request.contextPath}/users" class="nav-item <%= isUsers ? "active" : "" %>">
-            <i class="ph ph-users"></i>
+
+        <a href="${pageContext.request.contextPath}/users"
+           class="nav-item ${currentPage == 'users' ? 'active' : ''}">
             User Management
+        </a>
+
+        <a href="${pageContext.request.contextPath}/shows"
+           class="nav-item ${currentPage == 'shows' ? 'active' : ''}">
+            Shows
+        </a>
+
+        <a href="${pageContext.request.contextPath}/Abooking"
+           class="nav-item ${currentPage == 'Abooking' ? 'active' : ''}">
+            Booking
         </a>
     </div>
 
     <div class="spacer"></div>
 
+    <!-- System Section -->
     <div class="nav-section">
         <div class="nav-title">System</div>
-        <a href="#" class="nav-item">
-            <i class="ph ph-gear"></i>
-            Settings
-        </a>
+
+
         <a href="#" class="nav-item logout">
-            <i class="ph ph-sign-out"></i>
             Logout
         </a>
     </div>
+
 </aside>

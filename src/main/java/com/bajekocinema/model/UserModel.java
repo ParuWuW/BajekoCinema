@@ -1,20 +1,34 @@
 package com.bajekocinema.model;
 
 public class UserModel {
-	
+
+	private int UserID; // ADDED
 	private String Username;
-	private String UserPhoneNumber;
+	private int UserPhoneNumber;
 	private String UserEmail;
 	private String Password;
 	private String Image;
+
 	/**
-	 * @return the username
+	 * @return the userID
+	 */
+	public int getUserID() { // ADDED
+		return UserID;
+	}
+	/**
+	 * @param userID the userID to set
+	 */
+	public void setUserID(int userID) { // ADDED
+		UserID = userID;
+	}
+	/**
+	 * @return the __username__
 	 */
 	public String getUsername() {
 		return Username;
 	}
 	/**
-	 * @param username the username to set
+	 * @param username the __username__ to set
 	 */
 	public void setUsername(String username) {
 		Username = username;
@@ -22,13 +36,13 @@ public class UserModel {
 	/**
 	 * @return the userPhoneNumber
 	 */
-	public String getUserPhoneNumber() {
+	public int getUserPhoneNumber() {
 		return UserPhoneNumber;
 	}
 	/**
 	 * @param userPhoneNumber the userPhoneNumber to set
 	 */
-	public void setUserPhoneNumber(String userPhoneNumber) {
+	public void setUserPhoneNumber(int userPhoneNumber) {
 		UserPhoneNumber = userPhoneNumber;
 	}
 	/**
@@ -67,6 +81,5 @@ public class UserModel {
 	public void setPassword(String password) {
 		Password = password;
 	}
-	
 
 }
