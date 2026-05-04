@@ -9,8 +9,8 @@
     <title>BAJEKO Cinema | Home</title>
 
     <!-- External Stylesheet -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Home.css">
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css//Home.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Front-base.css">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta name="description" content="BAJEKO Cinema — Experience the luminescent gallery. Book tickets, watch trailers, and explore now showing and coming soon movies.">
