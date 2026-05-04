@@ -3,6 +3,7 @@ package com.bajekocinema.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +85,20 @@ public class UserDAO {
 	    }
 	    return null;
 	}
+	public boolean isEmailExists(String UserEmail) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM user WHERE UserEmail = ?";
+        try (Connection con = DBconfig.getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setString(1, UserEmail);
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+	}
 	
 	
 
-}

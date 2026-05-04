@@ -30,6 +30,10 @@
                     <a href="${pageContext.request.contextPath}/login" class="tab-link">SIGN IN</a>
                     <a href="${pageContext.request.contextPath}/register" class="tab-link active">SIGN UP</a>
                 </div>
+                
+                <c:if test="${not empty error}">
+    <p style="color: red;">${error}</p>
+</c:if>
 
                 <form action="${pageContext.request.contextPath}/register" method="POST" class="register-form" enctype="multipart/form-data">
                     <div class="input-group">
