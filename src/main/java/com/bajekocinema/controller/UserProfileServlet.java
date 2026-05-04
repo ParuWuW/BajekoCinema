@@ -14,7 +14,8 @@ import com.bajekocinema.utils.SessionUtil;
 /**
  * Servlet implementation class UserProfileServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/userprofile" })
+
+@WebServlet(asyncSupported = true, urlPatterns = { "/userProfile" })
 public class UserProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

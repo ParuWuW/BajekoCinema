@@ -7,7 +7,6 @@
     <title>Contact Us | Bajeko Cinema</title>
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Internal CSS (Retaining external files as requested but injected here for now) -->
     <style>
         /* Base Styles for User Facing Pages */
         :root {
@@ -248,6 +247,8 @@
     </style>
 </head>
 <body>
+    <c:set var="activePage" value="customerSupport" scope="request" />
+    <jsp:include page = "Header.jsp"/>
     
     <main class="contact-container">
         <div class="contact-content">
