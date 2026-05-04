@@ -25,18 +25,18 @@
 
             <section class="login-section">
                 <div class="hero-branding">
-                    <img src="images/logo.png" alt="Bajeko Cinema Logo" class="hero-logo">
+                    <img src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Bajeko Cinema Logo" class="hero-logo">
                     <h1>BAJEKO <span>Cinema</span></h1>
                     <p>THE LUMINESCENT GALLERY EXPERIENCE</p>
                 </div>
 
                 <div class="login-card">
                     <div class="login-tabs">
-                        <a href="#" class="tab active">SIGN IN</a>
-                        <a href="#" class="tab">SIGN UP</a>
+                        <a href="${pageContext.request.contextPath}/login" class="tab active">SIGN IN</a>
+                        <a href="${pageContext.request.contextPath}/register" class="tab">SIGN UP</a>
                     </div>
 
-                    <form action="" method="POST" class="login-form">
+                    <form action="${pageContext.request.contextPath}/login" method="POST" class="login-form">
                         <div class="input-group">
 						    <input type="email" id="email" name="UserEmail" placeholder=" " required>
 						    <label for="email">EMAIL ADDRESS</label>
@@ -55,16 +55,16 @@
 
                         <p class="terms-text">
                             By entering, you agree to our
-                            <a href="#">Terms of Service</a>
+                            <a href="${pageContext.request.contextPath}/termsOfService">Terms of Service</a>
                             and
-                            <a href="#">Privacy Policy</a>.
+                            <a href="${pageContext.request.contextPath}/privacyPolicy">Privacy Policy</a>.
                         </p>
                     </form>
                 </div>
 
                 <div class="join-line">
                     <span>Don't have an account?</span>
-                    <a href="#">Join the Inner Circle</a>
+                    <a href="${pageContext.request.contextPath}/register">Join the Inner Circle</a>
                 </div>
             </section>
         </main>

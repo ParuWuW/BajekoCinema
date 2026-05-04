@@ -28,7 +28,10 @@
                     <i class="fa-solid fa-search"></i>
                     <input type="text" placeholder="Search films...">
                 </div>
-                <button class="profile-btn"><i class="fa-solid fa-user"></i></button>
+                <a href="${pageContext.request.contextPath}/login"
+                       class="profile-btn">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
                 <!--
                 	LOGOUT LOGIC
                   <div class="search-bar">

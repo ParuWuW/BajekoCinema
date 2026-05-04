@@ -13,7 +13,6 @@
 <body>
 
 <div class="page-shell">
-	<jsp:include page="Header.jsp"/>
 
     <!-- Main -->
     <main class="hero-section">
@@ -21,15 +20,14 @@
 
         <section class="register-section">
             <div class="hero-branding">
-                <img src="images/logo.png" alt="Bajeko Cinema Logo" class="hero-logo">
-                <h1>BAJEKO <span>Cinema</span></h1>
+                <img src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Bajeko Cinema Logo" class="hero-logo">
                 <p>THE LUMINESCENT GALLERY EXPERIENCE</p>
             </div>
 
             <div class="register-card">
                 <div class="auth-tabs">
-                    <a href="login.jsp" class="tab-link">SIGN IN</a>
-                    <a href="register.jsp" class="tab-link active">SIGN UP</a>
+                    <a href="${pageContext.request.contextPath}/login" class="tab-link">SIGN IN</a>
+                    <a href="${pageContext.request.contextPath}/register" class="tab-link active">SIGN UP</a>
                 </div>
 
                 <form action="${pageContext.request.contextPath}/register" method="POST" class="register-form" enctype="multipart/form-data">
@@ -64,21 +62,19 @@
 
                     <p class="terms-text">
                         By entering, you agree to our
-                        <a href="#">Terms of Service</a>
+                        <a href="${pageContext.request.contextPath}/termsOfService">Terms of Service</a>
                         and
-                        <a href="#">Privacy Policy</a>.
+                        <a href="${pageContext.request.contextPath}/privacyPolicy">Privacy Policy</a>.
                     </p>
                 </form>
             </div>
 
             <div class="bottom-link">
                 <span>Already have an account?</span>
-                <a href="login.jsp">Log in</a>
+                <a href="${pageContext.request.contextPath}/login">Log in</a>
             </div>
         </section>
     </main>
-
-    <jsp:include page="Footer.jsp"/>
 
 </div>
 
