@@ -13,7 +13,7 @@
     <!-- Booking Specific Styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Booking.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Header.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Front-base.css">
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
