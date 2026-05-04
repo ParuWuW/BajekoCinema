@@ -22,7 +22,6 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-overlay"></div>
-        <!-- Hero Background Placeholder (Replace URL dynamically if needed) -->
         <div class="hero-bg"
             style="background-image: url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=2070&auto=format&fit=crop');">
         </div>
@@ -35,107 +34,87 @@
             </p>
 
             <div class="hero-buttons">
-                <a href="#" class="btn btn-primary"><i class="fa-solid fa-play"></i> Watch Trailer</a>
+                <a href="" class="btn btn-primary"><i class="fa-solid fa-play"></i> Watch Trailer</a>
                 <a href="#" class="btn btn-outline"><i class="fa-solid fa-ticket"></i> Book Tickets</a>
             </div>
         </div>
     </section>
 
-    <!-- Movies Content Section -->
+    <!-- ==================== Now Showing Section ==================== -->
     <section class="movies-section">
-
-        <!-- Section Tabs -->
-        <div class="tabs-container">
-            <button class="tab-btn active">Now Showing</button>
-            <button class="tab-btn">Coming Soon</button>
+        <div class="section-header">
+            <h2 class="section-title">Now Showing</h2>
+            <a href="${pageContext.request.contextPath}/nowShowing.jsp" class="view-all-link">
+                View All <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
 
-        <!-- Date Filter Chips -->
-        <div class="date-chips">
-            <button class="chip active">
-                <span class="chip-day">Today</span>
-                <span class="chip-date">24 May</span>
-            </button>
-            <button class="chip">
-                <span class="chip-day">Sat</span>
-                <span class="chip-date">25 May</span>
-            </button>
-            <button class="chip">
-                <span class="chip-day">Sun</span>
-                <span class="chip-date">26 May</span>
-            </button>
-            <button class="chip">
-                <span class="chip-day">Mon</span>
-                <span class="chip-date">27 May</span>
-            </button>
-            <button class="chip">
-                <span class="chip-day">Tue</span>
-                <span class="chip-date">28 May</span>
-            </button>
-            <button class="chip">
-                <span class="chip-day">Wed</span>
-                <span class="chip-date">29 May</span>
-            </button>
-        </div>
-
-        <!-- Movie Cards Grid -->
         <div class="movie-grid">
+            <c:choose>
+                <c:when test="${not empty nowShowingMovies}">
+                    <c:forEach var="movie" items="${nowShowingMovies}">
+                        <a href="${pageContext.request.contextPath}/movie?id=${movie.id}" class="movie-card">
+                            <div class="card-poster">
+                                <img src="${movie.posterUrl}" alt="${movie.title}">
+                                <div class="card-rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <c:out value="${movie.rating}" />
+                                </div>
+                            </div>
+                            <div class="card-info">
+                                <h3 class="card-title">
+                                    <c:out value="${movie.title}" />
+                                </h3>
+                                <p class="card-meta">
+                                    <c:out value="${movie.genre}" /> &bull; <c:out value="${movie.duration}" /> min
+                                </p>
+                            </div>
+                        </a>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <p class="empty-state">No movies are currently showing. Please check back soon.</p>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </section>
 
-            <%-- Future DB loop goes here: for(Movie m : moviesList) { --%>
+    <!-- ==================== Coming Soon Section ==================== -->
+    <section class="movies-section">
+        <div class="section-header">
+            <h2 class="section-title">Coming Soon</h2>
+            <a href="${pageContext.request.contextPath}/comingSoon" class="view-all-link">
+                View All <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
 
-                <!-- Dummy Card 1 -->
-                <div class="movie-card">
-                    <div class="card-poster">
-                        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=800&auto=format&fit=crop"
-                            alt="Interstellar Journey">
-                        <div class="card-rating"><i class="fa-solid fa-star"></i> 8.4</div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">Interstellar Journey</h3>
-                        <p class="card-meta">Sci-Fi • 126 min</p>
-                    </div>
-                </div>
-
-                <!-- Dummy Card 2 -->
-                <div class="movie-card">
-                    <div class="card-poster">
-                        <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=800&auto=format&fit=crop"
-                            alt="The Dark Knight">
-                        <div class="card-rating"><i class="fa-solid fa-star"></i> 7.9</div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">Midnight Vigilante</h3>
-                        <p class="card-meta">Action • 142 min</p>
-                    </div>
-                </div>
-
-                <!-- Dummy Card 3 -->
-                <div class="movie-card">
-                    <div class="card-poster">
-                        <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=800&auto=format&fit=crop"
-                            alt="Dune Sand">
-                        <div class="card-rating"><i class="fa-solid fa-star"></i> 9.1</div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">Desert Odyssey</h3>
-                        <p class="card-meta">Adventure • 166 min</p>
-                    </div>
-                </div>
-
-                <!-- Dummy Card 4 -->
-                <div class="movie-card">
-                    <div class="card-poster">
-                        <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=800&auto=format&fit=crop"
-                            alt="Cyberpunk City">
-                        <div class="card-rating"><i class="fa-solid fa-star"></i> 8.0</div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">Cybernetic Dawn</h3>
-                        <p class="card-meta">Thriller • 115 min</p>
-                    </div>
-                </div>
-
-                <%-- } End DB Loop --%>
+        <div class="movie-grid">
+            <c:choose>
+                <c:when test="${not empty comingSoonMovies}">
+                    <c:forEach var="movie" items="${comingSoonMovies}">
+                        <a href="${pageContext.request.contextPath}/movie?id=${movie.id}" class="movie-card">
+                            <div class="card-poster">
+                                <img src="${movie.posterUrl}" alt="${movie.title}">
+                                <div class="card-rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <c:out value="${movie.rating}" />
+                                </div>
+                            </div>
+                            <div class="card-info">
+                                <h3 class="card-title">
+                                    <c:out value="${movie.title}" />
+                                </h3>
+                                <p class="card-meta">
+                                    <c:out value="${movie.genre}" /> &bull; <c:out value="${movie.duration}" /> min
+                                </p>
+                            </div>
+                        </a>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <p class="empty-state">No upcoming movies announced yet. Stay tuned!</p>
+                </c:otherwise>
+            </c:choose>
         </div>
     </section> 
 
