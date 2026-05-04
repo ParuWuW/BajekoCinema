@@ -44,7 +44,7 @@
     <section class="movies-section">
         <div class="section-header">
             <h2 class="section-title">Now Showing</h2>
-            <a href="${pageContext.request.contextPath}/nowShowing.jsp" class="view-all-link">
+            <a href="${pageContext.request.contextPath}/nowShowing" class="view-all-link">
                 View All <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
