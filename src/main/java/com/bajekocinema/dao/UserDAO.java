@@ -14,7 +14,7 @@ public class UserDAO {
     public void insertUser(String Username, int userPhoneNumber, String UserEmail, String Password, String Image) throws Exception {
         Connection con = DBconfig.getConnection();
 
-        String sql = "INSERT INTO user (Username, UserPhoneNumber, UserEmail, Password, Image)" + "VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO user (fullName, email, phone, password, isVerified, role, image)" + "VALUES (?,?,?,?,False,'user',?)";
 
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setString(1, Username);
@@ -38,12 +38,14 @@ public class UserDAO {
 
         while (rs.next()) {
             UserModel s = new UserModel();
-            s.setUserID(rs.getInt("UserID")); // ADDED
-            s.setUsername(rs.getString("Username"));
-            s.setUserPhoneNumber(rs.getInt("UserPhoneNumber"));
-            s.setUserEmail(rs.getString("UserEmail"));
-            s.setPassword(rs.getString("Password"));
-            s.setImage(rs.getString("Image"));
+            s.setUserID(rs.getInt("userID"));
+            s.setFullName(rs.getString("fullName"));
+            s.setPhone(rs.getInt("phone"));
+            s.setEmail(rs.getString("email"));
+            s.setRole(rs.getString("role"));
+            s.setVerified(rs.getBoolean("isVerified"));
+            s.setPassword(rs.getString("password"));
+            s.setImage(rs.getString("image"));
             users.add(s);
         }
         rs.close();
@@ -63,12 +65,14 @@ public class UserDAO {
         UserModel user = null;
         if (rs.next()) {
             user = new UserModel();
-            user.setUserID(rs.getInt("UserID"));
-            user.setUsername(rs.getString("Username"));
-            user.setUserEmail(rs.getString("UserEmail"));
-            user.setUserPhoneNumber(rs.getInt("UserPhoneNumber"));
-            user.setPassword(rs.getString("Password"));
-            user.setImage(rs.getString("Image"));
+            user.setUserID(rs.getInt("userID"));
+            user.setFullName(rs.getString("fullName"));
+            user.setPhone(rs.getInt("phone"));
+            user.setEmail(rs.getString("email"));
+            user.setRole(rs.getString("role"));
+            user.setVerified(rs.getBoolean("isVerified"));
+            user.setPassword(rs.getString("password"));
+            user.setImage(rs.getString("image"));
         }
         rs.close();
         pst.close();

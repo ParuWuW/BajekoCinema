@@ -12,7 +12,7 @@ public class LoginService {
 	public Boolean loginUser(UserModel userModel) {
 			    
 	    try {
-            UserModel dbUser = userDAO.getUserByEmail(userModel.getUserEmail());
+            UserModel dbUser = userDAO.getUserByEmail(userModel.getEmail());
 
             if (dbUser == null) return false; // email not found
 

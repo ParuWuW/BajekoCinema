@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         UserModel user = new UserModel();
-        user.setUserEmail(UserEmail.trim());
+        user.setEmail(UserEmail.trim());
         user.setPassword(Password.trim());
 
         Boolean status = loginService.loginUser(user);
