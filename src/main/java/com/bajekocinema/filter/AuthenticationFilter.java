@@ -12,10 +12,14 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import com.bajekocinema.utils.SessionUtil;
+import com.bajekocinema.model.SessionModel;
+import com.bajekocinema.services.SessionService;
+import com.bajekocinema.utils.CookieUtil;
 
 @WebFilter("/*")
 public class AuthenticationFilter implements Filter {
+	private final SessionService sessionService = new SessionService();
+
 
     private static final String LOGIN = "/login";
     private static final String REGISTER = "/register";
@@ -52,8 +56,35 @@ public class AuthenticationFilter implements Filter {
         }
 
      
-        Object user = SessionUtil.getAttribute(req, "UserEmail");
-        boolean isLoggedIn = (user != null);
+     // Validate session via cookie
+        SessionModel session = null;
+        try {
+            jakarta.servlet.http.Cookie c = CookieUtil.getCookie(req, "SESSION_ID");
+            if (c != null) {
+                session = sessionService.validateSession(c.getValue());
+                if (session != null) {
+                    req.setAttribute("loggedInUserId", session.getUser_id());
+                    req.setAttribute("loggedInRole",   session.getRole());
+                }
+            }
+        } catch (Exception e) {
+            throw new ServletException(e);
+        }
+
+        boolean isLoggedIn = (session != null);
+        boolean isAdmin    = isLoggedIn && "admin".equals(session.getRole());
+
+        // Admin path check
+        if (path.startsWith("/admin")) {
+            if (!isLoggedIn) {
+                res.sendRedirect(contextPath + "/login");
+            } else if (!isAdmin) {
+                res.sendRedirect(contextPath + "/home"); 
+            } else {
+                chain.doFilter(request, response);
+            }
+            return;
+        }
 
  
         boolean isPublic = path.equals(LOGIN) || path.equals(REGISTER) || path.equals(HOME) || path.equals(TERMS_OF_SERVICE) || path.equals(PRIVACY_POLICY) || path.equals(ABOUT_US) || path.equals(CONTACT_US) || path.equals(FAQ) ;
