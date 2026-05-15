@@ -29,6 +29,7 @@ public class AuthenticationFilter implements Filter {
     private static final String ABOUT_US = "/aboutUs";
     private static final String CONTACT_US = "/contactUs";
     private static final String FAQ = "/Faq";
+    private static final String ERROR = "/error";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -87,7 +88,7 @@ public class AuthenticationFilter implements Filter {
         }
 
  
-        boolean isPublic = path.equals(LOGIN) || path.equals(REGISTER) || path.equals(HOME) || path.equals(TERMS_OF_SERVICE) || path.equals(PRIVACY_POLICY) || path.equals(ABOUT_US) || path.equals(CONTACT_US) || path.equals(FAQ) ;
+        boolean isPublic = path.equals(LOGIN) || path.equals(REGISTER) || path.equals(HOME) || path.equals(TERMS_OF_SERVICE) || path.equals(PRIVACY_POLICY) || path.equals(ABOUT_US) || path.equals(CONTACT_US) || path.equals(FAQ) || path.equals(ERROR) ;
 
         if (!isLoggedIn) {
             if (isPublic) {
