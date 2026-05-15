@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Privacy.css">
 </head>
 <body>
-    <jsp:include page = "Header.jsp"/>
+    <jsp:include page = "../common/Header.jsp"/>
     <main class="privacy-container">
         
         <header class="privacy-header">
@@ -132,7 +132,7 @@
 
     </main>
 
-    <jsp:include page="Footer.jsp" />
+    <jsp:include page="../common/Footer.jsp" />
 
 </body>
 </html>

@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Servlet implementation class MoviesServlet
  */
-@WebServlet("/movies")
+@WebServlet(asyncSupported = true, urlPatterns = { "/admin/movies"})
 public class MoviesServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -40,7 +40,7 @@ public class MoviesServlet extends HttpServlet {
         }
 
         request.setAttribute("currentPage", "movies");
-        request.getRequestDispatcher("WEB-INF/pages/MoviesAdmin.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/pages/admin/MoviesAdmin.jsp").forward(request, response);
     }
 
     /**

@@ -14,7 +14,7 @@ import com.bajekocinema.services.UserService; // CHANGED
 /**
  * Servlet implementation class UsersServlet
  */
-@WebServlet("/users")
+@WebServlet(asyncSupported = true, urlPatterns = {"/user"})
 public class UsersServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -41,7 +41,7 @@ public class UsersServlet extends HttpServlet {
         }
 
         request.setAttribute("currentPage", "users");
-        request.getRequestDispatcher("WEB-INF/pages/UsersAdmin.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/pages/admin/UsersAdmin.jsp").forward(request, response);
     }
 
     /**

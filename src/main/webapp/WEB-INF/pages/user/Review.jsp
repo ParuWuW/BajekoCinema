@@ -33,7 +33,7 @@
 <body class="review-page-body">
     <!-- Using generic inner page active state -->
     <% request.setAttribute("activePage", "home"); %>
-    <jsp:include page="Header.jsp" />
+    <jsp:include page="../common/Header.jsp" />
 
     <main class="review-page">
         <div class="review-container">
@@ -122,6 +122,6 @@
         </div>
     </main>
 
-    <jsp:include page="Footer.jsp" />
+    <jsp:include page="../common/Footer.jsp" />
 </body>
 </html>

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Terms.css">
 </head>
 <body>
-    <jsp:include page = "Header.jsp"/>
+    <jsp:include page = "../common/Header.jsp"/>
     <main class="terms-container">
         
         <header class="terms-header">
@@ -88,7 +88,7 @@
 
     </main>
 
-    <jsp:include page="Footer.jsp" />
+    <jsp:include page="../common/Footer.jsp" />
 
 </body>
 </html>

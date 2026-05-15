@@ -14,7 +14,7 @@
 </head>
 <body>
     <c:set var="activePage" value="customerSupport" scope="request" />
-    <jsp:include page = "Header.jsp"/>
+    <jsp:include page = "../common/Header.jsp"/>
     <main class="contact-container">
         <div class="contact-content">
             <span class="service-label">BAJEKO SERVICE</span>
@@ -47,7 +47,7 @@
         </div>
     </main>
 
-    <jsp:include page="Footer.jsp" />
+    <jsp:include page="../common/Footer.jsp" />
 
 </body>
 </html>

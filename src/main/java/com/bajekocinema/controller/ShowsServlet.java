@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Servlet implementation class ShowsServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/shows" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/admin/shows" })
 public class ShowsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -48,7 +48,7 @@ public class ShowsServlet extends HttpServlet {
         }
 
         request.setAttribute("currentPage", "shows");
-        request.getRequestDispatcher("WEB-INF/pages/ShowsAdmin.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/pages/admin/ShowsAdmin.jsp").forward(request, response);
     }
 
     /**

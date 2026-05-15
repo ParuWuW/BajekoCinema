@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="booking-page-body">
-    <jsp:include page="Header.jsp" />
+    <jsp:include page="../common/Header.jsp" />
 
     <main class="booking-page">
         <!-- 1. Hero Banner Section -->
@@ -165,6 +165,6 @@
         </section>
     </main>
 
-    <jsp:include page="Footer.jsp" />
+    <jsp:include page="../common/Footer.jsp" />
 </body>
 </html>

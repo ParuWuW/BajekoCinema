@@ -27,7 +27,7 @@ public class TermsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/pages/Terms.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/public/Terms.jsp").forward(request, response);
 	}
 
 	/**

@@ -17,7 +17,7 @@
 <body>
     <div class="app-container">
 
-        <jsp:include page="SidebarAdmin.jsp" />
+        <jsp:include page="../common/SidebarAdmin.jsp" />
 
         <div class="main-container">
 
@@ -170,7 +170,7 @@
 
             </main>
 
-            <jsp:include page="FooterAdmin.jsp" />
+            <jsp:include page="../common/FooterAdmin.jsp" />
 
         </div>
     </div>

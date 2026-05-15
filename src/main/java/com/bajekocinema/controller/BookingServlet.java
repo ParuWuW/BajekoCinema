@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(asyncSupported = true, urlPatterns = { "/Abooking" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/admin/booking" })
 public class BookingServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -47,7 +47,7 @@ public class BookingServlet extends HttpServlet {
         }
 
         request.setAttribute("currentPage", "Abooking");
-        request.getRequestDispatcher("/WEB-INF/pages/BookingAdmin.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/admin/BookingAdmin.jsp").forward(request, response);
     }
 
     @Override

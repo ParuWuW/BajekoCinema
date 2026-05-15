@@ -11,7 +11,7 @@
      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Faq.css">
 </head>
 <body>
-    <jsp:include page = "Header.jsp"/>
+    <jsp:include page = "../common/Header.jsp"/>
     <main class="faq-container">
         
         <header class="faq-header">
@@ -57,7 +57,7 @@
 
     </main>
 
-    <jsp:include page="Footer.jsp" />
+    <jsp:include page="../common/Footer.jsp" />
 
 </body>
 </html>

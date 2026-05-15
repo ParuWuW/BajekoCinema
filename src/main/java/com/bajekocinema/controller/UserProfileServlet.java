@@ -46,13 +46,13 @@ public class UserProfileServlet extends HttpServlet {
 	    try {
 	        UserModel user = userProfileService.getUserProfileByEmail(email);
 	        
-	        System.out.println("Username: " + user.getUsername());
-	        System.out.println("Email: " + user.getUserEmail());
-	        System.out.println("Phone: " + user.getUserPhoneNumber());
+	        System.out.println("Username: " + user.getFullName());
+	        System.out.println("Email: " + user.getEmail());
+	        System.out.println("Phone: " + user.getPhone());
 	        System.out.println("Image: " + user.getImage());
 	        
 	        request.setAttribute("user", user);
-	        request.getRequestDispatcher("WEB-INF/pages/UserProfile.jsp").forward(request, response);
+	        request.getRequestDispatcher("WEB-INF/pages/user/UserProfile.jsp").forward(request, response);
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }	}

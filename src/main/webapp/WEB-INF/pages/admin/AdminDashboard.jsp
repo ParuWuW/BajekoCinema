@@ -56,7 +56,7 @@
     <div class="app-container">
 
         <%-- SIDEBAR INCLUDE --%>
-        <jsp:include page="SidebarAdmin.jsp" />
+        <jsp:include page="../common/SidebarAdmin.jsp" />
 
         <div class="main-container">
 
@@ -98,7 +98,7 @@
             </main>
 
             <%-- FOOTER INCLUDE --%>
-            <jsp:include page="FooterAdmin.jsp" />
+            <jsp:include page="../common/FooterAdmin.jsp" />
 
         </div>
     </div>

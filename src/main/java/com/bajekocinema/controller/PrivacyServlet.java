@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class PrivacyServlet
  */
-@WebServlet("/privacyPolicy")
+@WebServlet(asyncSupported = true, urlPatterns = { "/privacyPolicy"})
 public class PrivacyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,7 +27,7 @@ public class PrivacyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/pages/Privacy.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/public/Privacy.jsp").forward(request, response);
 	}
 
 	/**

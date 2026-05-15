@@ -17,7 +17,7 @@
 </head>
 <body>
     <c:set var="activePage" value="home" scope="request" />
-    <jsp:include page = "Header.jsp"/>
+    <jsp:include page = "../common/Header.jsp"/>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -118,7 +118,7 @@
         </div>
     </section> 
 
-    <jsp:include page="Footer.jsp" />	
+    <jsp:include page="../common/Footer.jsp" />	
 
 </body>
 </html>

@@ -16,7 +16,7 @@
 </head>
 <body>
     
-    <jsp:include page = "Header.jsp"/>
+    <jsp:include page = "../common/Header.jsp"/>
         
     <main class="about-container">
         
@@ -87,7 +87,7 @@
 
     </main>
 
-    <jsp:include page="Footer.jsp" />
+    <jsp:include page="../common/Footer.jsp" />
 
 </body>
 </html>

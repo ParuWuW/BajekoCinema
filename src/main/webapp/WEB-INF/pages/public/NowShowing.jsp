@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Front-base.css">
 </head>
 <body>
-  <jsp:include page = "Header.jsp"/>
+  <jsp:include page = "../common/Header.jsp"/>
  
 <!-- Page Banner -->
 <div class="page-banner">
@@ -258,7 +258,7 @@
  
   </div><!-- /.movie-grid -->
   
-  <jsp:include page = "Footer.jsp"/>
+  <jsp:include page = "../common/Footer.jsp"/>
 </section>
  
 <script>
