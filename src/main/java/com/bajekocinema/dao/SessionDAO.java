@@ -67,7 +67,7 @@ public class SessionDAO {
 	// Validate a session_id coming from cookie
 	public SessionModel validateSession(String sessionId) throws SQLException {
 		String sql = "SELECT s.session_id, s.user_id, s.is_active, u.role"
-				+ " FROM Sessions s JOIN User u ON s.user_id = u.userID"
+				+ " FROM Sessions s JOIN `User` u ON s.user_id = u.userID"
 				+ " where s.session_id = ? and s.is_active = 1 and s.expires_at > NOW()";
 		try (Connection conn = DBconfig.getConnection();
 				PreparedStatement pst = conn.prepareStatement(sql)) {

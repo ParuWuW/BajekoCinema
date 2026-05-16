@@ -7,6 +7,6 @@ public class RegisterService {
     public void addUser(String Username, String UserPhoneNumber, String UserEmail, String Password, String Image) throws Exception {
         Password = PasswordUtil.getHashPassword(Password);
         UserDAO dao = new UserDAO();
-        dao.insertUser(Username, Integer.parseInt(UserPhoneNumber), UserEmail, Password, Image);
+        dao.insertUser(Username, UserPhoneNumber, UserEmail, Password, Image);
     }
 }

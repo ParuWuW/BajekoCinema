@@ -58,7 +58,7 @@
 						</div>
 
 						<div class="input-group">
-							<input type="file" id="profilePicture" name="UserProfilePicture"
+							<input type="file" id="profilePicture" name="image"
 								placeholder=" "> <label for="profilePicture">Profile
 								Picture</label>
 						</div>

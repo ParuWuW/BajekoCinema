@@ -14,7 +14,7 @@ public class UserDAO {
     public void insertUser(String Username, String userPhoneNumber, String UserEmail, String Password, String Image) throws Exception {
         Connection con = DBconfig.getConnection();
 
-        String sql = "INSERT INTO User (fullName, email, phone, password, isVerified, role, image)" + "VALUES (?,?,?,?,True,'user',?)";
+        String sql = "INSERT INTO `User` (fullName, email, phone, password, isVerified, role, image) " + "VALUES (?,?,?,?,True,'user',?)";
 
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setString(1, Username);
@@ -32,7 +32,7 @@ public class UserDAO {
         List<UserModel> users = new ArrayList<>();
         Connection con = DBconfig.getConnection();
 
-        String sql = "SELECT * FROM User";
+        String sql = "SELECT * FROM `User`";
         PreparedStatement pst = con.prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
 
@@ -57,7 +57,7 @@ public class UserDAO {
     // ADDED - used by LoginService
     public UserModel getUserByEmail(String email) throws Exception {
         Connection con = DBconfig.getConnection();
-        String sql = "SELECT * FROM User WHERE email = ?";
+        String sql = "SELECT * FROM `User` WHERE email = ?";
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setString(1, email);
         ResultSet rs = pst.executeQuery();
