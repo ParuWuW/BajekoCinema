@@ -11,13 +11,13 @@ import com.bajekocinema.model.SessionModel;
 public class SessionService {
 	private final SessionDAO sessionDAO = new SessionDAO();
 
-    public static final int SESSION_HOURS = 2; // single source of truth
+    public static final int SESSION_MINUTES = 30; // single source of truth
 
     // Called after successful login — revives or creates session
     public String loginUser(int userId) throws SQLException {
         SessionModel existing = sessionDAO.findByUserId(userId);
         Timestamp newExpiry  = new Timestamp(
-                System.currentTimeMillis() + SESSION_HOURS * 3600_000L);
+                System.currentTimeMillis() + SESSION_MINUTES * 60000L); 
 
         if (existing != null) {
             sessionDAO.reviveSession(existing.getSession_id(), newExpiry);

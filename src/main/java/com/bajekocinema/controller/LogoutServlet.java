@@ -2,13 +2,15 @@ package com.bajekocinema.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
+import java.sql.SQLException;
+
+import com.bajekocinema.services.SessionService;
+import com.bajekocinema.utils.CookieUtil;
+import com.bajekocinema.utils.SessionUtil;
 
 /**
  * Servlet implementation class LogoutServlet
@@ -16,6 +18,7 @@ import java.io.IOException;
 @WebServlet(asyncSupported = true, urlPatterns = { "/logout" })
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	SessionService sessionService = new SessionService();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,18 +34,19 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		//invalidate session
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-		 
-		Cookie roleCookie = new Cookie("role", "");
-		roleCookie.setMaxAge(0);
-		roleCookie.setPath("/");
-		response.addCookie(roleCookie);
-		 
-		response.sendRedirect(request.getContextPath() + "/home");
+		// in database mark session inactive. no delete for revival
+		String sessionId = (String) request.getAttribute("sessionId");
+		try {
+			sessionService.logoutUser(sessionId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		SessionUtil.invalidate(request);
+        // Delete the session id cookie from browser
+        CookieUtil.deleteCookie(response, "SESSION_ID");
+ 
+        response.sendRedirect(request.getContextPath() + "/home");
 	}
 
 	/**
