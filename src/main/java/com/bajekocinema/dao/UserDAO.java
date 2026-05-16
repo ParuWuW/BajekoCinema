@@ -11,15 +11,15 @@ import com.bajekocinema.utils.DBconfig;
 
 public class UserDAO {
 
-    public void insertUser(String Username, int userPhoneNumber, String UserEmail, String Password, String Image) throws Exception {
+    public void insertUser(String Username, String userPhoneNumber, String UserEmail, String Password, String Image) throws Exception {
         Connection con = DBconfig.getConnection();
 
-        String sql = "INSERT INTO user (fullName, email, phone, password, isVerified, role, image)" + "VALUES (?,?,?,?,False,'user',?)";
+        String sql = "INSERT INTO User (fullName, email, phone, password, isVerified, role, image)" + "VALUES (?,?,?,?,True,'user',?)";
 
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setString(1, Username);
-        pst.setInt(2, userPhoneNumber);
-        pst.setString(3, UserEmail);
+        pst.setString(2, UserEmail);
+        pst.setString(3, userPhoneNumber);
         pst.setString(4, Password);
         pst.setString(5, Image);
 
@@ -32,7 +32,7 @@ public class UserDAO {
         List<UserModel> users = new ArrayList<>();
         Connection con = DBconfig.getConnection();
 
-        String sql = "SELECT * FROM user";
+        String sql = "SELECT * FROM User";
         PreparedStatement pst = con.prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
 
@@ -40,7 +40,7 @@ public class UserDAO {
             UserModel s = new UserModel();
             s.setUserID(rs.getInt("userID"));
             s.setFullName(rs.getString("fullName"));
-            s.setPhone(rs.getInt("phone"));
+            s.setPhone(rs.getString("phone"));
             s.setEmail(rs.getString("email"));
             s.setRole(rs.getString("role"));
             s.setVerified(rs.getBoolean("isVerified"));
@@ -57,7 +57,7 @@ public class UserDAO {
     // ADDED - used by LoginService
     public UserModel getUserByEmail(String email) throws Exception {
         Connection con = DBconfig.getConnection();
-        String sql = "SELECT * FROM user WHERE UserEmail = ?";
+        String sql = "SELECT * FROM User WHERE email = ?";
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setString(1, email);
         ResultSet rs = pst.executeQuery();
@@ -67,7 +67,7 @@ public class UserDAO {
             user = new UserModel();
             user.setUserID(rs.getInt("userID"));
             user.setFullName(rs.getString("fullName"));
-            user.setPhone(rs.getInt("phone"));
+            user.setPhone(rs.getString("phone"));
             user.setEmail(rs.getString("email"));
             user.setRole(rs.getString("role"));
             user.setVerified(rs.getBoolean("isVerified"));

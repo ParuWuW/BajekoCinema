@@ -16,7 +16,7 @@
 
         <div class="avatar-section">
             <img src="${pageContext.request.contextPath}/${user.image}" alt="Profile Picture" class="avatar-img" />
-            <span class="avatar-name">${user.username}</span>
+            <span class="avatar-name">${user.fullName}</span>
         </div>
 
         <hr class="divider" />
@@ -25,17 +25,17 @@
 
             <div class="field-group">
                 <label class="field-label">Username</label>
-                <div class="field-value">${user.username}</div>
+                <div class="field-value">${user.fullName}</div>
             </div>
 
             <div class="field-group">
                 <label class="field-label">Email Address</label>
-                <div class="field-value">${user.userEmail}</div>
+                <div class="field-value">${user.email}</div>
             </div>
 
             <div class="field-group">
                 <label class="field-label">Phone Number</label>
-                <div class="field-value">${user.userPhoneNumber}</div>
+                <div class="field-value">${user.phone}</div>
             </div>
 
             <div class="field-group">

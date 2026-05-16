@@ -66,6 +66,7 @@ public class AuthenticationFilter implements Filter {
                 if (session != null) {
                     req.setAttribute("loggedInUserId", session.getUser_id());
                     req.setAttribute("loggedInRole",   session.getRole());
+                    req.setAttribute("sessionId", session.getSession_id());
                 }
             }
         } catch (Exception e) {

@@ -15,7 +15,7 @@ public class LoginService {
             UserModel dbUser = userDAO.getUserByEmail(userModel.getEmail());
 
             if (dbUser == null) return false; // email not found
-
+            if (!dbUser.isVerified()) return false;
             return PasswordUtil.checkPassword(userModel.getPassword(), dbUser.getPassword());
 
         } catch (Exception e) {

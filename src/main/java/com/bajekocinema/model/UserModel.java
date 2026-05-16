@@ -4,7 +4,7 @@ public class UserModel {
 
 	private int userID; 
 	private String fullName;
-	private int phone;
+	private String phone;
 	private String email;
 	private String password;
 	private String image;
@@ -37,13 +37,13 @@ public class UserModel {
 	/**
 	 * @return the phone
 	 */
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 	/**
 	 * @param phone the phone to set
 	 */
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	/**
