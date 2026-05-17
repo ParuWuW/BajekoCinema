@@ -18,4 +18,12 @@ public class MovieService {
     public boolean deleteMovie(int movieID) throws Exception {
         return movieDAO.deleteMovie(movieID);
     }
+    
+    public List<MovieModel> getNowShowingMovies() {
+        return movieDAO.getMoviesByStatus("now_showing");
+    }
+
+    public List<MovieModel> getUpcomingMovies() {
+        return movieDAO.getMoviesByStatus("upcoming");
+    }
 }
