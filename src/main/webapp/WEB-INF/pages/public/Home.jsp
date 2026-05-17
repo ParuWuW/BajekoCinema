@@ -9,10 +9,17 @@
     <title>BAJEKO Cinema | Home</title>
 
     <!-- External Stylesheet -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/GlobalUser.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Home.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Front-base.css">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+    	.btn-primary, .btn-outline {
+		    border-radius: 50px !important;
+		}
+    </style>
     <meta name="description" content="BAJEKO Cinema — Experience the luminescent gallery. Book tickets, watch trailers, and explore now showing and coming soon movies.">
 </head>
 <body>
@@ -35,7 +42,7 @@
 
             <div class="hero-buttons">
                 <a href="" class="btn btn-primary"><i class="fa-solid fa-play"></i> Watch Trailer</a>
-                <a href="#" class="btn btn-outline"><i class="fa-solid fa-ticket"></i> Book Tickets</a>
+                <a href="${pageContext.request.contextPath}/booking" class="btn btn-outline"><i class="fa-solid fa-ticket"></i> Book Tickets</a>
             </div>
         </div>
     </section>
