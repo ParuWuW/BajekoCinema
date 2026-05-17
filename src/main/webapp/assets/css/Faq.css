@@ -1,13 +1,5 @@
-:root {
-            --bg-app: #0D0D0D;
-            --surface: #131415;
-            --surface-light: #1A1A1C;
-            --text-main: #ffffff;
-            --text-muted: #8e8e93;
-            --accent-yellow: #fbbf24;
-            --accent-yellow-dark: #d97706;
-        }
-     body {
+
+body {
     background-color: var(--bg-app);
     color: var(--text-main);
     font-family: Arial, sans-serif;

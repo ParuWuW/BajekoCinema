@@ -11,15 +11,25 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
 <!-- External CSS -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/Login.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/GlobalUser.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Login.css">
+<style>
+	.hero-logo {
+	    width: 300px !important;
+	    height: auto;
+	    object-fit: contain;
+	    margin-top: 30px;
+	    margin-bottom: 10px;
+	}
+	.tab.active {
+    	color: var(--highlight-cyan);
+    	border-bottom: 2px solid var(--highlight-cyan);
+	}
+</style>
 </head>
 <body>
-
+	<jsp:include page = "../common/Header.jsp"/>
 	<div class="page-shell">
-
-		<%--<jsp:include page="Header.jsp">  --%>
-
 		<!-- login area -->
 		<main class="hero-section">
 			<div class="hero-overlay"></div>
@@ -29,9 +39,6 @@
 					<img
 						src="${pageContext.request.contextPath}/resources/images/Logo.png"
 						alt="Bajeko Cinema Logo" class="hero-logo">
-					<h1>
-						BAJEKO <span>Cinema</span>
-					</h1>
 					<p>THE LUMINESCENT GALLERY EXPERIENCE</p>
 				</div>
 
@@ -78,11 +85,8 @@
 						href="${pageContext.request.contextPath}/register">Join the
 						Inner Circle</a>
 				</div>
-			</section>
+			</section>	
 		</main>
-
-		<%--<jsp:include page="Footer.jsp" />--%>
-
 	</div>
 
 </body>

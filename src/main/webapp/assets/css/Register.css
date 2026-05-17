@@ -1,84 +1,33 @@
 @charset "UTF-8";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-:root {
-    --gold: #d4a017;
-    --gold-hover: #e0ad21;
-    --cyan: #00e6ff;
-    --bg-dark: #0b0b0d;
-    --header-bg: #1b1618;
-    --footer-bg: #171214;
-    --text-main: #ffffff;
-    --text-soft: rgba(255, 255, 255, 0.72);
-    --text-faint: rgba(255, 255, 255, 0.45);
-    --line: rgba(255, 255, 255, 0.14);
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-    --header-height: 92px;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    min-height: 100%;
-    font-family: 'Inter', sans-serif;
-    background: var(--bg-dark);
-    color: var(--text-main);
-}
-
-body {
-    overflow-x: hidden;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-ul {
-    list-style: none;
-}
-
-.page-shell {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Main section */
+/* background */
 .hero-section {
     position: relative;
-    flex: 1;
-    min-height: calc(100vh - var(--header-height) - 260px);
+    min-height: 100vh;
     background:
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.68)),
-        url("../images/cinema-bg.jpg") center center / cover no-repeat;
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80") center center / cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 56px 20px 90px;
+    padding: 60px 20px 100px;
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(circle at center, rgba(255,255,255,0.03), transparent 42%),
-        linear-gradient(to bottom, rgba(0,0,0,0.20), rgba(0,0,0,0.52));
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.04), transparent 40%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.7));
     z-index: 1;
 }
 
+/* Register section */
 .register-section {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 780px;
+    max-width: 760px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,123 +35,111 @@ ul {
 
 .hero-branding {
     text-align: center;
-    margin-bottom: 22px;
-}
-
-.hero-logo {
-    width: 90px;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.hero-branding h1 {
-    color: var(--gold);
-    font-size: 3rem;
-    font-weight: 800;
-    line-height: 1;
-}
-
-.hero-branding h1 span {
-    color: #ff3b20;
-    font-size: 1.45rem;
-    vertical-align: middle;
+    margin-bottom: 24px;
 }
 
 .hero-branding p {
-    margin-top: 18px;
+    margin-top: 16px;
     color: rgba(255, 255, 255, 0.82);
-    font-size: 0.86rem;
     letter-spacing: 6px;
+    font-size: 0.88rem;
 }
 
 .register-card {
     width: 100%;
     max-width: 610px;
-    padding: 42px 46px 32px;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    padding: 42px 44px 34px;
     border-radius: 28px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: var(--shadow);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
 }
 
+/*tabs*/
 .auth-tabs {
     display: flex;
+    align-items: center;
     gap: 28px;
-    margin-bottom: 36px;
+    margin-bottom: 42px;
 }
 
 .tab-link {
+    color: rgba(255, 255, 255, 0.66);
     font-size: 1rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.60);
+    letter-spacing: 0.4px;
     padding-bottom: 12px;
     border-bottom: 2px solid transparent;
     transition: 0.25s ease;
-}
-
-.tab-link:hover {
-    color: var(--text-main);
+    text-decoration: none;
 }
 
 .tab-link.active {
-    color: var(--cyan);
-    border-bottom-color: var(--cyan);
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--accent-gold);
 }
 
+.tab-link:hover {
+    color: var(--text-primary);
+}
+
+/* form */
 .register-form {
     width: 100%;
 }
 
 .input-group {
     position: relative;
-    margin-bottom: 28px;
+    margin-bottom: 34px;
 }
 
 .input-group input {
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid var(--line);
-    outline: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
     padding: 20px 0 12px;
-    color: var(--text-main);
+    color: var(--text-primary);
     font-size: 1rem;
+    outline: none;
+    box-sizing: border-box;
 }
 
 .input-group input:focus {
-    border-bottom-color: var(--cyan);
+    border-bottom-color: var(--highlight-cyan);
 }
 
 .input-group label {
     position: absolute;
     left: 0;
     top: 16px;
-    color: rgba(255,255,255,0.70);
+    color: rgba(255, 255, 255, 0.68);
     font-size: 0.98rem;
-    letter-spacing: 2px;
-    pointer-events: none;
+    letter-spacing: 3px;
     transition: 0.24s ease;
+    pointer-events: none;
 }
 
 .input-group input:focus + label,
 .input-group input:not(:placeholder-shown) + label {
     top: -4px;
     font-size: 0.72rem;
-    color: var(--cyan);
+    color: var(--highlight-cyan);
     letter-spacing: 1.5px;
 }
 
+/* ---------- Submit button ---------- */
 .signup-btn {
     width: 100%;
-    margin-top: 20px;
-    padding: 18px 20px;
     border: none;
-    border-radius: 999px;
-    background: var(--gold);
+    outline: none;
+    background: var(--accent-gold);
     color: #111;
-    font-size: 1.2rem;
+    border-radius: 999px;
+    padding: 18px 20px;
+    font-size: 1.15rem;
     font-weight: 800;
     letter-spacing: 4px;
     cursor: pointer;
@@ -210,115 +147,82 @@ ul {
 }
 
 .signup-btn:hover {
-    background: var(--gold-hover);
-    transform: translateY(-1px);
+    background: var(--accent-gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(212, 160, 23, 0.22);
 }
 
+/* ---------- Footer copy inside card ---------- */
 .terms-text {
-    margin-top: 20px;
+    margin-top: 22px;
     text-align: center;
     font-size: 0.82rem;
-    color: var(--text-faint);
+    color: rgba(255, 255, 255, 0.48);
     line-height: 1.7;
 }
 
 .terms-text a {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.72);
 }
 
 .terms-text a:hover {
     text-decoration: underline;
 }
 
+/* bottom link */
 .bottom-link {
     margin-top: 34px;
-    text-align: center;
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.78);
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .bottom-link a {
-    color: var(--cyan);
+    color: var(--highlight-cyan);
     font-weight: 700;
-    margin-left: 10px;
+    margin-left: 8px;
 }
 
 .bottom-link a:hover {
     text-decoration: underline;
 }
 
-/* Responsive */
+/* responsiveness */
 @media (max-width: 992px) {
-    .site-header {
-        height: auto;
-        padding: 18px 20px;
-        flex-wrap: wrap;
-    }
-
-    .header-left,
-    .header-right,
-    .main-nav {
-        flex: 100%;
-        justify-content: center;
-    }
-
-    .main-nav {
-        gap: 20px;
-        flex-wrap: wrap;
-    }
-
-    .search-box {
-        width: 100%;
-        max-width: 360px;
-    }
-
-    .register-card {
-        padding: 32px 24px 26px;
-    }
-
-    .hero-branding h1 {
-        font-size: 2.4rem;
+    .hero-section {
+        padding: 60px 16px 80px;
     }
 
     .hero-branding p {
         letter-spacing: 4px;
+        font-size: 0.8rem;
     }
 
-    .site-footer {
-        padding: 36px 24px 24px;
+    .register-card {
+        padding: 32px 24px 28px;
     }
 }
 
 @media (max-width: 768px) {
-    .hero-section {
-        padding: 44px 14px 70px;
-    }
-
     .hero-logo {
-        width: 72px;
-    }
-
-    .hero-branding h1 {
-        font-size: 2rem;
-    }
-
-    .hero-branding h1 span {
-        font-size: 1.1rem;
+        width: 74px;
     }
 
     .hero-branding p {
-        font-size: 0.76rem;
-        letter-spacing: 2px;
-    }
-
-    .register-card {
-        border-radius: 22px;
-        padding: 26px 18px 22px;
+        letter-spacing: 2.5px;
     }
 
     .auth-tabs {
         gap: 18px;
-        margin-bottom: 28px;
+        margin-bottom: 30px;
+    }
+
+    .tab-link {
+        font-size: 0.95rem;
+    }
+
+    .input-group label {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
     }
 
     .signup-btn {
@@ -326,43 +230,28 @@ ul {
         letter-spacing: 3px;
     }
 
-    .footer-brand-box .brand-main {
-        font-size: 2rem;
-    }
-
-    .footer-brand-box .brand-sub {
-        font-size: 1.2rem;
+    .bottom-link {
+        text-align: center;
+        font-size: 0.96rem;
     }
 }
 
 @media (max-width: 480px) {
-    .site-header {
-        padding: 14px 12px;
+    .hero-section {
+        padding: 44px 12px 70px;
     }
 
-    .brand-logo {
-        width: 52px;
-        height: 52px;
+    .hero-branding p {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
     }
 
-    .brand-main {
-        font-size: 1.4rem;
+    .register-card {
+        border-radius: 22px;
+        padding: 26px 16px 22px;
     }
 
-    .brand-sub {
-        font-size: 0.95rem;
-    }
-
-    .input-group label {
-        font-size: 0.88rem;
-        letter-spacing: 1.5px;
-    }
-
-    .bottom-link {
-        font-size: 0.92rem;
-    }
-
-    .footer-bottom p {
-        font-size: 0.8rem;
+    .input-group {
+        margin-bottom: 28px;
     }
 }

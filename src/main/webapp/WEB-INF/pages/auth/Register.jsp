@@ -8,11 +8,106 @@
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/Register.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/GlobalUser.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Register.css">
+<style>
+	.hero-section {
+	    position: relative;
+	    min-height: 100vh;
+	    background:
+	        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+	        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80") center center / cover no-repeat;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    padding: 60px 20px 100px;
+	}
+	.hero-logo {
+	    width: 300px !important;
+	    height: auto;
+	    object-fit: contain;
+	    margin-top: 30px;
+	    margin-bottom: 10px;
+	}
+	
+	.profile-upload-label {
+	    display: block;
+	    font-size: 0.72rem;
+	    color: var(--highlight-cyan);
+	    letter-spacing: 1.5px;
+	    margin-bottom: 20px;
+	    font-weight: 500;
+	}
+	
+	.profile-upload-box {
+	    display: flex;
+	    align-items: center;
+	    gap: 14px;
+	    width: 100%;
+	    border: 1px dashed rgba(255, 255, 255, 0.22);
+	    border-radius: 10px;
+	    padding: 16px 18px;
+	    cursor: pointer;
+	    background: rgba(255, 255, 255, 0.04);
+	    transition: border-color 0.25s ease;
+	    box-sizing: border-box;
+	    margin-bottom: 34px;
+	}
+	
+	.profile-upload-box:hover {
+	    border-color: rgba(var(--highlight-cyan-rgb), 0.5);
+	    border-color: var(--highlight-cyan);
+	    opacity: 0.7;
+	}
+	
+	.profile-upload-avatar {
+	    width: 44px;
+	    height: 44px;
+	    border-radius: 50%;
+	    background: rgba(255, 255, 255, 0.08);
+	    border: 1px solid rgba(255, 255, 255, 0.15);
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    flex-shrink: 0;
+	}
+	
+	.profile-upload-avatar i {
+	    font-size: 20px;
+	    color: rgba(255, 255, 255, 0.45);
+	}
+	
+	.profile-upload-text p:first-child {
+	    margin: 0;
+	    font-size: 0.88rem;
+	    color: rgba(255, 255, 255, 0.75);
+	    font-weight: 500;
+	}
+	
+	.profile-upload-text p:last-child {
+	    margin: 4px 0 0;
+	    font-size: 0.72rem;
+	    color: rgba(255, 255, 255, 0.38);
+	    letter-spacing: 0.5px;
+	}
+	
+	.profile-upload-icon {
+	    font-size: 18px;
+	    color: rgba(255, 255, 255, 0.3);
+	    margin-left: auto;
+	}
+	
+	.profile-upload-hint {
+	    font-size: 0.72rem;
+	    color: rgba(255, 255, 255, 0.28);
+	    text-align: center;
+	    margin: -20px 0 34px;
+	    letter-spacing: 0.3px;
+	}
+</style>
 </head>
 <body>
-
+	<jsp:include page = "../common/Header.jsp"/>
 	<div class="page-shell">
 
 		<!-- Main -->
@@ -24,9 +119,6 @@
 					<img
 						src="${pageContext.request.contextPath}/resources/images/Logo.png"
 						alt="Bajeko Cinema Logo" class="hero-logo">
-					<h1>
-						BAJEKO <span>Cinema</span>
-					</h1>
 					<p>THE LUMINESCENT GALLERY EXPERIENCE</p>
 				</div>
 
@@ -58,15 +150,22 @@
 						</div>
 
 						<div class="input-group">
-							<input type="file" id="profilePicture" name="image"
-								placeholder=" "> <label for="profilePicture">Profile
-								Picture</label>
-						</div>
-
-						<div class="input-group">
 							<input type="password" id="password" name="Password"
 								placeholder=" "> <label for="password">PASSWORD</label>
 						</div>
+						
+						<p class="profile-upload-label">PROFILE PICTURE</p>
+						<label for="profilePicture" class="profile-upload-box">
+						    <div class="profile-upload-avatar">
+						        <i class="fa-regular fa-user"></i>
+						    </div>
+						    <div class="profile-upload-text">
+						        <p>Choose a photo</p>
+						        <p>JPG, PNG or GIF · Max 5 MB</p>
+						    </div>
+						    <i class="fa-regular fa-upload profile-upload-icon"></i>
+						</label>
+						<input type="file" id="profilePicture" name="image" accept="image/*" style="display: none;">
 
 						<button type="submit" class="signup-btn">SIGN UP</button>
 

@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/AboutUs.css">
 </head>
 <body>
-    
+    <c:set var="activePage" value="aboutUs" scope="request" />
     <jsp:include page = "../common/Header.jsp"/>
         
     <main class="about-container">
