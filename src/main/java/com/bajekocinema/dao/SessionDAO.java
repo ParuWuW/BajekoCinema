@@ -73,6 +73,7 @@ public class SessionDAO {
 				PreparedStatement pst = conn.prepareStatement(sql)) {
 			pst.setString(1, sessionId);
 			ResultSet rs = pst.executeQuery();
+
 			if (rs.next()) {
 				SessionModel s = new SessionModel();
 				s.setSession_id(rs.getString("session_id"));
@@ -82,8 +83,7 @@ public class SessionDAO {
 				return s;
 			}
 		}
-		System.out.println("VALIDATING SESSION ID: [" + sessionId + "]");
-		System.out.println("SESSION ID LENGTH: " + sessionId.length());
+		
 		return null;
 	}
 }

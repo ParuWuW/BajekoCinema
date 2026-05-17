@@ -65,12 +65,7 @@ public class AuthenticationFilter implements Filter {
         SessionModel session = null;
         try {
             Cookie c = CookieUtil.getCookie(req, "SESSION_ID");
-            System.out.println("Cookie: " + (c != null ? c.getValue() : "NULL"));
-            System.out.println("Session: " + session);
-            System.out.println("Path: " + path);
             if (c != null) {
-            	System.out.println("RAW COOKIE VALUE: [" + c.getValue() + "]");
-                System.out.println("COOKIE LENGTH: " + c.getValue().length());
                 session = sessionService.validateSession(c.getValue());
                 if (session != null) {
                     req.setAttribute("loggedInUserId", session.getUser_id());

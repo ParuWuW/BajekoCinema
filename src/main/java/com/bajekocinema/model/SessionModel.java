@@ -81,5 +81,9 @@ public class SessionModel {
 	public void setRole(String role) {
 		this.role = role;
 	}
-
+	// In SessionModel.java
+	@Override
+	public String toString() {
+	    return "SessionModel[id=" + session_id + ", userId=" + user_id + ", role=" + role + "]";
+	}
 }

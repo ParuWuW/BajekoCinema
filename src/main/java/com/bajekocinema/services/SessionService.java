@@ -11,7 +11,7 @@ import com.bajekocinema.model.SessionModel;
 public class SessionService {
 	private final SessionDAO sessionDAO = new SessionDAO();
 
-    public static final int SESSION_MINUTES = 30; // single source of truth
+    public static final int SESSION_MINUTES = 1440; // single source of truth
 
     // Called after successful login — revives or creates session
     public String loginUser(int userId) throws SQLException {
