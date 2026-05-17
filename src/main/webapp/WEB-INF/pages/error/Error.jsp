@@ -41,7 +41,7 @@
 }
 
 .error-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 700;
     letter-spacing: 0.08em;
     color: var(--accent-gold);
@@ -98,7 +98,7 @@
                 It might have been renamed, removed, or is temporarily unavailable.
             </c:when>
             <c:otherwise>
-                "Uh oh! Our servers are taking a little nap.<br>
+                Uh oh! Our servers are taking a little nap.<br>
                 Please refresh the page or check back soon.
             </c:otherwise>
           </c:choose>
