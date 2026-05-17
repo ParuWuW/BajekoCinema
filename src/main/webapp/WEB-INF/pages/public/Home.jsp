@@ -17,7 +17,7 @@
 </head>
 <body>
     <c:set var="activePage" value="home" scope="request" />
-    <jsp:include page = "../common/Header.jsp"/>
+    <jsp:include page = "/WEB-INF/pages/common/Header.jsp"/>
 
     <!-- Hero Section -->
     <section class="hero">

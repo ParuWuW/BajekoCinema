@@ -8,8 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.bajekocinema.model.UserModel;
-import com.bajekocinema.services.UserProfileService;
-import com.bajekocinema.utils.SessionUtil;
 
 /**
  * Servlet implementation class UserProfileServlet
@@ -19,9 +17,6 @@ import com.bajekocinema.utils.SessionUtil;
 public class UserProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-    private UserProfileService userProfileService = new UserProfileService();
-
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,27 +30,20 @@ public class UserProfileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String email = (String) SessionUtil.getAttribute(request, "UserEmail");
-		System.out.println("Email from session: " + email); //to see if session is getting email
-
-	    if (email == null) {
-	        response.sendRedirect("login.jsp");
+		UserModel loggedInUser = (UserModel) request.getAttribute("loggedInUser");
+		System.out.println("loggedInUser from session: " + loggedInUser);
+		if (loggedInUser == null) {
+	        response.sendRedirect(request.getContextPath() + "/login");
 	        return;
 	    }
-
 	    try {
-	        UserModel user = userProfileService.getUserProfileByEmail(email);
 	        
-	        System.out.println("Username: " + user.getFullName());
-	        System.out.println("Email: " + user.getEmail());
-	        System.out.println("Phone: " + user.getPhone());
-	        System.out.println("Image: " + user.getImage());
-	        
-	        request.setAttribute("user", user);
-	        request.getRequestDispatcher("WEB-INF/pages/user/UserProfile.jsp").forward(request, response);
+	        request.setAttribute("user", loggedInUser);
+	        request.getRequestDispatcher("/WEB-INF/pages/user/UserProfile.jsp").forward(request, response);
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	    }	}
+	    }
+	    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -82,6 +82,8 @@ public class SessionDAO {
 				return s;
 			}
 		}
+		System.out.println("VALIDATING SESSION ID: [" + sessionId + "]");
+		System.out.println("SESSION ID LENGTH: " + sessionId.length());
 		return null;
 	}
 }

@@ -11,6 +11,7 @@ import com.bajekocinema.model.UserModel;
 import com.bajekocinema.services.LoginService;
 import com.bajekocinema.services.SessionService;
 import com.bajekocinema.utils.CookieUtil;
+import com.bajekocinema.utils.SessionUtil;
 
 /**
  * Servlet implementation class LoginServlet

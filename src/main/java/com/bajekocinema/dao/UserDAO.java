@@ -80,8 +80,34 @@ public class UserDAO {
         return user;
     }
 
-    // ADDED - used by UserProfileService
+    
     public UserModel getUserProfileByEmail(String email) throws Exception {
         return getUserByEmail(email);
     }
+
+	public UserModel getUserById(int userId) throws Exception {
+		// TODO Auto-generated method stub
+		Connection conn = DBconfig.getConnection();
+        String sql = "SELECT * FROM `User` WHERE userID = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, userId);
+        ResultSet rs = pst.executeQuery();
+
+        UserModel user = null;
+        if (rs.next()) {
+            user = new UserModel();
+            user.setUserID(rs.getInt("userID"));
+            user.setFullName(rs.getString("fullName"));
+            user.setPhone(rs.getString("phone"));
+            user.setEmail(rs.getString("email"));
+            user.setRole(rs.getString("role"));
+            user.setVerified(rs.getBoolean("isVerified"));
+            user.setPassword(rs.getString("password"));
+            user.setImage(rs.getString("image"));
+        }
+        rs.close();
+        pst.close();
+        conn.close();
+        return user;
+	}
 }
