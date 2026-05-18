@@ -24,6 +24,7 @@ import com.bajekocinema.utils.CookieUtil;
 public class AuthenticationFilter implements Filter {
 	private final SessionService sessionService = new SessionService();
 	private final UserDAO userDAO = new UserDAO();
+	
 
 	//public pages
     private static final Set<String> PUBLIC_PAGES = Set.of(
