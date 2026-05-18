@@ -24,13 +24,13 @@
 </head>
 <body>
     <c:set var="activePage" value="home" scope="request" />
-    <jsp:include page = "/WEB-INF/pages/common/Header.jsp"/>
+    <jsp:include page = "../common/Header.jsp"/>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-bg"
-            style="background-image: url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=2070&auto=format&fit=crop');">
+            style="background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
         </div>
 
         <div class="hero-content"> 
@@ -59,25 +59,23 @@
         <div class="movie-grid">
             <c:choose>
                 <c:when test="${not empty nowShowingMovies}">
-                    <c:forEach var="movie" items="${nowShowingMovies}">
-                        <a href="${pageContext.request.contextPath}/movie?id=${movie.id}" class="movie-card">
-                            <div class="card-poster">
-                                <img src="${movie.posterUrl}" alt="${movie.title}">
-                                <div class="card-rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <c:out value="${movie.rating}" />
-                                </div>
-                            </div>
-                            <div class="card-info">
-                                <h3 class="card-title">
-                                    <c:out value="${movie.title}" />
-                                </h3>
-                                <p class="card-meta">
-                                    <c:out value="${movie.genre}" /> &bull; <c:out value="${movie.duration}" /> min
-                                </p>
-                            </div>
-                        </a>
-                    </c:forEach>
+				<c:forEach var="movie" items="${nowShowingMovies}">
+				    <a href="${pageContext.request.contextPath}/movie?id=${movie.movieId}" class="movie-card">
+				        <div class="card-poster">
+				            <img src="${movie.posterUrl}" alt="${movie.title}">
+				            <div class="card-rating">
+				                <i class="fa-solid fa-star"></i>
+				                <c:out value="${movie.imdbScore}" />
+				            </div>
+				        </div>
+				        <div class="card-info">
+				            <h3 class="card-title"><c:out value="${movie.title}" /></h3>
+				            <p class="card-meta">
+				                <c:out value="${movie.genre}" /> &bull; <c:out value="${movie.durationMin}" /> min
+				            </p>
+				        </div>
+				    </a>
+				</c:forEach>
                 </c:when>
                 <c:otherwise>
                     <p class="empty-state">No movies are currently showing. Please check back soon.</p>
@@ -99,24 +97,22 @@
             <c:choose>
                 <c:when test="${not empty comingSoonMovies}">
                     <c:forEach var="movie" items="${comingSoonMovies}">
-                        <a href="${pageContext.request.contextPath}/movie?id=${movie.id}" class="movie-card">
-                            <div class="card-poster">
-                                <img src="${movie.posterUrl}" alt="${movie.title}">
-                                <div class="card-rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <c:out value="${movie.rating}" />
-                                </div>
-                            </div>
-                            <div class="card-info">
-                                <h3 class="card-title">
-                                    <c:out value="${movie.title}" />
-                                </h3>
-                                <p class="card-meta">
-                                    <c:out value="${movie.genre}" /> &bull; <c:out value="${movie.duration}" /> min
-                                </p>
-                            </div>
-                        </a>
-                    </c:forEach>
+				    <a href="${pageContext.request.contextPath}/movie?id=${movie.movieId}" class="movie-card">
+				        <div class="card-poster">
+				            <img src="${movie.posterUrl}" alt="${movie.title}">
+				            <div class="card-rating">
+				                <i class="fa-solid fa-star"></i>
+				                <c:out value="${movie.imdbScore}" />
+				            </div>
+				        </div>
+				        <div class="card-info">
+				            <h3 class="card-title"><c:out value="${movie.title}" /></h3>
+				            <p class="card-meta">
+				                <c:out value="${movie.genre}" /> &bull; <c:out value="${movie.durationMin}" /> min
+				            </p>
+				        </div>
+				    </a>
+				</c:forEach>
                 </c:when>
                 <c:otherwise>
                     <p class="empty-state">No upcoming movies announced yet. Stay tuned!</p>

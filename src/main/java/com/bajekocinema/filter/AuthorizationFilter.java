@@ -21,7 +21,7 @@ import com.bajekocinema.model.SessionModel;
  */
 @WebFilter(asyncSupported = true, urlPatterns = {
 	    "/profile",
-	    "/booking", 
+	  "/booking", 
 	    "/reviewBooking",
 	    "/admin/*" }
 	)

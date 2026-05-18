@@ -77,8 +77,8 @@
 }
 
 .tab-link.active {
-    color: var(--text-primary);
-    border-bottom: 2px solid var(--accent-gold);
+    color: var(--highlight-cyan);
+    border-bottom: 2px solid var(--highlight-cyan);
 }
 
 .tab-link:hover {

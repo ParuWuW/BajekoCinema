@@ -13,19 +13,57 @@ public class MovieDAO {
         List<MovieModel> movies = new ArrayList<>();
         try {
             Connection conn = DBconfig.getConnection();
-            String sql = "SELECT * FROM movie";
+            String sql = "SELECT * FROM `Movie`";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 MovieModel m = new MovieModel();
-                m.setMovieID(rs.getInt("MovieID"));
-                m.setMovieName(rs.getString("MovieName"));
-                m.setMovieLanguage(rs.getString("MovieLanguage"));
-                m.setMovieReleaseDate(rs.getDate("MovieReleaseDate"));
-                m.setMovieDuration(rs.getString("MovieDuration"));
-                m.setMovieGenre(rs.getString("MovieGenre"));
-                m.setMovieDescription(rs.getString("MovieDescription"));
+                m.setMovieId(rs.getInt("movie_id"));
+                m.setTitle(rs.getString("title"));
+                m.setGenre(rs.getString("genre"));
+                m.setDescription(rs.getString("description"));
+                m.setDurationMin(rs.getInt("duration_min"));
+                m.setReleaseDate(rs.getDate("release_date"));
+                m.setPosterUrl(rs.getString("poster_url"));
+                m.setTrailerUrl(rs.getString("trailer_url"));
+                m.setImdbScore(rs.getDouble("imdb_score"));
+                m.setStatus(rs.getString("status"));
+                movies.add(m);
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return movies;
+    }
+    
+    //get movies based on their status
+    public List<MovieModel> getMoviesByStatus(String status) {
+        List<MovieModel> movies = new ArrayList<>();
+        try {
+            Connection conn = DBconfig.getConnection();
+            String sql = "SELECT * FROM `Movie` WHERE status = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, status);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                MovieModel m = new MovieModel();
+                m.setMovieId(rs.getInt("movie_id"));
+                m.setTitle(rs.getString("title"));
+                m.setGenre(rs.getString("genre"));
+                m.setDescription(rs.getString("description"));
+                m.setDurationMin(rs.getInt("duration_min"));
+                m.setReleaseDate(rs.getDate("release_date"));
+                m.setPosterUrl(rs.getString("poster_url"));
+                m.setTrailerUrl(rs.getString("trailer_url"));
+                m.setImdbScore(rs.getDouble("imdb_score"));
+                m.setStatus(rs.getString("status"));
                 movies.add(m);
             }
 

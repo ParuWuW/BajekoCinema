@@ -6,6 +6,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+
+import com.bajekocinema.model.MovieModel;
+import com.bajekocinema.services.MovieService;
 
 /**
  * Servlet implementation class HomeServlet
@@ -13,6 +17,7 @@ import java.io.IOException;
 @WebServlet(asyncSupported = true, urlPatterns = { "/home" })
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private MovieService movieService = new MovieService();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -27,6 +32,11 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+        List<MovieModel> nowShowingMovies = movieService.getNowShowingMovies();
+        List<MovieModel> comingSoonMovies = movieService.getUpcomingMovies();
+
+        request.setAttribute("nowShowingMovies", nowShowingMovies);
+        request.setAttribute("comingSoonMovies", comingSoonMovies);
 		request.getRequestDispatcher("WEB-INF/pages/public/Home.jsp").forward(request, response);
 	}
 
