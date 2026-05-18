@@ -84,8 +84,8 @@ public class UserProfileServlet extends HttpServlet {
         Part filePart = request.getPart("image");
         if (filePart != null && filePart.getSize() > 0) {
         	String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        	filePart.write(getServletContext().getRealPath("/uploads/profile/") + fileName);
-        	imagePath = "uploads/profile/" + fileName;    
+        	filePart.write(getServletContext().getRealPath("/resources/images/") + fileName);
+        	imagePath = "resources/images" + fileName;    
         }
 
         try {
