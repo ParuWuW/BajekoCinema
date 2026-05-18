@@ -8,13 +8,18 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>My Profile - Bajeko Cinema</title>
+    <title>My Profile</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/userprofile.css">
+    <style>
+    a {
+    text-decoration:none;}
+    </style>
 </head>
 <body>
+<jsp:include page="/WEB-INF/pages/common/Header.jsp" />
 
 
-<div class="profile-wrapper">
+<div class="profilepage-wrapper">
     <div class="profile-card">
 
         <div class="avatar-section">

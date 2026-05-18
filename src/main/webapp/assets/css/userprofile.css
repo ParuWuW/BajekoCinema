@@ -10,9 +10,11 @@ body {
     padding: 2rem;
 }
 
-.profile-wrapper {
-    max-width: 1200px;
+.profilepage-wrapper {
+    max-width:1200px;
     margin: 0 auto;
+    padding: 200px;
+    position: center;
 }
 
 .profile-card {
