@@ -1,8 +1,21 @@
 package com.bajekocinema.model;
 
 public class HallModel {
+	private int HallID;
 	private String HallName;
 	private int HallCapacity;
+	/**
+	 * @return the hallID
+	 */
+	public int getHallID() {
+		return HallID;
+	}
+	/**
+	 * @param hallID the hallID to set
+	 */
+	public void setHallID(int hallID) {
+		HallID = hallID;
+	}
 	/**
 	 * @return the hallName
 	 */

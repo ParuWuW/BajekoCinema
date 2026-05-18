@@ -1,72 +1,110 @@
 package com.bajekocinema.model;
 
 public class UserModel {
-	
-	private String Username;
-	private int UserPhoneNumber;
-	private String UserEmail;
-	private String Password;
-	private String Image;
+
+	private int userID; 
+	private String fullName;
+	private String phone;
+	private String email;
+	private String password;
+	private String image;
+	private boolean isVerified;
+	private String role;
 	/**
-	 * @return the username
+	 * @return the userID
 	 */
-	public String getUsername() {
-		return Username;
+	public int getUserID() {
+		return userID;
 	}
 	/**
-	 * @param username the username to set
+	 * @param userID the userID to set
 	 */
-	public void setUsername(String username) {
-		Username = username;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 	/**
-	 * @return the userPhoneNumber
+	 * @return the fullName
 	 */
-	public int getUserPhoneNumber() {
-		return UserPhoneNumber;
+	public String getFullName() {
+		return fullName;
 	}
 	/**
-	 * @param userPhoneNumber the userPhoneNumber to set
+	 * @param fullName the fullName to set
 	 */
-	public void setUserPhoneNumber(int userPhoneNumber) {
-		UserPhoneNumber = userPhoneNumber;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 	/**
-	 * @return the userEmail
+	 * @return the phone
 	 */
-	public String getUserEmail() {
-		return UserEmail;
+	public String getPhone() {
+		return phone;
 	}
 	/**
-	 * @param userEmail the userEmail to set
+	 * @param phone the phone to set
 	 */
-	public void setUserEmail(String userEmail) {
-		UserEmail = userEmail;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	/**
-	 * @return the image
+	 * @return the email
 	 */
-	public String getImage() {
-		return Image;
+	public String getEmail() {
+		return email;
 	}
 	/**
-	 * @param image the image to set
+	 * @param email the email to set
 	 */
-	public void setImage(String image) {
-		Image = image;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	/**
 	 * @return the password
 	 */
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 	/**
 	 * @param password the password to set
 	 */
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
-	
+	/**
+	 * @return the image
+	 */
+	public String getImage() {
+		return image;
+	}
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(String image) {
+		this.image = image;
+	}
+	/**
+	 * @return the isVerified
+	 */
+	public boolean isVerified() {
+		return isVerified;
+	}
+	/**
+	 * @param isVerified the isVerified to set
+	 */
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
+	}
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 }

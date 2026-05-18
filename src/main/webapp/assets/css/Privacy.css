@@ -1,0 +1,264 @@
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    font-family: Arial, sans-serif;
+}
+.privacy-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 40px;
+}
+
+.privacy-header {
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.privacy-title {
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.privacy-desc {
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.privacy-meta {
+    font-size: 11px;
+    color: #fbbf24;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-block;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+}
+
+/* Base Card Styles */
+.policy-card {
+    background-color: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.policy-card h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.policy-card h3 i {
+    color: #fbbf24;
+    font-size: 20px;
+}
+
+.policy-card p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* The Grid Layout */
+.privacy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.col-left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Info Collection List */
+.collection-list {
+    list-style: none;
+}
+
+.collection-list li {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    line-height: 1.5;
+}
+
+.collection-list li i {
+    color: #fbbf24;
+    margin-top: 3px;
+}
+
+.collection-list li strong {
+    color: var(--text-main);
+}
+
+/* Image Card */
+.image-card {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    min-height: 200px;
+}
+
+.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+}
+
+.image-quote {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Data Usage List */
+.usage-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.usage-item {
+    background-color: #1a1a1c;
+    border-radius: 12px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.usage-num {
+    color: #fbbf24;
+    font-family: monospace;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.usage-text {
+    font-size: 14px;
+    color: var(--text-main);
+}
+
+/* Rights List */
+.rights-item {
+    margin-bottom: 25px;
+}
+
+.rights-item:last-child {
+    margin-bottom: 0;
+}
+
+.rights-item h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.rights-item p {
+    font-size: 13px;
+    margin-bottom: 0;
+}
+
+/* Third-Party Box (Full width but in grid layout below) */
+.third-party-section {
+    background-color: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    gap: 40px;
+}
+
+.third-party-content {
+    flex: 1;
+}
+
+.third-party-content h3 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.third-party-content p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.third-party-grid {
+    flex: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.tp-item {
+    background-color: #1a1a1c;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.tp-item h5 {
+    font-size: 11px;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tp-item h5 i {
+    color: #fbbf24;
+    font-size: 14px;
+}
+
+.tp-item p {
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+    .privacy-grid {
+        grid-template-columns: 1fr;
+    }
+    .third-party-section {
+        flex-direction: column;
+    }
+    .third-party-grid {
+        grid-template-columns: 1fr;
+    }
+}

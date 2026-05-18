@@ -33,7 +33,7 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("WEB-INF/pages/Register.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/auth/Register.jsp").forward(request, response);
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class RegisterServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
 			String Username = request.getParameter("Username");
-			int UserPhoneNumber = Integer.parseInt(request.getParameter("UserPhoneNumber"));
+			String UserPhoneNumber = request.getParameter("UserPhoneNumber");
 			String UserEmail = request.getParameter("UserEmail");
 			String Password = request.getParameter("Password");
 			Part filePart = request.getPart("Image");
@@ -51,10 +51,17 @@ public class RegisterServlet extends HttpServlet {
 			
 			String Image;
 			if(fileName !=null && !fileName.isEmpty()) {
-				Image = "resources/images" + fileName;
+				Image = "resources/images/" + fileName;
 			} else {
 				Image = "resources/images/default.png";
 			}
+			// Phone number validation
+		    if (UserPhoneNumber == null || !UserPhoneNumber.matches("\\d{10}")) // '\\d': 0-9 digits '{10}': 10 digits length
+		    {
+		        request.setAttribute("error", "Phone number must be exactly 10 digits");
+		        request.getRequestDispatcher("/WEB-INF/pages/auth/Register.jsp").forward(request, response);
+		        return;
+		    }
 			
 			RegisterService service = new RegisterService();
 			service.addUser(Username,UserPhoneNumber,UserEmail,Password,Image);

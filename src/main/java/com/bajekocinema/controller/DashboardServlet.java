@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class DashboardServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = {"/dashboard"})
+@WebServlet(asyncSupported = true, urlPatterns = {"/admin/dashboard"})
 public class DashboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,7 +27,8 @@ public class DashboardServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("WEB-INF/pages/AdminDashboard.jsp").forward(request, response);
+		request.setAttribute("currentPage", "dashboard");
+		request.getRequestDispatcher("WEB-INF/pages/admin/AdminDashboard.jsp").forward(request, response);
 	}
 
 	/**
