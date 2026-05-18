@@ -22,4 +22,5 @@ public class BookingService {
     public boolean deleteBooking(int bookingID) throws Exception {
         return bookingDAO.deleteBooking(bookingID);
     }
+    
 }

@@ -155,4 +155,47 @@ public class BookingDAO {
             return false;
         }
     }
+    
+    
+    
+    //SICHU LAI CHAINE HO 
+    //DO NOT TOUCH
+
+    public List<BookingModel> getBookingsByUserId(int userId) {
+        List<BookingModel> bookings = new ArrayList<>();
+        try {
+            Connection conn = DBconfig.getConnection();
+
+            String sql = "SELECT b.booking_id, b.booking_time, b.total_amount, b.status, " +
+                         "m.title, s.show_date, s.start_time " +
+                         "FROM Booking b " +
+                         "JOIN Shows s ON b.show_id = s.show_id " +
+                         "JOIN Movie m ON s.movie_id = m.movie_id " +
+                         "WHERE b.user_id = ? " +
+                         "ORDER BY b.booking_id DESC";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                BookingModel b = new BookingModel();
+                b.setBookingID(rs.getInt("booking_id"));
+                b.setBookingDate(rs.getString("booking_time"));
+                b.setTotalAmount(rs.getFloat("total_amount"));
+                b.setBookingStatus(rs.getString("status"));
+                b.setMovieName(rs.getString("title"));
+                b.setShowTiming(rs.getString("show_date") + " " + rs.getString("start_time"));
+                bookings.add(b);
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bookings;
+    }
 }
