@@ -23,7 +23,7 @@ public class MovieDAO {
                 m.setTitle(rs.getString("title"));
                 m.setGenre(rs.getString("genre"));
                 m.setDescription(rs.getString("description"));
-                m.setDurationMin(rs.getString("duration_min"));
+                m.setDurationMin(rs.getInt("duration_min"));
                 m.setReleaseDate(rs.getDate("release_date"));
                 m.setPosterUrl(rs.getString("poster_url"));
                 m.setTrailerUrl(rs.getString("trailer_url"));
