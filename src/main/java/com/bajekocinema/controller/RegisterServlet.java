@@ -62,6 +62,11 @@ public class RegisterServlet extends HttpServlet {
 		        request.getRequestDispatcher("/WEB-INF/pages/auth/Register.jsp").forward(request, response);
 		        return;
 		    }
+		    if (UserEmail != null && !UserEmail.endsWith("@gmail.com")) {
+		    	request.setAttribute("error", "enter a valid email");
+		        request.getRequestDispatcher("/WEB-INF/pages/auth/Register.jsp").forward(request, response);
+		        return;
+		    }
 			
 			RegisterService service = new RegisterService();
 			service.addUser(Username,UserPhoneNumber,UserEmail,Password,Image);

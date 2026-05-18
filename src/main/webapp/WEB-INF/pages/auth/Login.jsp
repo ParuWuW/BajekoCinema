@@ -14,6 +14,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/GlobalUser.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Login.css">
 <style>
+	a {
+		text-decoration: none;
+	}
+	
 	.hero-logo {
 	    width: 300px !important;
 	    height: auto;
@@ -25,6 +29,7 @@
     	color: var(--highlight-cyan);
     	border-bottom: 2px solid var(--highlight-cyan);
 	}
+	
 </style>
 </head>
 <body>
@@ -56,12 +61,12 @@
 						method="POST" class="login-form">
 						<div class="input-group">
 							<input type="email" id="email" name="UserEmail" placeholder=" "
-								required> <label for="email">EMAIL ADDRESS</label>
+								> <label for="email">EMAIL ADDRESS</label>
 						</div>
 
 						<div class="input-group">
 							<input type="password" id="password" name="Password"
-								placeholder=" " required> <label for="password">PASSWORD</label>
+								placeholder=" "> <label for="password">PASSWORD</label>
 						</div>
 
 						<div class="forgot-wrap">

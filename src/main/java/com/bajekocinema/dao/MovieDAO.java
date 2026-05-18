@@ -13,7 +13,7 @@ public class MovieDAO {
         List<MovieModel> movies = new ArrayList<>();
         try {
             Connection conn = DBconfig.getConnection();
-            String sql = "SELECT * FROM movie";
+            String sql = "SELECT * FROM `Movie`";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -47,7 +47,7 @@ public class MovieDAO {
         List<MovieModel> movies = new ArrayList<>();
         try {
             Connection conn = DBconfig.getConnection();
-            String sql = "SELECT * FROM movie WHERE status = ?";
+            String sql = "SELECT * FROM `Movie` WHERE status = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, status);
             ResultSet rs = ps.executeQuery();

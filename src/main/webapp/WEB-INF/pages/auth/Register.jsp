@@ -22,6 +22,10 @@
 	    justify-content: center;
 	    padding: 60px 20px 100px;
 	}
+	.tab-link.active {
+	    color: var(--highlight-cyan);
+	    border-bottom: 2px solid var(--highlight-cyan);
+	}
 	.hero-logo {
 	    width: 300px !important;
 	    height: auto;
