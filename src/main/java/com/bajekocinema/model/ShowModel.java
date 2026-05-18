@@ -1,96 +1,63 @@
 package com.bajekocinema.model;
 
-public class ShowModel {
-	private int ShowID;
-	private String ShowTiming;
-	private String ShowDuration;
-	private String MovieName;
-	private String HallName;
-	private int MovieID;
-	private int HallID;
-	/**
-	 * @return the showID
-	 */
-	public int getShowID() {
-		return ShowID;
-	}
-	/**
-	 * @param showID the showID to set
-	 */
-	public void setShowID(int showID) {
-		ShowID = showID;
-	}
-	/**
-	 * @return the showTiming
-	 */
-	public String getShowTiming() {
-		return ShowTiming;
-	}
-	/**
-	 * @param showTiming the showTiming to set
-	 */
-	public void setShowTiming(String showTiming) {
-		ShowTiming = showTiming;
-	}
-	/**
-	 * @return the showDuration
-	 */
-	public String getShowDuration() {
-		return ShowDuration;
-	}
-	/**
-	 * @param showDuration the showDuration to set
-	 */
-	public void setShowDuration(String showDuration) {
-		ShowDuration = showDuration;
-	}
-	/**
-	 * @return the movieName
-	 */
-	public String getMovieName() {
-		return MovieName;
-	}
-	/**
-	 * @param movieName the movieName to set
-	 */
-	public void setMovieName(String movieName) {
-		MovieName = movieName;
-	}
-	/**
-	 * @return the hallName
-	 */
-	public String getHallName() {
-		return HallName;
-	}
-	/**
-	 * @param hallName the hallName to set
-	 */
-	public void setHallName(String hallName) {
-		HallName = hallName;
-	}
-	/**
-	 * @return the movieID
-	 */
-	public int getMovieID() {
-		return MovieID;
-	}
-	/**
-	 * @param movieID the movieID to set
-	 */
-	public void setMovieID(int movieID) {
-		MovieID = movieID;
-	}
-	/**
-	 * @return the hallID
-	 */
-	public int getHallID() {
-		return HallID;
-	}
-	/**
-	 * @param hallID the hallID to set
-	 */
-	public void setHallID(int hallID) {
-		HallID = hallID;
-	}
+import java.util.Date;
 
+public class ShowModel {
+
+    private int showID;
+    private String showTiming;
+    private String showDuration;
+    private int movieID;
+    private String movieName;
+    private int hallID;
+    private String hallName;
+    private Date showDate;
+    private Date startTime;
+    private String status;
+
+    // ---- showID ----
+    public int getShowID()            { return showID; }
+    public void setShowID(int id)     { this.showID = id; }
+    public int getShowId()            { return showID; }
+    public void setShowId(int id)     { this.showID = id; }
+
+    // ---- showTiming (raw string kept for admin views) ----
+    public String getShowTiming()              { return showTiming; }
+    public void   setShowTiming(String t)      { this.showTiming = t; }
+
+    // ---- showDuration ----
+    public String getShowDuration()            { return showDuration; }
+    public void   setShowDuration(String d)    { this.showDuration = d; }
+
+    // ---- movieID ----
+    public int  getMovieID()          { return movieID; }
+    public void setMovieID(int id)    { this.movieID = id; }
+    public int  getMovieId()          { return movieID; }
+    public void setMovieId(int id)    { this.movieID = id; }
+
+    // ---- movieName ----
+    public String getMovieName()              { return movieName; }
+    public void   setMovieName(String name)   { this.movieName = name; }
+
+    // ---- hallID ----
+    public int  getHallID()           { return hallID; }
+    public void setHallID(int id)     { this.hallID = id; }
+    public int  getHallId()           { return hallID; }
+    public void setHallId(int id)     { this.hallID = id; }
+
+    // ---- hallName ----
+    public String getHallName()               { return hallName; }
+    public void   setHallName(String name)    { this.hallName = name; }
+
+    // ---- showDate (date part of ShowTiming — used by fmt:formatDate in JSP) ----
+    public Date getShowDate()             { return showDate; }
+    public void setShowDate(Date d)       { this.showDate = d; }
+
+    // ---- startTime (time part of ShowTiming — used by fmt:formatDate in JSP) ----
+    public Date getStartTime()            { return startTime; }
+    public void setStartTime(Date t)      { this.startTime = t; }
+
+    // ---- status ("scheduled" | "cancelled") ----
+    public String getStatus()             { return status; }
+    public void   setStatus(String s)     { this.status = s; }
 }

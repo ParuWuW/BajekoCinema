@@ -11,10 +11,6 @@ public class MovieService {
         return movieDAO.getAllMovies();
     }
 
-    public boolean addMovie(MovieModel movie) throws Exception {
-        return movieDAO.addMovie(movie);
-    }
-
     public boolean deleteMovie(int movieID) throws Exception {
         return movieDAO.deleteMovie(movieID);
     }

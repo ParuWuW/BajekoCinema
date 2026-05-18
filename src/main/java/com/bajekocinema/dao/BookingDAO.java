@@ -155,4 +155,137 @@ public class BookingDAO {
             return false;
         }
     }
+    
+    /**
+     * Creates a booking for the given user/show/seats in a single transaction:
+     *
+     *   1. INSERT into booking          → get BookingID
+     *   2. INSERT into showBooking      → links booking to show/movie/hall/user
+     *   3. INSERT into ticket           → one ticket per booking
+     *   4. INSERT into ticket_seat x N  → one row per selected seat
+     *
+     * Rolls back fully if anything fails (e.g. seat grabbed between select and submit).
+     *
+     * @param userID      logged-in user (from session)
+     * @param movieID     the movie
+     * @param hallID      the hall
+     * @param showID      the selected show
+     * @param seatIds     seat_ids the user selected
+     * @param pricePerSeat price for each seat (used to populate ticket_seat.seat_price)
+     * @return new BookingID on success, -1 on any failure
+     */
+    public int createBookingWithSeats(int userID, int movieID, int hallID,
+                                      int showID, List<Integer> seatIds,
+                                      float pricePerSeat) {
+        Connection conn = null;
+        int newBookingID = -1;
+ 
+        try {
+            conn = DBconfig.getConnection();
+            conn.setAutoCommit(false); // BEGIN
+ 
+            float totalAmount = pricePerSeat * seatIds.size();
+ 
+            // ------------------------------------------------------------------
+            // Step 1: INSERT into booking
+            // ------------------------------------------------------------------
+            String insertBooking =
+                "INSERT INTO booking (BookingDate, BookingStatus, TotalAmount, TicketID, PaymentID) " +
+                "VALUES (NOW(), 'confirmed', ?, 0, 0)";
+ 
+            try (PreparedStatement ps = conn.prepareStatement(
+                    insertBooking, PreparedStatement.RETURN_GENERATED_KEYS)) {
+ 
+                ps.setFloat(1, totalAmount);
+                ps.executeUpdate();
+ 
+                try (ResultSet keys = ps.getGeneratedKeys()) {
+                    if (keys.next()) newBookingID = keys.getInt(1);
+                }
+            }
+ 
+            if (newBookingID == -1) throw new Exception("Could not retrieve generated BookingID");
+ 
+            // ------------------------------------------------------------------
+            // Step 2: INSERT into showBooking
+            // ------------------------------------------------------------------
+            String insertShowBooking =
+                "INSERT INTO showBooking (BookingID, UserID, MovieID, HallID, ShowID) " +
+                "VALUES (?, ?, ?, ?, ?)";
+ 
+            try (PreparedStatement ps = conn.prepareStatement(insertShowBooking)) {
+                ps.setInt(1, newBookingID);
+                ps.setInt(2, userID);
+                ps.setInt(3, movieID);
+                ps.setInt(4, hallID);
+                ps.setInt(5, showID);
+                ps.executeUpdate();
+            }
+ 
+            // ------------------------------------------------------------------
+            // Step 3: INSERT into ticket (one ticket per booking)
+            // ------------------------------------------------------------------
+            int newTicketID = -1;
+            String insertTicket =
+                "INSERT INTO ticket (booking_id, status) VALUES (?, 'active')";
+ 
+            try (PreparedStatement ps = conn.prepareStatement(
+                    insertTicket, PreparedStatement.RETURN_GENERATED_KEYS)) {
+ 
+                ps.setInt(1, newBookingID);
+                ps.executeUpdate();
+ 
+                try (ResultSet keys = ps.getGeneratedKeys()) {
+                    if (keys.next()) newTicketID = keys.getInt(1);
+                }
+            }
+ 
+            if (newTicketID == -1) throw new Exception("Could not retrieve generated TicketID");
+ 
+            // ------------------------------------------------------------------
+            // Step 4: UPDATE booking.TicketID now that we have it
+            // ------------------------------------------------------------------
+            String updateBooking = "UPDATE booking SET TicketID = ? WHERE BookingID = ?";
+            try (PreparedStatement ps = conn.prepareStatement(updateBooking)) {
+                ps.setInt(1, newTicketID);
+                ps.setInt(2, newBookingID);
+                ps.executeUpdate();
+            }
+ 
+            // ------------------------------------------------------------------
+            // Step 5: INSERT one row into ticket_seat per selected seat
+            // ------------------------------------------------------------------
+            String insertSeat =
+                "INSERT INTO ticket_seat (ticket_id, seat_id, seat_price) VALUES (?, ?, ?)";
+ 
+            try (PreparedStatement ps = conn.prepareStatement(insertSeat)) {
+                for (int seatId : seatIds) {
+                    ps.setInt(1, newTicketID);
+                    ps.setInt(2, seatId);
+                    ps.setFloat(3, pricePerSeat);
+                    ps.addBatch();
+                }
+                ps.executeBatch();
+            }
+ 
+            conn.commit(); // COMMIT
+            System.out.println("BookingDAO: success — BookingID=" + newBookingID
+                    + " TicketID=" + newTicketID + " seats=" + seatIds);
+ 
+        } catch (Exception e) {
+            System.out.println("BookingDAO: transaction failed, rolling back");
+            e.printStackTrace();
+            if (conn != null) {
+                try { conn.rollback(); } catch (Exception ex) { ex.printStackTrace(); }
+            }
+            newBookingID = -1;
+ 
+        } finally {
+            if (conn != null) {
+                try { conn.setAutoCommit(true); conn.close(); } catch (Exception ex) { ex.printStackTrace(); }
+            }
+        }
+ 
+        return newBookingID;
+    }
 }
