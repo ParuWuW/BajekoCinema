@@ -1,33 +1,5 @@
 @charset "UTF-8";
-
-:root {
-    --bg-main: #0a0a0a;
-    --bg-secondary: #111113;
-    --bg-card: #151518;
-    --accent-gold: #d4a017;
-    --accent-gold-light: #e8b92d;
-    --accent-gold-dark: #b8890f;
-    --highlight-cyan: #00e5e5;
-    --highlight-cyan-glow: rgba(0, 229, 229, 0.35);
-    --text-primary: #ffffff;
-    --text-secondary: #b0b0b8;
-    --text-muted: #6b6b75;
-    --border-subtle: rgba(255,255,255,0.06);
-    --border-color: #222228;
-    --radius-sm: 8px;
-    --radius-md: 14px;
-    --radius-lg: 20px;
-    --radius-pill: 50px;
-    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: all 0.2s cubic-bezier(0.4,0,0.2,1);
-    --transition-base: all 0.35s cubic-bezier(0.4,0,0.2,1);
-    --shadow-card: 0 8px 32px rgba(0,0,0,0.45);
-    --shadow-card-hover: 0 20px 50px rgba(0,0,0,0.6);
-    --shadow-gold: 0 8px 30px rgba(212,160,23,0.25);
-  }
  
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
   body {
     font-family: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background-color: var(--bg-main);
@@ -36,10 +8,28 @@
     overflow-x: hidden;
     min-height: 100vh;
   }
-  a { text-decoration: none; color: inherit; transition: var(--transition-fast); }
-  ul { list-style: none; }
-  img { max-width: 100%; display: block; }
-  button { cursor: pointer; border: none; background: none; font-family: inherit; color: inherit; transition: var(--transition-base); }
+  a { 
+	  text-decoration: none; 
+	  color: inherit; 
+	  transition: var(--transition-fast); 
+  }
+  ul { 
+  list-style: none; 
+  }
+  
+  img { 
+  	max-width: 100%; 
+  	display: block; 
+  }
+  
+  button { 
+	  cursor: pointer; 
+	  border: none; 
+	  background: none; 
+	  font-family: inherit; 
+	  color: inherit; 
+	  transition: var(--transition-base); 
+  }
   
   .page-banner {
     padding-top: 70px;
@@ -72,8 +62,7 @@
     color: var(--text-muted);
     margin-bottom: 2.5rem;
   }
- 
-  /* ── Page Nav Tabs ── */
+
   .page-tabs {
     display: flex;
     gap: 3.5rem;
@@ -143,7 +132,7 @@
   }
   .results-meta strong { color: var(--text-secondary); }
  
-  /* ── Movie Grid ── */
+  /* Movie Grid */
   .movie-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -231,7 +220,7 @@
   }
   .overlay-btn.secondary:hover { border-color: rgba(255,255,255,0.3); }
  
-  /* ── Release Date Badge (replaces rating) ── */
+  /* Release Date Badge */
   .card-release {
     position: absolute;
     top: 0.85rem; right: 0.85rem;
@@ -250,25 +239,7 @@
   }
   .card-release i { font-size: 0.72rem; }
  
-  /* Genre badge (top-left) */
-  .card-genre-badge {
-    position: absolute;
-    top: 0.85rem; left: 0.85rem;
-    z-index: 3;
-    padding: 0.28rem 0.65rem;
-    border-radius: var(--radius-sm);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-  }
-  .badge-scifi  { background: rgba(0,229,229,0.15); border: 1px solid rgba(0,229,229,0.3); color: var(--highlight-cyan); }
-  .badge-action { background: rgba(212,160,23,0.12); border: 1px solid rgba(212,160,23,0.25); color: var(--accent-gold); }
-  .badge-drama  { background: rgba(180,100,200,0.12); border: 1px solid rgba(180,100,200,0.25); color: #c887e8; }
-  .badge-horror { background: rgba(220,50,50,0.12); border: 1px solid rgba(220,50,50,0.25); color: #e87070; }
-  .badge-adventure { background: rgba(50,200,100,0.12); border: 1px solid rgba(50,200,100,0.25); color: #5ed88a; }
  
-  /* "Notify Me" ribbon on highly anticipated cards */
   .card-hot {
     position: absolute;
     top: 0; left: 0;
@@ -301,44 +272,6 @@
     margin-bottom: 0.6rem;
   }
   .card-meta .dot { opacity: 0.4; }
- 
-  /* Notify Me button */
-  .notify-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    padding: 0.4rem 0.9rem;
-    border-radius: var(--radius-sm);
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: var(--transition-fast);
-    font-family: inherit;
-  }
-  .notify-btn:hover {
-    background: rgba(212,160,23,0.08);
-    border-color: rgba(212,160,23,0.35);
-    color: var(--accent-gold);
-  }
-  .notify-btn.notified {
-    background: rgba(212,160,23,0.1);
-    border-color: rgba(212,160,23,0.4);
-    color: var(--accent-gold);
-  }
-  .notify-btn i { font-size: 0.7rem; }
- 
-  /* Countdown strip */
-  .card-countdown {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    margin-top: 0.35rem;
-  }
-  .card-countdown strong { color: var(--highlight-cyan); }
  
   /* ── Responsive ── */
   @media (max-width: 1280px) { .movie-grid { grid-template-columns: repeat(4, 1fr); gap: 1.8rem; } }

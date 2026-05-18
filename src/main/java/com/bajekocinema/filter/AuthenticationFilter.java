@@ -29,6 +29,8 @@ public class AuthenticationFilter implements Filter {
 	//public pages
     private static final Set<String> PUBLIC_PAGES = Set.of(
             "/home",
+            "/nowShowing",
+            "/comingSoon",
             "/termsOfService",
             "/privacyPolicy",
             "/aboutUs",
