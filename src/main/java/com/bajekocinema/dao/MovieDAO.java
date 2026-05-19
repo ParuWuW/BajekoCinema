@@ -174,4 +174,66 @@ public class MovieDAO {
         m.setStatus(rs.getString("status"));
         return m;
     }
+    
+    /**
+     * Now-showing movies whose title matches the search keyword.
+     * Only returns movies that have at least one scheduled show today or later.
+     */
+    public List<MovieModel> searchNowShowingByTitle(String keyword) {
+        List<MovieModel> movies = new ArrayList<>();
+
+        String sql = "SELECT DISTINCT m.* FROM movie m " +
+                     "JOIN shows s ON s.movie_id = m.movie_id " +
+                     "WHERE m.status = 'now_showing' " +
+                     "  AND s.status = 'scheduled' " +
+                     "  AND s.show_date >= CURDATE() " +
+                     "  AND m.title LIKE ? " +
+                     "ORDER BY m.title ASC";
+
+        try {
+            Connection conn = DBconfig.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + keyword + "%");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                movies.add(mapMovie(rs));
+            }
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return movies;
+    }
+
+    /**
+     * Upcoming movies whose title matches the search keyword.
+     */
+    public List<MovieModel> searchUpcomingByTitle(String keyword) {
+        List<MovieModel> movies = new ArrayList<>();
+
+        String sql = "SELECT * FROM movie " +
+                     "WHERE status = 'upcoming' " +
+                     "  AND title LIKE ? " +
+                     "ORDER BY release_date ASC, title ASC";
+
+        try {
+            Connection conn = DBconfig.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + keyword + "%");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                movies.add(mapMovie(rs));
+            }
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return movies;
+    }
 }

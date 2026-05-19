@@ -31,10 +31,14 @@
 			</nav>
 
 			<div class="nav-actions">
-				<div class="search-bar">
-					<i class="fa-solid fa-search"></i> <input type="text"
-						placeholder="Search films...">
-				</div>
+			<form action="${pageContext.request.contextPath}/home" method="get" class="search-bar">			
+			    <i class="fa-solid fa-search"></i>			
+			    <input type="text"
+			           name="search"
+			           placeholder="Search movies..."
+			           value="${not empty searchQuery ? searchQuery : ''}"
+			           autocomplete="off" />			
+			</form>
 
 				<c:choose>
 					<c:when test="${not empty loggedInUser}">

@@ -41,4 +41,12 @@ public class MovieService {
     public List<MovieModel> getUpcomingMovies() {
         return movieDAO.getUpcomingMovies(null);
     }
+    
+    public List<MovieModel> searchNowShowingMovies(String keyword) {
+        return movieDAO.searchNowShowingByTitle(keyword);
+    }
+
+    public List<MovieModel> searchUpcomingMovies(String keyword) {
+        return movieDAO.searchUpcomingByTitle(keyword);
+    }
 }
