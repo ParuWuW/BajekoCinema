@@ -1,5 +1,9 @@
+/* ══════════════════════════════════════════
+   CONTACT PAGE — COMPLETE CSS
+══════════════════════════════════════════ */
+
 body {
-	font-family: 'Inter', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--bg-app);
     color: var(--text-main);
     line-height: 1.5;
@@ -8,28 +12,21 @@ body {
     flex-direction: column;
 }
 
-
+/* ── Main container — two column layout ── */
 .contact-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 120px 40px;
     display: flex;
-    justify-content: flex-start;
-    position: relative;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 80px;
 }
 
-/* Container */
-.contact-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 120px 40px;
-    display: flex;
-    justify-content: flex-start;
-}
-
-
+/* ── LEFT SIDE ── */
 .contact-content {
-    max-width: 600px;
+    max-width: 560px;
+    flex: 1;
 }
 
 .service-label {
@@ -55,7 +52,6 @@ body {
     line-height: 1.6;
     margin-bottom: 60px;
     max-width: 450px;
-    margin-left: 40px; /* To offset it slightly like the mockup */
 }
 
 .contact-cards {
@@ -115,11 +111,112 @@ body {
     font-weight: 600;
 }
 
-@media (max-width: 768px) {
+/* ── RIGHT SIDE — contact form ── */
+.contact-form-wrap {
+    flex: 1;
+    max-width: 480px;
+    padding-top: 10px;
+}
+
+.form-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-main);
+}
+
+.form-subtitle {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 36px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.form-required {
+    color: #fbbf24;
+    margin-left: 2px;
+}
+
+.form-input {
+    background-color: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 15px;
+    color: var(--text-main);
+    font-family: inherit;
+    width: 100%;
+    transition: border-color 0.25s ease, background-color 0.25s ease;
+    outline: none;
+}
+
+.form-input::placeholder {
+    color: var(--text-muted);
+}
+
+.form-input:focus {
+    border-color: rgba(251, 191, 36, 0.5);
+    background-color: var(--surface-light);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+.form-submit {
+    align-self: flex-start;
+    background-color: #fbbf24;
+    color: #000;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    padding: 16px 36px;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.form-submit:hover {
+    background-color: #d97706;
+    transform: translateY(-2px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .contact-container {
+        flex-direction: column;
+        gap: 60px;
+        padding: 80px 24px;
+    }
+
     .contact-title {
         font-size: 48px;
     }
-    .contact-desc {
-        margin-left: 0;
+
+    .contact-content,
+    .contact-form-wrap {
+        max-width: 100%;
+        width: 100%;
     }
 }
