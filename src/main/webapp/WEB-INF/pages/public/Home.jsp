@@ -99,25 +99,25 @@
     <section class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-bg"
-            style="background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+            style="background-image: url('${pageContext.request.contextPath}/resources/images/herobanner.png');">
         </div>
 
         <div class="hero-content"> 
-            <span class="hero-label">STREAMING EXCLUSIVELY AT BAJEKO</span>
-            <h1 class="hero-title">PROJECT HAIL<br>MARY</h1>
-            <p class="hero-desc">A lone astronaut must save the earth from disaster in this edge-of-your-seat
-                thriller based on the best-selling novel. Experience the journey exclusively in our IMAX theaters.
+            <span class="hero-label">Lights Down. Stories Begin.</span>
+            <h1 class="hero-title">BAJEKO<br>CINEMAS</h1>
+            <p class="hero-desc">At Bajeko Cinemas, every movie becomes an unforgettable experience with stunning visuals, surround sound, and the perfect movie-night atmosphere.
+             Experience the journey exclusively in our IMAX theaters.
             </p>
 
             <div class="hero-buttons">
-                <a href="" class="btn btn-primary"><i class="fa-solid fa-play"></i> Watch Trailer</a>
-                <a href="${pageContext.request.contextPath}/booking" class="btn btn-outline"><i class="fa-solid fa-ticket"></i> Book Tickets</a>
+                <a href="#now-showing" class="btn btn-primary"><i class="fa-solid fa-ticket"></i> Browse Movies</a>
+                <a href="${pageContext.request.contextPath}/aboutUs" class="btn btn-outline"><i class="fa-brands fa-readme"></i> Read About Us</a>
             </div>
         </div>
     </section>
 
     <!-- Now Showing Section-->
-    <section class="movies-section">
+    <section class="movies-section" id="now-showing">
         <div class="section-header">
             <h2 class="section-title">Now Showing</h2>
             <a href="${pageContext.request.contextPath}/nowShowing" class="view-all-link">

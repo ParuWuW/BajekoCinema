@@ -133,7 +133,6 @@ button {
     background: var(--accent-gold-light);
     border-color: var(--accent-gold-light);
     transform: translateY(-3px);
-    box-shadow: var(--shadow-gold);
 }
 
 .btn-primary:active {
