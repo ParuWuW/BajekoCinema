@@ -1,96 +1,59 @@
 package com.bajekocinema.model;
 
+import java.sql.Date;
+import java.sql.Time;
+
 public class ShowModel {
-	private int ShowID;
-	private String ShowTiming;
-	private String ShowDuration;
-	private String MovieName;
-	private String HallName;
-	private int MovieID;
-	private int HallID;
-	/**
-	 * @return the showID
-	 */
+	private int showID;
+	private int movieID;
+	private int theatreID;
+	private int hallID;
+	private Date showDate;
+	private Time startTime;
+	private String status;
+	
 	public int getShowID() {
-		return ShowID;
+		return showID;
 	}
-	/**
-	 * @param showID the showID to set
-	 */
 	public void setShowID(int showID) {
-		ShowID = showID;
+		this.showID = showID;
 	}
-	/**
-	 * @return the showTiming
-	 */
-	public String getShowTiming() {
-		return ShowTiming;
-	}
-	/**
-	 * @param showTiming the showTiming to set
-	 */
-	public void setShowTiming(String showTiming) {
-		ShowTiming = showTiming;
-	}
-	/**
-	 * @return the showDuration
-	 */
-	public String getShowDuration() {
-		return ShowDuration;
-	}
-	/**
-	 * @param showDuration the showDuration to set
-	 */
-	public void setShowDuration(String showDuration) {
-		ShowDuration = showDuration;
-	}
-	/**
-	 * @return the movieName
-	 */
-	public String getMovieName() {
-		return MovieName;
-	}
-	/**
-	 * @param movieName the movieName to set
-	 */
-	public void setMovieName(String movieName) {
-		MovieName = movieName;
-	}
-	/**
-	 * @return the hallName
-	 */
-	public String getHallName() {
-		return HallName;
-	}
-	/**
-	 * @param hallName the hallName to set
-	 */
-	public void setHallName(String hallName) {
-		HallName = hallName;
-	}
-	/**
-	 * @return the movieID
-	 */
 	public int getMovieID() {
-		return MovieID;
+		return movieID;
 	}
-	/**
-	 * @param movieID the movieID to set
-	 */
 	public void setMovieID(int movieID) {
-		MovieID = movieID;
+		this.movieID = movieID;
 	}
-	/**
-	 * @return the hallID
-	 */
+	public int getTheatreID() {
+		return theatreID;
+	}
+	public void setTheatreID(int theatreID) {
+		this.theatreID = theatreID;
+	}
 	public int getHallID() {
-		return HallID;
+		return hallID;
 	}
-	/**
-	 * @param hallID the hallID to set
-	 */
 	public void setHallID(int hallID) {
-		HallID = hallID;
+		this.hallID = hallID;
 	}
+	public Date getShowDate() {
+		return showDate;
+	}
+	public void setShowDate(Date showDate) {
+		this.showDate = showDate;
+	}
+	public Time getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Time startTime) {
+		this.startTime = startTime;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 }

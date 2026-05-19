@@ -198,4 +198,105 @@ public class BookingDAO {
         }
         return bookings;
     }
+    
+    //khushi ko code
+    /**
+     * Creates a booking with associated ticket and seats in a single transaction.
+     *
+     * @param userID       the user making the booking
+     * @param showID       the show being booked
+     * @param seatIds      list of seat IDs to book
+     * @param pricePerSeat price for each seat (used to populate ticket_seat.seat_price)
+     * @return new bookingId on success, -1 on any failure
+     */
+    public int createBookingWithSeats(int userID, int showID,
+                                      List<Integer> seatIds, float pricePerSeat) {
+        Connection conn = null;
+        int newBookingID = -1;
+
+        if (seatIds == null || seatIds.isEmpty()) {
+            System.out.println("BookingDAO: no seats provided, aborting");
+            return -1;
+        }
+
+        try {
+            conn = DBconfig.getConnection();
+            conn.setAutoCommit(false); // BEGIN
+
+            float totalAmount = pricePerSeat * seatIds.size();
+
+            // Step 1: INSERT into booking
+            // booking_time defaults to CURRENT_TIMESTAMP, status defaults to 'pending'
+            // explicitly set status to 'confirmed' since we're committing the booking.
+            String insertBooking =
+                "INSERT INTO booking (user_id, show_id, total_amount, status) " +
+                "VALUES (?, ?, ?, 'confirmed')";
+
+            try (PreparedStatement ps = conn.prepareStatement(
+                    insertBooking, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+                ps.setInt(1, userID);
+                ps.setInt(2, showID);
+                ps.setFloat(3, totalAmount);
+                ps.executeUpdate();
+
+                try (ResultSet keys = ps.getGeneratedKeys()) {
+                    if (keys.next()) newBookingID = keys.getInt(1);
+                }
+            }
+
+            if (newBookingID == -1) throw new Exception("Could not retrieve generated booking_id");
+
+            // Step 2: INSERT into ticket (one ticket per booking — booking_id is UNIQUE)
+            int newTicketID = -1;
+            String insertTicket =
+                "INSERT INTO ticket (booking_id, status) VALUES (?, 'active')";
+
+            try (PreparedStatement ps = conn.prepareStatement(
+                    insertTicket, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+                ps.setInt(1, newBookingID);
+                ps.executeUpdate();
+
+                try (ResultSet keys = ps.getGeneratedKeys()) {
+                    if (keys.next()) newTicketID = keys.getInt(1);
+                }
+            }
+
+            if (newTicketID == -1) throw new Exception("Could not retrieve generated ticket_id");
+
+            // Step 3: insert one row into ticket_seat per selected seat
+            String insertSeat =
+                "INSERT INTO ticket_seat (ticket_id, seat_id, seat_price) VALUES (?, ?, ?)";
+
+            try (PreparedStatement ps = conn.prepareStatement(insertSeat)) {
+                for (int seatId : seatIds) {
+                    ps.setInt(1, newTicketID);
+                    ps.setInt(2, seatId);
+                    ps.setFloat(3, pricePerSeat);
+                    ps.addBatch();
+                }
+                ps.executeBatch();
+            }
+
+            conn.commit(); // COMMIT
+            System.out.println("BookingDAO: success — bookingId=" + newBookingID
+                    + " ticketId=" + newTicketID + " seats=" + seatIds);
+
+        } catch (Exception e) {
+            System.out.println("BookingDAO: transaction failed, rolling back");
+            e.printStackTrace();
+            if (conn != null) {
+                try { conn.rollback(); } catch (Exception ex) { ex.printStackTrace(); }
+            }
+            newBookingID = -1;
+
+        } finally {
+            if (conn != null) {
+                try { conn.setAutoCommit(true); conn.close(); } catch (Exception ex) { ex.printStackTrace(); }
+            }
+        }
+
+        return newBookingID;
+    }
 }
