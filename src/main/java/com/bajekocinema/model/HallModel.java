@@ -1,44 +1,45 @@
 package com.bajekocinema.model;
 
 public class HallModel {
-	private int HallID;
-	private String HallName;
-	private int HallCapacity;
+	private int hallID;
+	private int theatreID;
+	private String hallName;
+	private int hallCapacity;
 	/**
 	 * @return the hallID
 	 */
 	public int getHallID() {
-		return HallID;
+		return hallID;
 	}
 	/**
 	 * @param hallID the hallID to set
 	 */
 	public void setHallID(int hallID) {
-		HallID = hallID;
+		hallID = hallID;
 	}
 	/**
 	 * @return the hallName
 	 */
 	public String getHallName() {
-		return HallName;
+		return hallName;
 	}
 	/**
 	 * @param hallName the hallName to set
 	 */
 	public void setHallName(String hallName) {
-		HallName = hallName;
+		hallName = hallName;
 	}
 	/**
 	 * @return the hallCapacity
 	 */
 	public int getHallCapacity() {
-		return HallCapacity;
+		return hallCapacity;
 	}
 	/**
 	 * @param hallCapacity the hallCapacity to set
 	 */
 	public void setHallCapacity(int hallCapacity) {
-		HallCapacity = hallCapacity;
+		hallCapacity = hallCapacity;
 	}
 
 }

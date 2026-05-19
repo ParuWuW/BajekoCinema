@@ -9,6 +9,7 @@ public class SessionModel {
     private Timestamp created_at;
     private Timestamp expires_at;
     private boolean is_active;
+    
 	/**
 	 * @return the session_id
 	 */
