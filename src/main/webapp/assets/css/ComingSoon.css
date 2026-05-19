@@ -100,6 +100,30 @@
   }
  
   /* ── Month Filter ── */
+  form.genre-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+ 
+.genre-filter .genre-pill {
+    font-family: inherit;
+    cursor: pointer;
+}
+ 
+.genre-filter .genre-pill:focus-visible {
+    outline: 2px solid #e50914;
+    outline-offset: 2px;
+}
+ 
+.chip-empty {
+    color: #888;
+    font-size: 13px;
+    font-style: italic;
+    padding: 6px 4px;
+}
+  
   .month-filter {
     display: flex;
     gap: 0.6rem;
