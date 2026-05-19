@@ -3,115 +3,65 @@ package com.bajekocinema.model;
 public class BookingModel {
 
     private int bookingID;
+    private int userID;
+    private int showID;
     private String bookingDate;
     private String bookingStatus;
     private float totalAmount;
-    private int ticketID;
-    private int paymentID;
 
-    // added these to show movie, hall and show info in the booking table
+    // joined / display fields
     private String movieName;
     private String hallName;
+    private String theatreName;
     private String showTiming;
-
-    // who booked the show
     private String username;
+    private String moviePoster;
 
-    /**
-     * @return the bookingID
-     */
+    // selected seats (for review page summary)
+    private String selectedSeatsLabel; // e.g. "A1, A2, A3"
+
     public int getBookingID() { return bookingID; }
-    /**
-     * @param bookingID the bookingID to set
-     */
-    public void setBookingID(int bookingID) { bookingID = bookingID; }
+    public void setBookingID(int bookingID) { this.bookingID = bookingID; }
 
-    /**
-     * @return the bookingDate
-     */
+    public int getUserID() { return userID; }
+    public void setUserID(int userID) { this.userID = userID; }
+
+    public int getShowID() { return showID; }
+    public void setShowID(int showID) { this.showID = showID; }
+
     public String getBookingDate() { return bookingDate; }
-    /**
-     * @param bookingDate the bookingDate to set
-     */
-    public void setBookingDate(String bookingDate) { bookingDate = bookingDate; }
+    public void setBookingDate(String bookingDate) { this.bookingDate = bookingDate; }
 
-    /**
-     * @return the bookingStatus
-     */
     public String getBookingStatus() { return bookingStatus; }
-    /**
-     * @param bookingStatus the bookingStatus to set
-     */
     public void setBookingStatus(String bookingStatus) {
-    	// convert to uppercase so badge comparison works in JSP
-    	if (bookingStatus != null) {
-    		bookingStatus = bookingStatus.toUpperCase();
-    	} else {
-    		bookingStatus = bookingStatus;
-    	}
+        if (bookingStatus != null) {
+            this.bookingStatus = bookingStatus.toUpperCase();
+        } else {
+            this.bookingStatus = null;
+        }
     }
 
-    /**
-     * @return the totalAmount
-     */
     public float getTotalAmount() { return totalAmount; }
-    /**
-     * @param totalAmount the totalAmount to set
-     */
-    public void setTotalAmount(float totalAmount) { totalAmount = totalAmount; }
+    public void setTotalAmount(float totalAmount) { this.totalAmount = totalAmount; }
 
-    /**
-     * @return the ticketID
-     */
-    public int getTicketID() { return ticketID; }
-    /**
-     * @param ticketID the ticketID to set
-     */
-    public void setTicketID(int ticketID) { ticketID = ticketID; }
-
-    /**
-     * @return the paymentID
-     */
-    public int getPaymentID() { return paymentID; }
-    /**
-     * @param paymentID the paymentID to set
-     */
-    public void setPaymentID(int paymentID) { paymentID = paymentID; }
-
-    /**
-     * @return the movieName
-     */
     public String getMovieName() { return movieName; }
-    /**
-     * @param movieName the movieName to set
-     */
-    public void setMovieName(String movieName) { movieName = movieName; }
+    public void setMovieName(String movieName) { this.movieName = movieName; }
 
-    /**
-     * @return the hallName
-     */
     public String getHallName() { return hallName; }
-    /**
-     * @param hallName the hallName to set
-     */
-    public void setHallName(String hallName) { hallName = hallName; }
+    public void setHallName(String hallName) { this.hallName = hallName; }
 
-    /**
-     * @return the showTiming
-     */
+    public String getTheatreName() { return theatreName; }
+    public void setTheatreName(String theatreName) { this.theatreName = theatreName; }
+
     public String getShowTiming() { return showTiming; }
-    /**
-     * @param showTiming the showTiming to set
-     */
-    public void setShowTiming(String showTiming) { showTiming = showTiming; }
+    public void setShowTiming(String showTiming) { this.showTiming = showTiming; }
 
-    /**
-     * @return the username
-     */
     public String getUsername() { return username; }
-    /**
-     * @param username the username to set
-     */
-    public void setUsername(String username) { username = username; }
+    public void setUsername(String username) { this.username = username; }
 
+    public String getMoviePoster() { return moviePoster; }
+    public void setMoviePoster(String moviePoster) { this.moviePoster = moviePoster; }
+
+    public String getSelectedSeatsLabel() { return selectedSeatsLabel; }
+    public void setSelectedSeatsLabel(String selectedSeatsLabel) { this.selectedSeatsLabel = selectedSeatsLabel; }
 }

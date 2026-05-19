@@ -11,6 +11,10 @@ import java.util.List;
 public class MovieService {
     private MovieDAO movieDAO = new MovieDAO();
     private GenreDAO genreDAO = new GenreDAO();
+    
+    public MovieModel getMovieById(int movieId) {
+        return movieDAO.getMovieById(movieId);
+    }
 
     public List<MovieModel> getAllMovies() {
         return movieDAO.getAllMovies();

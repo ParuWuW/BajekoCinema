@@ -1,30 +1,16 @@
 package com.bajekocinema.model;
 
 public class TheatreModel {
-	private String TheatreName;
-	private String TheatreAddress;
-	/**
-	 * @return the theatreName
-	 */
-	public String getTheatreName() {
-		return TheatreName;
-	}
-	/**
-	 * @param theatreName the theatreName to set
-	 */
-	public void setTheatreName(String theatreName) {
-		TheatreName = theatreName;
-	}
-	/**
-	 * @return the theatreAddress
-	 */
-	public String getTheatreAddress() {
-		return TheatreAddress;
-	}
-	/**
-	 * @param theatreAddress the theatreAddress to set
-	 */
-	public void setTheatreAddress(String theatreAddress) {
-		TheatreAddress = theatreAddress;
-	}
+    private int theatreID;
+    private String theatreName;
+    private String theatreAddress;
+
+    public int getTheatreID() { return theatreID; }
+    public void setTheatreID(int theatreID) { this.theatreID = theatreID; }
+
+    public String getTheatreName() { return theatreName; }
+    public void setTheatreName(String theatreName) { this.theatreName = theatreName; }
+
+    public String getTheatreAddress() { return theatreAddress; }
+    public void setTheatreAddress(String theatreAddress) { this.theatreAddress = theatreAddress; }
 }
