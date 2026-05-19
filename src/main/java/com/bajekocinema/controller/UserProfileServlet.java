@@ -9,8 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 import java.io.IOException;
-import java.nio.file.Paths;
-
 import com.bajekocinema.model.UserModel;
 import com.bajekocinema.services.UserService;
 import com.bajekocinema.utils.ImageUtil;
