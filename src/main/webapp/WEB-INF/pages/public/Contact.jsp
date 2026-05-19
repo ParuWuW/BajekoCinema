@@ -6,22 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | Bajeko Cinema</title>
-    <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/GlobalUser.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Contact.css">
 </head>
 <body>
     <c:set var="activePage" value="customerSupport" scope="request" />
-    <jsp:include page = "../common/Header.jsp"/>
+    <jsp:include page="../common/Header.jsp"/>
+
     <main class="contact-container">
+
+        <%-- LEFT SIDE — your existing content, unchanged --%>
         <div class="contact-content">
             <span class="service-label">BAJEKO SERVICE</span>
             <h1 class="contact-title">The Cinematic<br>Connection.</h1>
             <p class="contact-desc">Whether you're inquiring about private screenings, membership perks, or feedback on your experience, our digital concierge is at your service.</p>
-            
+
             <div class="contact-cards">
-                
                 <a href="tel:+97798233242324" class="contact-card">
                     <div class="card-icon">
                         <i class="fa-solid fa-phone-volume"></i>
@@ -41,12 +42,76 @@
                         <span class="card-value">bajekohelp@gmail.com</span>
                     </div>
                 </a>
-
             </div>
         </div>
+
+        <%-- RIGHT SIDE — new contact form (frontend only) --%>
+        <div class="contact-form-wrap">
+            <h2 class="form-title">Get in Touch</h2>
+            <p class="form-subtitle">We'd love to hear from you. Inquire anything you want.</p>
+
+            <form class="contact-form" action="#" method="post">
+
+                <div class="form-group">
+                    <label class="form-label" for="contactName">
+                        Name <span class="form-required">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="contactName"
+                        name="name"
+                        class="form-input"
+                        placeholder="Your Name"
+                        required
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="contactEmail">
+                        Email <span class="form-required">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="contactEmail"
+                        name="email"
+                        class="form-input"
+                        placeholder="Your Email"
+                        required
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="contactSubject">Subject</label>
+                    <input
+                        type="text"
+                        id="contactSubject"
+                        name="subject"
+                        class="form-input"
+                        placeholder="Subject"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="contactMessage">
+                        Message <span class="form-required">*</span>
+                    </label>
+                    <textarea
+                        id="contactMessage"
+                        name="message"
+                        class="form-input form-textarea"
+                        placeholder="Message"
+                        rows="5"
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="form-submit">SUBMIT</button>
+
+            </form>
+        </div>
+
     </main>
 
-    <jsp:include page="../common/Footer.jsp" />
-
+    <jsp:include page="../common/Footer.jsp"/>
 </body>
 </html>
