@@ -75,9 +75,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     box-shadow: 0 -4px 16px var(--highlight-cyan-glow);
 }
 
-/* ==========================================================================
-   Main Content
-   ========================================================================== */
+/* Main Content */
 .movies-section {
     max-width: 1440px;
     margin: 0 auto;
@@ -175,6 +173,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     border-color: var(--accent-gold);
     color: var(--accent-gold);
 }
+
 
 /* Results count */
 .results-meta {

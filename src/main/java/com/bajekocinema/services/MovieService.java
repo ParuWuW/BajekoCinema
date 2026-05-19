@@ -1,29 +1,44 @@
 package com.bajekocinema.services;
 
+import com.bajekocinema.dao.GenreDAO;
 import com.bajekocinema.dao.MovieDAO;
+import com.bajekocinema.model.GenreModel;
 import com.bajekocinema.model.MovieModel;
+
+import java.sql.Date;
 import java.util.List;
 
 public class MovieService {
     private MovieDAO movieDAO = new MovieDAO();
+    private GenreDAO genreDAO = new GenreDAO();
 
-    public List<MovieModel> getAllMovies() throws Exception {
+    public List<MovieModel> getAllMovies() {
         return movieDAO.getAllMovies();
     }
 
-    public boolean addMovie(MovieModel movie) throws Exception {
-        return movieDAO.addMovie(movie);
+    public List<Date> getNowShowingDates() {
+        return movieDAO.getDistinctScheduledShowDates();
     }
 
-    public boolean deleteMovie(int movieID) throws Exception {
-        return movieDAO.deleteMovie(movieID);
+    // Genres come straight from the genre table now
+    public List<GenreModel> getAllGenres() {
+        return genreDAO.getAllGenres();
+    }
+
+    // Filtered now-showing movies
+    public List<MovieModel> getNowShowingMovies(String dateFilter, String genreFilter) {
+        return movieDAO.getNowShowingMovies(dateFilter, genreFilter);
+    }
+    
+    public List<MovieModel> getUpcomingMovies(String genreFilter) {
+        return movieDAO.getUpcomingMovies(genreFilter);
     }
     
     public List<MovieModel> getNowShowingMovies() {
-        return movieDAO.getMoviesByStatus("now_showing");
+        return movieDAO.getNowShowingMovies(null, null);
     }
 
     public List<MovieModel> getUpcomingMovies() {
-        return movieDAO.getMoviesByStatus("upcoming");
+        return movieDAO.getUpcomingMovies(null);
     }
 }

@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import com.bajekocinema.model.GenreModel;
 import com.bajekocinema.model.MovieModel;
 import com.bajekocinema.services.MovieService;
 
@@ -32,9 +33,17 @@ public class ComingSoonServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-        List<MovieModel> comingSoonMovies = movieService.getUpcomingMovies();
+		
+        String genreParam = request.getParameter("genre");
+
+        List<GenreModel> genres           = movieService.getAllGenres();
+        List<MovieModel> comingSoonMovies = movieService.getUpcomingMovies(genreParam);
+
+        request.setAttribute("genres", genres);
         request.setAttribute("comingSoonMovies", comingSoonMovies);
-		request.getRequestDispatcher("WEB-INF/pages/public/ComingSoon.jsp").forward(request, response);
+        request.setAttribute("selectedGenre", genreParam);
+        
+        request.getRequestDispatcher("WEB-INF/pages/public/ComingSoon.jsp").forward(request, response);
 	}
 
 	/**

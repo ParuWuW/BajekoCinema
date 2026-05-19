@@ -31,13 +31,24 @@
   <section class="movies-section">
 
     <!-- Month Filter -->
-    <div class="month-filter">
-      <button class="month-pill active">All</button>
-      <button class="month-pill">May 2026</button>
-      <button class="month-pill">June 2026</button>
-      <button class="month-pill">July 2026</button>
-      <button class="month-pill">August 2026</button>
-    </div>
+    <form id="filterForm" method="get"
+          action="${pageContext.request.contextPath}/comingSoon"
+          class="genre-filter">
+
+      <button type="submit" name="genre" value=""
+              class="genre-pill ${empty selectedGenre ? 'active' : ''}">All</button>
+
+      <c:forEach var="g" items="${genres}">
+        <button type="submit" name="genre" value="${g.genreName}"
+                class="genre-pill ${selectedGenre eq g.genreName ? 'active' : ''}">
+          <c:out value="${g.genreName}"/>
+        </button>
+      </c:forEach>
+
+      <c:if test="${empty genres}">
+        <span class="chip-empty">No upcoming genres yet.</span>
+      </c:if>
+    </form>
 
     <!-- Movie Grid -->
     <div class="movie-grid">
@@ -48,11 +59,11 @@
               <div class="card-poster">
                 <img src="${movie.posterUrl}" alt="${movie.title}">
                 <div class="card-genre-badge">
-                  <c:out value="${movie.genre}" />
+                  <c:out value="${movie.genre}"/>
                 </div>
                 <div class="card-release">
                   <i class="fa-regular fa-calendar"></i>
-                  <c:out value="${movie.releaseDate}" />
+                  <c:out value="${movie.releaseDate}"/>
                 </div>
                 <div class="card-overlay">
                   <button class="overlay-btn secondary">
@@ -61,9 +72,11 @@
                 </div>
               </div>
               <div class="card-info">
-                <h3 class="card-title"><c:out value="${movie.title}" /></h3>
+                <h3 class="card-title"><c:out value="${movie.title}"/></h3>
                 <p class="card-meta">
-                  <c:out value="${movie.genre}" /> <span class="dot">&bull;</span> <c:out value="${movie.durationMin}" /> min
+                  <c:out value="${movie.genre}"/>
+                  <span class="dot">&bull;</span>
+                  <c:out value="${movie.durationMin}"/> min
                 </p>
               </div>
             </div>
