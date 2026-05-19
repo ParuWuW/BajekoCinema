@@ -76,7 +76,7 @@
 
                 <!-- Image Card -->
                 <div class="policy-card image-card">
-                    <img src="${pageContext.request.contextPath}/assets/img/theatre.png" alt="Dark Cinema Seats" style="filter: grayscale(80%) brightness(0.6);" onerror="this.src='https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1000&auto=format&fit=crop'">
+                    <img src="${pageContext.request.contextPath}/resources/images/theatre.png" alt="Dark Cinema Seats" style="filter: grayscale(80%) brightness(0.6);">
                     <div class="image-quote">"Privacy is the ultimate luxury."</div>
                 </div>
 
