@@ -55,14 +55,20 @@ public class RegisterServlet extends HttpServlet {
 			} else {
 				Image = "resources/images/default.png";
 			}
+			
+			if (isBlank(Username) && isBlank(UserPhoneNumber) && isBlank(UserEmail) && isBlank(Password)) {
+				request.setAttribute("error", "Please fill all the personal information");
+		        request.getRequestDispatcher("/WEB-INF/pages/auth/Register.jsp").forward(request, response);
+		        return;
+			}
 			// Phone number validation
-		    if (UserPhoneNumber == null || !UserPhoneNumber.matches("\\d{10}")) // '\\d': 0-9 digits '{10}': 10 digits length
+		    if (isBlank(UserPhoneNumber) || !UserPhoneNumber.matches("\\d{10}")) // '\\d': 0-9 digits '{10}': 10 digits length
 		    {
 		        request.setAttribute("error", "Phone number must be exactly 10 digits");
 		        request.getRequestDispatcher("/WEB-INF/pages/auth/Register.jsp").forward(request, response);
 		        return;
 		    }
-		    if (UserEmail != null && !UserEmail.endsWith("@gmail.com")) {
+		    if (isBlank(UserEmail)&& !UserEmail.endsWith("@gmail.com")) {
 		    	request.setAttribute("error", "enter a valid email");
 		        request.getRequestDispatcher("/WEB-INF/pages/auth/Register.jsp").forward(request, response);
 		        return;
@@ -75,6 +81,8 @@ public class RegisterServlet extends HttpServlet {
 			RegisterService service = new RegisterService();
 			service.addUser(Username,UserPhoneNumber,UserEmail,Password,Image);
 			
+			
+			
 			// Redirect to login page
             response.sendRedirect(request.getContextPath() + "/login?success=registered");
 			
@@ -84,6 +92,10 @@ public class RegisterServlet extends HttpServlet {
 		    request.setAttribute("error", msg);
 		    request.getRequestDispatcher("/WEB-INF/pages/auth/Register.jsp").forward(request, response);
 		}
+		
+	}
+	private boolean isBlank(String s) {
+	    return s == null || s.trim().isEmpty();
 	}
 
 }
