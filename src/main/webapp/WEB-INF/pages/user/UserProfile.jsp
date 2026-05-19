@@ -18,7 +18,6 @@
 <body>
 <jsp:include page="/WEB-INF/pages/common/Header.jsp" />
 
-
 <div class="profilepage-wrapper">
     <div class="profile-card">
 
@@ -99,6 +98,7 @@
     </div>
 </div>
 
+    <jsp:include page="../common/Footer.jsp" />	
 <script>
     // Open edit mode if servlet forwarded back due to an error
     var openEdit = "${not empty showEdit}";

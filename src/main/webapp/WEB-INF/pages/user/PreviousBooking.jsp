@@ -109,5 +109,6 @@ td.status-pending   { color: #e8b92d; }
 		</c:choose>
 
 	</div>
+    <jsp:include page="../common/Footer.jsp" />	
 </body>
 </html>
