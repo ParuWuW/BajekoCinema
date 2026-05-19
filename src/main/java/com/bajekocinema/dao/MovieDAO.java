@@ -81,7 +81,6 @@ public class MovieDAO {
 
     /**
      * Now-showing movies, optionally filtered by date and/or genre.
-     * Simple version: no StringBuilder, no extra genre join.
      */
     public List<MovieModel> getNowShowingMovies(String dateFilter, String genreFilter) {
         List<MovieModel> movies = new ArrayList<>();
@@ -128,7 +127,6 @@ public class MovieDAO {
     
     /**
      * Upcoming movies, optionally filtered by genre.
-     * Simple version: no StringBuilder, no extra genre join.
      */
     public List<MovieModel> getUpcomingMovies(String genreFilter) {
         List<MovieModel> movies = new ArrayList<>();

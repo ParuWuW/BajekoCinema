@@ -106,7 +106,7 @@ form.filters-row {
         </c:if>
       </div>
 
-      <!-- Genre Pills (dynamic, from genre table) -->
+      <!-- Genre Pills -->
       <div class="genre-filter">
         <button type="submit" name="genre" value=""
                 class="genre-pill ${empty selectedGenre ? 'active' : ''}">All</button>
