@@ -2,6 +2,7 @@ package com.bajekocinema.dao;
 
 import com.bajekocinema.model.ShowModel;
 import com.bajekocinema.model.HallModel;
+import com.bajekocinema.model.TheatreModel;
 import com.bajekocinema.utils.DBconfig;
 
 import java.sql.Connection;
@@ -12,235 +13,402 @@ import java.util.List;
 
 public class ShowDAO {
 
-    public List<ShowModel> getAllShows() {
-        List<ShowModel> shows = new ArrayList<>();
+	public List<ShowModel> getAllShows() {
+		List<ShowModel> shows = new ArrayList<>();
+		String sql = "SELECT s.show_id, s.movie_id, s.theatre_id, s.hall_id, "
+				+ "s.show_date, s.start_time, s.status, "
+				+ "m.title AS movie_title, h.hall_name, t.theatre_name "
+				+ "FROM Shows s "
+				+ "JOIN Movie m ON s.movie_id = m.movie_id "
+				+ "JOIN Hall h ON s.hall_id = h.hall_id "
+				+ "JOIN Theatre t ON s.theatre_id = t.theatre_id "
+				+ "ORDER BY s.show_date ASC, s.start_time ASC";
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				ShowModel show = new ShowModel();
+				show.setShowId(rs.getInt("show_id"));
+				show.setMovieId(rs.getInt("movie_id"));
+				show.setTheatreId(rs.getInt("theatre_id"));
+				show.setHallId(rs.getInt("hall_id"));
+				show.setShowDate(rs.getString("show_date"));
+				show.setStartTime(rs.getString("start_time"));
+				show.setStatus(rs.getString("status"));
+				show.setMovieTitle(rs.getString("movie_title"));
+				show.setHallName(rs.getString("hall_name"));
+				show.setTheatreName(rs.getString("theatre_name"));
+				shows.add(show);
+			}
+			rs.close(); ps.close(); conn.close();
+		} catch (Exception e) {
+			System.out.println("Failed to fetch shows");
+			e.printStackTrace();
+		}
+		return shows;
+	}
 
-        String sql = "SELECT s.ShowTiming, s.ShowDuration, m.MovieName, h.HallName " +
-                     "FROM shows s " +
-                     "JOIN hallShow hs ON s.ShowID = hs.ShowID " +
-                     "JOIN movie m ON hs.MovieID = m.MovieID " +
-                     "JOIN hall h ON hs.HallID = h.HallID";
+	public List<ShowModel> getScheduledShows() {
+		List<ShowModel> shows = new ArrayList<>();
+		String sql = "SELECT s.show_id, s.movie_id, s.theatre_id, s.hall_id, "
+				+ "s.show_date, s.start_time, s.status, "
+				+ "m.title AS movie_title, h.hall_name, t.theatre_name "
+				+ "FROM Shows s "
+				+ "JOIN Movie m ON s.movie_id = m.movie_id "
+				+ "JOIN Hall h ON s.hall_id = h.hall_id "
+				+ "JOIN Theatre t ON s.theatre_id = t.theatre_id "
+				+ "WHERE s.status = 'scheduled' "
+				+ "ORDER BY s.show_date ASC, s.start_time ASC";
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				ShowModel show = new ShowModel();
+				show.setShowId(rs.getInt("show_id"));
+				show.setMovieId(rs.getInt("movie_id"));
+				show.setTheatreId(rs.getInt("theatre_id"));
+				show.setHallId(rs.getInt("hall_id"));
+				show.setShowDate(rs.getString("show_date"));
+				show.setStartTime(rs.getString("start_time"));
+				show.setStatus(rs.getString("status"));
+				show.setMovieTitle(rs.getString("movie_title"));
+				show.setHallName(rs.getString("hall_name"));
+				show.setTheatreName(rs.getString("theatre_name"));
+				shows.add(show);
+			}
+			rs.close(); ps.close(); conn.close();
+		} catch (Exception e) {
+			System.out.println("Failed to fetch scheduled shows");
+			e.printStackTrace();
+		}
+		return shows;
+	}
 
-        try {
-            Connection conn = DBconfig.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+	public List<ShowModel> getShowsByMovieID(int movieID) {
+		List<ShowModel> shows = new ArrayList<>();
+		String sql = "SELECT s.show_id, s.movie_id, s.theatre_id, s.hall_id, "
+				+ "s.show_date, s.start_time, s.status, "
+				+ "m.title AS movie_title, h.hall_name, t.theatre_name "
+				+ "FROM Shows s "
+				+ "JOIN Movie m ON s.movie_id = m.movie_id "
+				+ "JOIN Hall h ON s.hall_id = h.hall_id "
+				+ "JOIN Theatre t ON s.theatre_id = t.theatre_id "
+				+ "WHERE s.movie_id = ? "
+				+ "ORDER BY s.show_date ASC, s.start_time ASC";
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, movieID);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				ShowModel show = new ShowModel();
+				show.setShowId(rs.getInt("show_id"));
+				show.setMovieId(rs.getInt("movie_id"));
+				show.setTheatreId(rs.getInt("theatre_id"));
+				show.setHallId(rs.getInt("hall_id"));
+				show.setShowDate(rs.getString("show_date"));
+				show.setStartTime(rs.getString("start_time"));
+				show.setStatus(rs.getString("status"));
+				show.setMovieTitle(rs.getString("movie_title"));
+				show.setHallName(rs.getString("hall_name"));
+				show.setTheatreName(rs.getString("theatre_name"));
+				shows.add(show);
+			}
+			rs.close(); ps.close(); conn.close();
+		} catch (Exception e) {
+			System.out.println("Failed to fetch shows by movie");
+			e.printStackTrace();
+		}
+		return shows;
+	}
 
-            while (rs.next()) {
-                ShowModel show = new ShowModel();
-                show.setShowTiming(rs.getString("ShowTiming"));
-                show.setShowDuration(rs.getString("ShowDuration"));
-                show.setMovieName(rs.getString("MovieName"));
-                show.setHallName(rs.getString("HallName"));
-                shows.add(show);
-            }
+	public ShowModel getShowByID(int showID) {
+		ShowModel show = null;
+		String sql = "SELECT s.show_id, s.movie_id, s.theatre_id, s.hall_id, "
+				+ "s.show_date, s.start_time, s.status, "
+				+ "m.title AS movie_title, h.hall_name, t.theatre_name "
+				+ "FROM Shows s "
+				+ "JOIN Movie m ON s.movie_id = m.movie_id "
+				+ "JOIN Hall h ON s.hall_id = h.hall_id "
+				+ "JOIN Theatre t ON s.theatre_id = t.theatre_id "
+				+ "WHERE s.show_id = ?";
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, showID);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				show = new ShowModel();
+				show.setShowId(rs.getInt("show_id"));
+				show.setMovieId(rs.getInt("movie_id"));
+				show.setTheatreId(rs.getInt("theatre_id"));
+				show.setHallId(rs.getInt("hall_id"));
+				show.setShowDate(rs.getString("show_date"));
+				show.setStartTime(rs.getString("start_time"));
+				show.setStatus(rs.getString("status"));
+				show.setMovieTitle(rs.getString("movie_title"));
+				show.setHallName(rs.getString("hall_name"));
+				show.setTheatreName(rs.getString("theatre_name"));
+			}
+			rs.close(); ps.close(); conn.close();
+		} catch (Exception e) {
+			System.out.println("Failed to fetch show by ID");
+			e.printStackTrace();
+		}
+		return show;
+	}
 
-            rs.close();
-            ps.close();
-            conn.close();
+	// ── Theatre methods ───────────────────────────────────────────────────────
 
-        } catch (Exception e) {
-            System.out.println("Failed to fetch shows");
-            e.printStackTrace();
-        }
+	public List<TheatreModel> getAllTheatres() {
+		List<TheatreModel> theatres = new ArrayList<>();
+		String sql = "SELECT theatre_id, theatre_name, address, phone, email FROM Theatre ORDER BY theatre_name ASC";
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				TheatreModel t = new TheatreModel();
+				t.setTheatreId(rs.getInt("theatre_id"));
+				t.setTheatreName(rs.getString("theatre_name"));
+				t.setAddress(rs.getString("address"));
+				t.setPhone(rs.getString("phone"));
+				t.setEmail(rs.getString("email"));
+				theatres.add(t);
+			}
+			rs.close(); ps.close(); conn.close();
+		} catch (Exception e) {
+			System.out.println("Failed to fetch theatres");
+			e.printStackTrace();
+		}
+		return theatres;
+	}
 
-        return shows;
-    }
+	// NEW
+	public TheatreModel getTheatreById(int theatreId) {
+		TheatreModel t = null;
+		String sql = "SELECT theatre_id, theatre_name, address, phone, email FROM Theatre WHERE theatre_id = ?";
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, theatreId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				t = new TheatreModel();
+				t.setTheatreId(rs.getInt("theatre_id"));
+				t.setTheatreName(rs.getString("theatre_name"));
+				t.setAddress(rs.getString("address"));
+				t.setPhone(rs.getString("phone"));
+				t.setEmail(rs.getString("email"));
+			}
+			rs.close(); ps.close(); conn.close();
+		} catch (Exception e) {
+			System.out.println("Failed to fetch theatre by ID");
+			e.printStackTrace();
+		}
+		return t;
+	}
 
-    /**
-     * Gets shows with IDs included — used for the booking dropdown
-     * so we can pass showID, movieID, hallID when creating a booking
-     */
-    public List<ShowModel> getScheduledShows() {
-        List<ShowModel> shows = new ArrayList<>();
+	public boolean addTheatre(String name, String address, String phone, String email) {
+		try {
+			Connection conn = DBconfig.getConnection();
+			String sql = "INSERT INTO Theatre (theatre_name, address, phone, email) VALUES (?, ?, ?, ?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, address);
+			ps.setString(3, phone == null || phone.isEmpty() ? null : phone);
+			ps.setString(4, email == null || email.isEmpty() ? null : email);
+			ps.executeUpdate();
+			ps.close(); conn.close();
+			return true;
+		} catch (Exception e) {
+			System.out.println("Failed to add theatre");
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-        String sql = "SELECT s.ShowID, s.ShowTiming, s.ShowDuration, " +
-                     "m.MovieID, m.MovieName, h.HallID, h.HallName " +
-                     "FROM shows s " +
-                     "JOIN hallShow hs ON s.ShowID = hs.ShowID " +
-                     "JOIN movie m ON hs.MovieID = m.MovieID " +
-                     "JOIN hall h ON hs.HallID = h.HallID " +
-                     "ORDER BY s.ShowTiming ASC";
+	// NEW
+	public boolean updateTheatre(int theatreId, String name, String address, String phone, String email) {
+		try {
+			Connection conn = DBconfig.getConnection();
+			String sql = "UPDATE Theatre SET theatre_name = ?, address = ?, phone = ?, email = ? WHERE theatre_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, address);
+			ps.setString(3, phone == null || phone.isEmpty() ? null : phone);
+			ps.setString(4, email == null || email.isEmpty() ? null : email);
+			ps.setInt(5, theatreId);
+			ps.executeUpdate();
+			ps.close(); conn.close();
+			return true;
+		} catch (Exception e) {
+			System.out.println("Failed to update theatre");
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-        try {
-            Connection conn = DBconfig.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+	public boolean deleteTheatre(int theatreId) {
+		try {
+			Connection conn = DBconfig.getConnection();
+			String sql = "DELETE FROM Theatre WHERE theatre_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, theatreId);
+			ps.executeUpdate();
+			ps.close(); conn.close();
+			return true;
+		} catch (Exception e) {
+			System.out.println("Failed to delete theatre");
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-            while (rs.next()) {
-                ShowModel show = new ShowModel();
-                show.setShowID(rs.getInt("ShowID"));
-                show.setShowTiming(rs.getString("ShowTiming"));
-                show.setShowDuration(rs.getString("ShowDuration"));
-                show.setMovieID(rs.getInt("MovieID"));
-                show.setMovieName(rs.getString("MovieName"));
-                show.setHallID(rs.getInt("HallID"));
-                show.setHallName(rs.getString("HallName"));
-                shows.add(show);
-            }
+	// ── Hall methods ──────────────────────────────────────────────────────────
 
-            rs.close();
-            ps.close();
-            conn.close();
+	public List<HallModel> getAllHalls() {
+		List<HallModel> halls = new ArrayList<>();
+		String sql = "SELECT h.hall_id, h.theatre_id, t.theatre_name, h.hall_name, h.total_seats "
+				+ "FROM Hall h "
+				+ "JOIN Theatre t ON h.theatre_id = t.theatre_id "
+				+ "ORDER BY t.theatre_name ASC, h.hall_name ASC";
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				HallModel hall = new HallModel();
+				hall.setHallId(rs.getInt("hall_id"));
+				hall.setTheatreId(rs.getInt("theatre_id"));
+				hall.setTheatreName(rs.getString("theatre_name"));
+				hall.setHallName(rs.getString("hall_name"));
+				hall.setTotalSeats(rs.getInt("total_seats"));
+				halls.add(hall);
+			}
+			rs.close(); ps.close(); conn.close();
+		} catch (Exception e) {
+			System.out.println("Failed to fetch halls");
+			e.printStackTrace();
+		}
+		return halls;
+	}
 
-        } catch (Exception e) {
-            System.out.println("Failed to fetch scheduled shows");
-            e.printStackTrace();
-        }
+	// NEW
+	public HallModel getHallById(int hallId) {
+		HallModel hall = null;
+		String sql = "SELECT h.hall_id, h.theatre_id, t.theatre_name, h.hall_name, h.total_seats "
+				+ "FROM Hall h "
+				+ "JOIN Theatre t ON h.theatre_id = t.theatre_id "
+				+ "WHERE h.hall_id = ?";
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, hallId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				hall = new HallModel();
+				hall.setHallId(rs.getInt("hall_id"));
+				hall.setTheatreId(rs.getInt("theatre_id"));
+				hall.setTheatreName(rs.getString("theatre_name"));
+				hall.setHallName(rs.getString("hall_name"));
+				hall.setTotalSeats(rs.getInt("total_seats"));
+			}
+			rs.close(); ps.close(); conn.close();
+		} catch (Exception e) {
+			System.out.println("Failed to fetch hall by ID");
+			e.printStackTrace();
+		}
+		return hall;
+	}
 
-        return shows;
-    }
+	public boolean addHall(int theatreId, String hallName, int totalSeats) {
+		try {
+			Connection conn = DBconfig.getConnection();
+			String sql = "INSERT INTO Hall (theatre_id, hall_name, total_seats) VALUES (?, ?, ?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, theatreId);
+			ps.setString(2, hallName);
+			ps.setInt(3, totalSeats);
+			ps.executeUpdate();
+			ps.close(); conn.close();
+			return true;
+		} catch (Exception e) {
+			System.out.println("Failed to add hall");
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-    public List<HallModel> getAllHalls() {
-        List<HallModel> halls = new ArrayList<>();
+	// NEW
+	public boolean updateHall(int hallId, String hallName, int totalSeats) {
+		try {
+			Connection conn = DBconfig.getConnection();
+			String sql = "UPDATE Hall SET hall_name = ?, total_seats = ? WHERE hall_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, hallName);
+			ps.setInt(2, totalSeats);
+			ps.setInt(3, hallId);
+			ps.executeUpdate();
+			ps.close(); conn.close();
+			return true;
+		} catch (Exception e) {
+			System.out.println("Failed to update hall");
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-        String sql = "SELECT HallID, HallName FROM hall";
+	public boolean deleteHall(int hallId) {
+		try {
+			Connection conn = DBconfig.getConnection();
+			String sql = "DELETE FROM Hall WHERE hall_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, hallId);
+			ps.executeUpdate();
+			ps.close(); conn.close();
+			return true;
+		} catch (Exception e) {
+			System.out.println("Failed to delete hall");
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-        try {
-            Connection conn = DBconfig.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+	public void scheduleShow(int movieId, int theatreId, int hallId, String showDate, String startTime, String status) {
+		String sql = "INSERT INTO Shows (movie_id, theatre_id, hall_id, show_date, start_time, status) "
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, movieId);
+			ps.setInt(2, theatreId);
+			ps.setInt(3, hallId);
+			ps.setString(4, showDate);
+			ps.setString(5, startTime);
+			ps.setString(6, status != null && !status.isEmpty() ? status : "scheduled");
+			ps.executeUpdate();
+			ps.close(); conn.close();
+		} catch (Exception e) {
+			System.out.println("Failed to schedule show");
+			e.printStackTrace();
+		}
+	}
 
-            while (rs.next()) {
-                HallModel hall = new HallModel();
-                hall.setHallID(rs.getInt("HallID"));
-                hall.setHallName(rs.getString("HallName"));
-                halls.add(hall);
-            }
-
-            rs.close();
-            ps.close();
-            conn.close();
-
-        } catch (Exception e) {
-            System.out.println("Failed to fetch halls");
-            e.printStackTrace();
-        }
-
-        return halls;
-    }
-
-    public void scheduleShow(String showTiming, String showDuration, int movieID, int hallID) {
-        try {
-            Connection conn = DBconfig.getConnection();
-
-            // Step 1: insert into shows
-            String insertShow = "INSERT INTO shows (ShowTiming, ShowDuration) VALUES (?, ?)";
-            PreparedStatement ps = conn.prepareStatement(insertShow, PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setString(1, showTiming);
-            ps.setString(2, showDuration);
-            ps.executeUpdate();
-
-            // Step 2: get generated ShowID
-            ResultSet keys = ps.getGeneratedKeys();
-            int showID = 0;
-            if (keys.next()) {
-                showID = keys.getInt(1);
-            }
-
-            // Step 3: insert into hallShow
-            // UserID = 1 and TheatreID = 1 as defaults for now
-            String insertHallShow = "INSERT INTO hallShow (UserID, MovieID, TheatreID, HallID, ShowID) VALUES (1, ?, 1, ?, ?)";
-            PreparedStatement ps2 = conn.prepareStatement(insertHallShow);
-            ps2.setInt(1, movieID);
-            ps2.setInt(2, hallID);
-            ps2.setInt(3, showID);
-            ps2.executeUpdate();
-
-            System.out.println("Show scheduled: ShowID=" + showID + " MovieID=" + movieID + " HallID=" + hallID);
-
-            keys.close();
-            ps2.close();
-            ps.close();
-            conn.close();
-
-        } catch (Exception e) {
-            System.out.println("Failed to schedule show");
-            e.printStackTrace();
-        }
-    }
-
-    // ADDED
-    public List<ShowModel> getShowsByMovieID(int movieID) {
-        List<ShowModel> shows = new ArrayList<>();
-
-        String sql = "SELECT s.ShowID, s.ShowTiming, s.ShowDuration, "
-                   + "m.MovieID, m.MovieName, h.HallID, h.HallName "
-                   + "FROM shows s "
-                   + "JOIN hallShow hs ON s.ShowID = hs.ShowID "
-                   + "JOIN movie m ON hs.MovieID = m.MovieID "
-                   + "JOIN hall h ON hs.HallID = h.HallID "
-                   + "WHERE m.MovieID = ? "
-                   + "ORDER BY s.ShowTiming ASC";
-
-        try {
-            Connection conn = DBconfig.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, movieID);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                ShowModel show = new ShowModel();
-                show.setShowID(rs.getInt("ShowID"));
-                show.setShowTiming(rs.getString("ShowTiming"));
-                show.setShowDuration(rs.getString("ShowDuration"));
-                show.setMovieID(rs.getInt("MovieID"));
-                show.setMovieName(rs.getString("MovieName"));
-                show.setHallID(rs.getInt("HallID"));
-                show.setHallName(rs.getString("HallName"));
-                shows.add(show);
-            }
-
-            rs.close();
-            ps.close();
-            conn.close();
-
-        } catch (Exception e) {
-            System.out.println("Failed to fetch shows by movie");
-            e.printStackTrace();
-        }
-
-        return shows;
-    }
-
-    // ADDED
-    public ShowModel getShowByID(int showID) {
-        ShowModel show = null;
-
-        String sql = "SELECT s.ShowID, s.ShowTiming, s.ShowDuration, "
-                   + "m.MovieID, m.MovieName, h.HallID, h.HallName "
-                   + "FROM shows s "
-                   + "JOIN hallShow hs ON s.ShowID = hs.ShowID "
-                   + "JOIN movie m ON hs.MovieID = m.MovieID "
-                   + "JOIN hall h ON hs.HallID = h.HallID "
-                   + "WHERE s.ShowID = ?";
-
-        try {
-            Connection conn = DBconfig.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, showID);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                show = new ShowModel();
-                show.setShowID(rs.getInt("ShowID"));
-                show.setShowTiming(rs.getString("ShowTiming"));
-                show.setShowDuration(rs.getString("ShowDuration"));
-                show.setMovieID(rs.getInt("MovieID"));
-                show.setMovieName(rs.getString("MovieName"));
-                show.setHallID(rs.getInt("HallID"));
-                show.setHallName(rs.getString("HallName"));
-            }
-
-            rs.close();
-            ps.close();
-            conn.close();
-
-        } catch (Exception e) {
-            System.out.println("Failed to fetch show by ID");
-            e.printStackTrace();
-        }
-
-        return show;
-    }
+	public boolean deleteShow(int showId) {
+		try {
+			Connection conn = DBconfig.getConnection();
+			String sql = "DELETE FROM Shows WHERE show_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, showId);
+			ps.executeUpdate();
+			ps.close(); conn.close();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

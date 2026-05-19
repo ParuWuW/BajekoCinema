@@ -20,11 +20,10 @@ import com.bajekocinema.model.UserModel;
 import com.bajekocinema.services.SessionService;
 import com.bajekocinema.utils.CookieUtil;
 
-@WebFilter("/*")
+//@WebFilter("/*")
 public class AuthenticationFilter implements Filter {
 	private final SessionService sessionService = new SessionService();
 	private final UserDAO userDAO = new UserDAO();
-	
 
 	//public pages
     private static final Set<String> PUBLIC_PAGES = Set.of(

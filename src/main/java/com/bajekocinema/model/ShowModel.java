@@ -1,96 +1,156 @@
 package com.bajekocinema.model;
 
 public class ShowModel {
-	private int ShowID;
-	private String ShowTiming;
-	private String ShowDuration;
-	private String MovieName;
-	private String HallName;
-	private int MovieID;
-	private int HallID;
-	/**
-	 * @return the showID
-	 */
-	public int getShowID() {
-		return ShowID;
+
+	private int showId;
+	private int movieId;
+	private int theatreId;
+	private int hallId;
+	private String showDate;
+	private String startTime;
+	private String status;
+
+	// joined fields for display
+	private String movieTitle;
+	private String hallName;
+	private String theatreName;
+
+	public int getShowId() {
+		return showId;
 	}
-	/**
-	 * @param showID the showID to set
-	 */
-	public void setShowID(int showID) {
-		ShowID = showID;
+
+	public void setShowId(int showId) {
+		this.showId = showId;
 	}
-	/**
-	 * @return the showTiming
-	 */
-	public String getShowTiming() {
-		return ShowTiming;
+
+	public int getMovieId() {
+		return movieId;
 	}
-	/**
-	 * @param showTiming the showTiming to set
-	 */
-	public void setShowTiming(String showTiming) {
-		ShowTiming = showTiming;
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
 	}
-	/**
-	 * @return the showDuration
-	 */
-	public String getShowDuration() {
-		return ShowDuration;
+
+	public int getTheatreId() {
+		return theatreId;
 	}
-	/**
-	 * @param showDuration the showDuration to set
-	 */
-	public void setShowDuration(String showDuration) {
-		ShowDuration = showDuration;
+
+	public void setTheatreId(int theatreId) {
+		this.theatreId = theatreId;
 	}
-	/**
-	 * @return the movieName
-	 */
-	public String getMovieName() {
-		return MovieName;
+
+	public int getHallId() {
+		return hallId;
 	}
-	/**
-	 * @param movieName the movieName to set
-	 */
-	public void setMovieName(String movieName) {
-		MovieName = movieName;
+
+	public void setHallId(int hallId) {
+		this.hallId = hallId;
 	}
-	/**
-	 * @return the hallName
-	 */
+
+	public String getShowDate() {
+		return showDate;
+	}
+
+	public void setShowDate(String showDate) {
+		this.showDate = showDate;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getMovieTitle() {
+		return movieTitle;
+	}
+
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
+	}
+
 	public String getHallName() {
-		return HallName;
+		return hallName;
 	}
-	/**
-	 * @param hallName the hallName to set
-	 */
+
 	public void setHallName(String hallName) {
-		HallName = hallName;
+		this.hallName = hallName;
 	}
-	/**
-	 * @return the movieID
-	 */
+
+	public String getTheatreName() {
+		return theatreName;
+	}
+
+	public void setTheatreName(String theatreName) {
+		this.theatreName = theatreName;
+	}
+
+	// used by admin JSP pages
+	public int getShowID() {
+		return showId;
+	}
+
+	public void setShowID(int showId) {
+		this.showId = showId;
+	}
+
 	public int getMovieID() {
-		return MovieID;
+		return movieId;
 	}
-	/**
-	 * @param movieID the movieID to set
-	 */
-	public void setMovieID(int movieID) {
-		MovieID = movieID;
+
+	public void setMovieID(int movieId) {
+		this.movieId = movieId;
 	}
-	/**
-	 * @return the hallID
-	 */
+
 	public int getHallID() {
-		return HallID;
+		return hallId;
 	}
-	/**
-	 * @param hallID the hallID to set
-	 */
-	public void setHallID(int hallID) {
-		HallID = hallID;
+
+	public void setHallID(int hallId) {
+		this.hallId = hallId;
+	}
+
+	public String getMovieName() {
+		return movieTitle;
+	}
+
+	public void setMovieName(String movieName) {
+		this.movieTitle = movieName;
+	}
+
+	public String getShowTiming() {
+		if (showDate != null && startTime != null) {
+			return showDate + " " + startTime;
+		}
+		if (showDate != null) {
+			return showDate;
+		}
+		if (startTime != null) {
+			return startTime;
+		}
+		return "";
+	}
+
+	public void setShowTiming(String showTiming) {
+		this.startTime = showTiming;
+	}
+
+	public String getShowDuration() {
+		return status != null ? status : "";
+	}
+
+	public void setShowDuration(String showDuration) {
+		// no duration field in new schema
 	}
 
 }

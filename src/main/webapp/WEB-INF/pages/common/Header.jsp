@@ -72,12 +72,7 @@
 								<a href="${pageContext.request.contextPath}/userProfile"
 									class="popup-link"> <i class="fa-regular fa-user"></i> View
 									Profile
-								</a> 
-								<a href="${pageContext.request.contextPath}/previousBooking"
-									class="popup-link"> <i class="fa-regular fa-user"></i> View
-									Previous Booking
-								</a> 
-								<a href="${pageContext.request.contextPath}/logout"
+								</a> <a href="${pageContext.request.contextPath}/logout"
 									class="popup-link popup-logout"> <i
 									class="fa-solid fa-right-from-bracket"></i> Logout
 								</a>

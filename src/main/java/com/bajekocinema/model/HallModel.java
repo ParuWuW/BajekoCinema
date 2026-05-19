@@ -1,44 +1,68 @@
 package com.bajekocinema.model;
 
 public class HallModel {
-	private int HallID;
-	private String HallName;
-	private int HallCapacity;
-	/**
-	 * @return the hallID
-	 */
-	public int getHallID() {
-		return HallID;
+
+	private int hallId;
+	private int theatreId;
+	private String theatreName;
+	private String hallName;
+	private int totalSeats;
+
+	public int getHallId() {
+		return hallId;
 	}
-	/**
-	 * @param hallID the hallID to set
-	 */
-	public void setHallID(int hallID) {
-		HallID = hallID;
+
+	public void setHallId(int hallId) {
+		this.hallId = hallId;
 	}
-	/**
-	 * @return the hallName
-	 */
+
+	public int getTheatreId() {
+		return theatreId;
+	}
+
+	public void setTheatreId(int theatreId) {
+		this.theatreId = theatreId;
+	}
+
+	public String getTheatreName() {
+		return theatreName;
+	}
+
+	public void setTheatreName(String theatreName) {
+		this.theatreName = theatreName;
+	}
+
 	public String getHallName() {
-		return HallName;
+		return hallName;
 	}
-	/**
-	 * @param hallName the hallName to set
-	 */
+
 	public void setHallName(String hallName) {
-		HallName = hallName;
+		this.hallName = hallName;
 	}
-	/**
-	 * @return the hallCapacity
-	 */
+
+	public int getTotalSeats() {
+		return totalSeats;
+	}
+
+	public void setTotalSeats(int totalSeats) {
+		this.totalSeats = totalSeats;
+	}
+
+	// used by JSP pages
+	public int getHallID() {
+		return hallId;
+	}
+
+	public void setHallID(int hallId) {
+		this.hallId = hallId;
+	}
+
 	public int getHallCapacity() {
-		return HallCapacity;
+		return totalSeats;
 	}
-	/**
-	 * @param hallCapacity the hallCapacity to set
-	 */
-	public void setHallCapacity(int hallCapacity) {
-		HallCapacity = hallCapacity;
+
+	public void setHallCapacity(int capacity) {
+		this.totalSeats = capacity;
 	}
 
 }

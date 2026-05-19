@@ -11,191 +11,201 @@ import java.util.List;
 
 public class BookingDAO {
 
-    /**
-     * Get all bookings from database
-     * joined with showBooking, movie, hall and shows tables
-     * so we can show movie name, hall name and show timing in the admin page
-     */
-    public List<BookingModel> getAllBookings() {
-        List<BookingModel> bookings = new ArrayList<>();
-        try {
-            Connection conn = DBconfig.getConnection();
+	public List<BookingModel> getAllBookings() {
+		List<BookingModel> bookings = new ArrayList<>();
 
-            // joining booking with showBooking to get movieID, hallID, showID
-            // then joining those to get the actual names and timings
-            // also joining user to show who booked
-            String sql = "SELECT b.BookingID, b.BookingDate, b.BookingStatus, b.TotalAmount, b.TicketID, b.PaymentID, "
-                       + "m.MovieName, h.HallName, s.ShowTiming, u.Username "
-                       + "FROM booking b "
-                       + "LEFT JOIN showBooking sb ON b.BookingID = sb.BookingID "
-                       + "LEFT JOIN movie m ON sb.MovieID = m.MovieID "
-                       + "LEFT JOIN hall h ON sb.HallID = h.HallID "
-                       + "LEFT JOIN shows s ON sb.ShowID = s.ShowID "
-                       + "LEFT JOIN user u ON sb.UserID = u.UserID";
+		String sql = "SELECT b.booking_id, b.user_id, b.show_id, b.booking_time, b.total_amount, b.status, "
+				+ "m.title AS movie_name, h.hall_name, s.show_date, s.start_time, u.fullName AS user_full_name "
+				+ "FROM Booking b "
+				+ "LEFT JOIN Shows s ON b.show_id = s.show_id "
+				+ "LEFT JOIN Movie m ON s.movie_id = m.movie_id "
+				+ "LEFT JOIN Hall h ON s.hall_id = h.hall_id "
+				+ "LEFT JOIN `User` u ON b.user_id = u.userID "
+				+ "ORDER BY b.booking_id DESC";
 
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                BookingModel b = new BookingModel();
-                b.setBookingID(rs.getInt("BookingID"));
-                b.setBookingDate(rs.getString("BookingDate"));
-                b.setBookingStatus(rs.getString("BookingStatus"));
-                b.setTotalAmount(rs.getFloat("TotalAmount"));
-                b.setTicketID(rs.getInt("TicketID"));
-                b.setPaymentID(rs.getInt("PaymentID"));
-                // set the joined fields
-                b.setMovieName(rs.getString("MovieName"));
-                b.setHallName(rs.getString("HallName"));
-                b.setShowTiming(rs.getString("ShowTiming"));
-                b.setUsername(rs.getString("Username"));
-                bookings.add(b);
-            }
+			while (rs.next()) {
+				BookingModel b = new BookingModel();
+				b.setBookingId(rs.getInt("booking_id"));
+				b.setUserId(rs.getInt("user_id"));
+				b.setShowId(rs.getInt("show_id"));
+				b.setBookingTime(rs.getString("booking_time"));
+				b.setTotalAmount(rs.getDouble("total_amount"));
+				b.setStatus(rs.getString("status"));
+				b.setMovieName(rs.getString("movie_name"));
+				b.setHallName(rs.getString("hall_name"));
+				b.setShowDate(rs.getString("show_date"));
+				b.setStartTime(rs.getString("start_time"));
+				b.setUserFullName(rs.getString("user_full_name"));
+				bookings.add(b);
+			}
 
-            rs.close();
-            ps.close();
-            conn.close();
+			rs.close();
+			ps.close();
+			conn.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return bookings;
-    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-    /**
-     * Create a booking from a scheduled show
-     * inserts into booking then links it in showBooking
-     */
-    public boolean addBookingForShow(int showID, int movieID, int hallID) {
-        try {
-            Connection conn = DBconfig.getConnection();
+		return bookings;
+	}
 
-            // Step 1: insert into booking with today's date and PENDING status
-            String insertBooking = "INSERT INTO booking (BookingDate, BookingStatus, TotalAmount) VALUES (CURDATE(), 'PENDING', 0)";
-            PreparedStatement ps = conn.prepareStatement(insertBooking, PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.executeUpdate();
+	public List<BookingModel> getBookingsByUserId(int userId) {
+		List<BookingModel> bookings = new ArrayList<>();
 
-            // Step 2: get the new BookingID
-            ResultSet keys = ps.getGeneratedKeys();
-            int bookingID = 0;
-            if (keys.next()) {
-                bookingID = keys.getInt(1);
-            }
+		String sql = "SELECT b.booking_id, b.user_id, b.show_id, b.booking_time, b.total_amount, b.status, "
+				+ "m.title AS movie_name, h.hall_name, s.show_date, s.start_time "
+				+ "FROM Booking b "
+				+ "LEFT JOIN Shows s ON b.show_id = s.show_id "
+				+ "LEFT JOIN Movie m ON s.movie_id = m.movie_id "
+				+ "LEFT JOIN Hall h ON s.hall_id = h.hall_id "
+				+ "WHERE b.user_id = ? "
+				+ "ORDER BY b.booking_id DESC";
 
-            // Step 3: link it in showBooking
-            // UserID = 1 and TheatreID = 1 as defaults for now
-            String insertShowBooking = "INSERT INTO showBooking (UserID, MovieID, TheatreID, HallID, ShowID, BookingID) VALUES (1, ?, 1, ?, ?, ?)";
-            PreparedStatement ps2 = conn.prepareStatement(insertShowBooking);
-            ps2.setInt(1, movieID);
-            ps2.setInt(2, hallID);
-            ps2.setInt(3, showID);
-            ps2.setInt(4, bookingID);
-            ps2.executeUpdate();
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
 
-            System.out.println("Booking created: BookingID=" + bookingID + " ShowID=" + showID);
+			while (rs.next()) {
+				BookingModel b = new BookingModel();
+				b.setBookingId(rs.getInt("booking_id"));
+				b.setUserId(rs.getInt("user_id"));
+				b.setShowId(rs.getInt("show_id"));
+				b.setBookingTime(rs.getString("booking_time"));
+				b.setTotalAmount(rs.getDouble("total_amount"));
+				b.setStatus(rs.getString("status"));
+				b.setMovieName(rs.getString("movie_name"));
+				b.setHallName(rs.getString("hall_name"));
+				b.setShowDate(rs.getString("show_date"));
+				b.setStartTime(rs.getString("start_time"));
+				bookings.add(b);
+			}
 
-            keys.close();
-            ps2.close();
-            ps.close();
-            conn.close();
-            return true;
+			rs.close();
+			ps.close();
+			conn.close();
 
-        } catch (Exception e) {
-            System.out.println("Failed to create booking");
-            e.printStackTrace();
-            return false;
-        }
-    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-    /**
-     * Update booking status
-     */
-    public boolean updateBookingStatus(int bookingID, String status) {
-        try {
-            Connection conn = DBconfig.getConnection();
-            String sql = "UPDATE booking SET BookingStatus = ? WHERE BookingID = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, status);
-            ps.setInt(2, bookingID);
-            ps.executeUpdate();
-            ps.close();
-            conn.close();
-            return true;
+		return bookings;
+	}
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+	public boolean addBookingForShow(int showId, int userId, double totalAmount) {
+		String sql = "INSERT INTO Booking (user_id, show_id, total_amount, status) VALUES (?, ?, ?, 'pending')";
 
-    /**
-     * Delete a booking
-     */
-    public boolean deleteBooking(int bookingID) {
-        try {
-            Connection conn = DBconfig.getConnection();
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, userId);
+			ps.setInt(2, showId);
+			ps.setDouble(3, totalAmount);
+			ps.executeUpdate();
 
-            // need to delete from showBooking first because of foreign key constraint
-            String sql1 = "DELETE FROM showBooking WHERE BookingID = ?";
-            PreparedStatement ps1 = conn.prepareStatement(sql1);
-            ps1.setInt(1, bookingID);
-            ps1.executeUpdate();
-            ps1.close();
+			System.out.println("Booking created: showId=" + showId + " userId=" + userId);
 
-            String sql = "DELETE FROM booking WHERE BookingID = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, bookingID);
-            ps.executeUpdate();
-            ps.close();
-            conn.close();
-            return true;
+			ps.close();
+			conn.close();
+			return true;
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    
-    
-    
-    //SICHU LAI CHAINE HO 
-    //DO NOT TOUCH
+		} catch (Exception e) {
+			System.out.println("Failed to create booking");
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-    public List<BookingModel> getBookingsByUserId(int userId) {
-        List<BookingModel> bookings = new ArrayList<>();
-        try {
-            Connection conn = DBconfig.getConnection();
+	public boolean updateBookingStatus(int bookingId, String status) {
+		String normalised = status != null ? status.toLowerCase() : "pending";
+		String sql = "UPDATE Booking SET status = ? WHERE booking_id = ?";
 
-            String sql = "SELECT b.booking_id, b.booking_time, b.total_amount, b.status, " +
-                         "m.title, s.show_date, s.start_time " +
-                         "FROM Booking b " +
-                         "JOIN Shows s ON b.show_id = s.show_id " +
-                         "JOIN Movie m ON s.movie_id = m.movie_id " +
-                         "WHERE b.user_id = ? " +
-                         "ORDER BY b.booking_id DESC";
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, normalised);
+			ps.setInt(2, bookingId);
+			ps.executeUpdate();
+			ps.close();
+			conn.close();
+			return true;
 
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, userId);
-            ResultSet rs = ps.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-            while (rs.next()) {
-                BookingModel b = new BookingModel();
-                b.setBookingID(rs.getInt("booking_id"));
-                b.setBookingDate(rs.getString("booking_time"));
-                b.setTotalAmount(rs.getFloat("total_amount"));
-                b.setBookingStatus(rs.getString("status"));
-                b.setMovieName(rs.getString("title"));
-                b.setShowTiming(rs.getString("show_date") + " " + rs.getString("start_time"));
-                bookings.add(b);
-            }
+	public boolean deleteBooking(int bookingId) {
+		try {
+			Connection conn = DBconfig.getConnection();
+			conn.setAutoCommit(false);
 
-            rs.close();
-            ps.close();
-            conn.close();
+			// delete payment first since it has no cascade from booking
+			PreparedStatement ps1 = conn.prepareStatement("DELETE FROM Payment WHERE booking_id = ?");
+			ps1.setInt(1, bookingId);
+			ps1.executeUpdate();
+			ps1.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return bookings;
-    }
+			// deleting booking cascades to ticket and ticket_seat
+			PreparedStatement ps2 = conn.prepareStatement("DELETE FROM Booking WHERE booking_id = ?");
+			ps2.setInt(1, bookingId);
+			ps2.executeUpdate();
+			ps2.close();
+
+			conn.commit();
+			conn.close();
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public int getTotalBookings() {
+		String sql = "SELECT COUNT(*) FROM Booking";
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				int count = rs.getInt(1);
+				rs.close();
+				ps.close();
+				conn.close();
+				return count;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public double getTotalRevenue() {
+		String sql = "SELECT COALESCE(SUM(total_amount), 0) FROM Booking WHERE status = 'confirmed'";
+		try {
+			Connection conn = DBconfig.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				double total = rs.getDouble(1);
+				rs.close();
+				ps.close();
+				conn.close();
+				return total;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 }

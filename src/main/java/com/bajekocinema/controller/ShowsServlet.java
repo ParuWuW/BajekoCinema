@@ -3,8 +3,9 @@ package com.bajekocinema.controller;
 import com.bajekocinema.model.HallModel;
 import com.bajekocinema.model.MovieModel;
 import com.bajekocinema.model.ShowModel;
-import com.bajekocinema.services.ShowService; // CHANGED
-import com.bajekocinema.services.MovieService; // CHANGED
+import com.bajekocinema.model.TheatreModel;
+import com.bajekocinema.services.ShowService;
+import com.bajekocinema.services.MovieService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,63 +15,77 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Servlet implementation class ShowsServlet
+ * ShowsServlet — updated for new bajekocinema-2.sql schema.
+ *
+ * Schedule Show form fields (new schema):
+ *   movieID, theatreID, hallID, showDate, startTime, status
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/admin/shows" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/admin/shows", "/shows" })
 public class ShowsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private ShowService showService = new ShowService(); // CHANGED
-    private MovieService movieService = new MovieService(); // CHANGED
+    private ShowService  showService  = new ShowService();
+    private MovieService movieService = new MovieService();
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ShowsServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
-            List<ShowModel> shows = showService.getAllShows(); // CHANGED
-            List<MovieModel> movieList = movieService.getAllMovies(); // CHANGED
-            List<HallModel> hallList = showService.getAllHalls(); // CHANGED
+            List<ShowModel>   shows      = showService.getAllShows();
+            List<MovieModel>  movieList  = movieService.getAllMovies();
+            List<HallModel>   hallList   = showService.getAllHalls();
+            List<TheatreModel>theatreList= showService.getAllTheatres();
 
-            request.setAttribute("shows", shows);
-            request.setAttribute("movieList", movieList);
-            request.setAttribute("hallList", hallList);
+            request.setAttribute("shows",       shows);
+            request.setAttribute("movieList",   movieList);
+            request.setAttribute("hallList",    hallList);
+            request.setAttribute("theatreList", theatreList);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         request.setAttribute("currentPage", "shows");
-        request.getRequestDispatcher("WEB-INF/pages/admin/ShowsAdmin.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/admin/ShowsAdmin.jsp")
+               .forward(request, response);
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String action = request.getParameter("action");
 
         if ("schedule".equals(action)) {
             try {
-                String showTiming = request.getParameter("showTiming");
-                String showDuration = request.getParameter("showDuration");
-                int movieID = Integer.parseInt(request.getParameter("movieID"));
-                int hallID = Integer.parseInt(request.getParameter("hallID"));
+                int    movieId   = Integer.parseInt(request.getParameter("movieID"));
+                int    hallId    = Integer.parseInt(request.getParameter("hallID"));
+                String showDate  = request.getParameter("showDate");
+                String startTime = request.getParameter("startTime");
+                String status    = request.getParameter("status");
 
-                showService.scheduleShow(showTiming, showDuration, movieID, hallID); // CHANGED
+                // theatreID — use form param if present, otherwise derive from hall
+                String theatreParam = request.getParameter("theatreID");
+                int theatreId = (theatreParam != null && !theatreParam.isEmpty())
+                        ? Integer.parseInt(theatreParam) : 1;
+
+                showService.scheduleShow(movieId, theatreId, hallId, showDate, startTime, status);
+
             } catch (Exception e) {
-                System.out.println("Error in schedule action");
+                System.out.println("ShowsServlet: error in schedule action");
+                e.printStackTrace();
+            }
+        } else if ("delete".equals(action)) {
+            try {
+                int showId = Integer.parseInt(request.getParameter("showID"));
+                showService.deleteShow(showId);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        response.sendRedirect(request.getContextPath() + "/shows");
+        response.sendRedirect(request.getContextPath() + "/admin/shows");
     }
 }

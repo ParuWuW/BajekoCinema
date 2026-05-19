@@ -45,9 +45,11 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Movie</th>
+                                    <th>Theatre</th>
                                     <th>Hall</th>
-                                    <th>Show Time</th>
-                                    <th>Duration</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,15 +59,17 @@
                                             <tr>
                                                 <td>${status.count}</td>
                                                 <td>${show.movieName}</td>
+                                                <td>${show.theatreName}</td>
                                                 <td>${show.hallName}</td>
-                                                <td>${show.showTiming}</td>
-                                                <td>${show.showDuration}</td>
+                                                <td>${show.showDate}</td>
+                                                <td>${show.startTime}</td>
+                                                <td>${show.status}</td>
                                             </tr>
                                         </c:forEach>
                                     </c:when>
                                     <c:otherwise>
                                         <tr>
-                                            <td colspan="5" style="text-align: center; padding: 30px; color: var(--text-muted);">
+                                            <td colspan="7" style="text-align: center; padding: 30px; color: var(--text-muted);">
                                                 No shows scheduled yet. Click <strong>Schedule Show</strong> to get started.
                                             </td>
                                         </tr>
@@ -83,7 +87,7 @@
                             <h2>Schedule Show</h2>
                             <button class="close-modal" onclick="closeModal('scheduleShowModal')">X</button>
                         </div>
-                        <form class="modal-body" method="post" action="${pageContext.request.contextPath}/shows">
+                        <form class="modal-body" method="post" action="${pageContext.request.contextPath}/admin/shows">
                             <input type="hidden" name="action" value="schedule">
                             <div class="modal-form-row">
                                 <div class="form-group">
@@ -96,6 +100,17 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label>Theatre</label>
+                                    <select class="form-control" name="theatreID" required>
+                                        <option value="">Select Theatre</option>
+                                        <c:forEach var="theatre" items="${theatreList}">
+                                            <option value="${theatre.theatreId}">${theatre.theatreName}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-form-row">
+                                <div class="form-group">
                                     <label>Hall</label>
                                     <select class="form-control" name="hallID" required>
                                         <option value="">Select Hall</option>
@@ -104,15 +119,23 @@
                                         </c:forEach>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select class="form-control" name="status">
+                                        <option value="scheduled">Scheduled</option>
+                                        <option value="cancelled">Cancelled</option>
+                                        <option value="completed">Completed</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="modal-form-row">
                                 <div class="form-group">
-                                    <label>Show Time</label>
-                                    <input type="time" class="form-control" name="showTiming" required>
+                                    <label>Show Date</label>
+                                    <input type="date" class="form-control" name="showDate" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Duration</label>
-                                    <input type="text" class="form-control" name="showDuration" placeholder="e.g. 2h 15m" required>
+                                    <label>Start Time</label>
+                                    <input type="time" class="form-control" name="startTime" required>
                                 </div>
                             </div>
                             <button type="submit" class="btn-save">Schedule</button>

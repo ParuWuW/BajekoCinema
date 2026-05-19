@@ -2,116 +2,177 @@ package com.bajekocinema.model;
 
 public class BookingModel {
 
-    private int BookingID;
-    private String BookingDate;
-    private String BookingStatus;
-    private float TotalAmount;
-    private int TicketID;
-    private int PaymentID;
+	private int bookingId;
+	private int userId;
+	private int showId;
+	private String bookingTime;
+	private double totalAmount;
+	private String status;
 
-    // added these to show movie, hall and show info in the booking table
-    private String MovieName;
-    private String HallName;
-    private String ShowTiming;
+	// joined fields for display
+	private String movieName;
+	private String hallName;
+	private String showDate;
+	private String startTime;
+	private String userFullName;
 
-    // who booked the show
-    private String Username;
+	public int getBookingId() {
+		return bookingId;
+	}
 
-    /**
-     * @return the bookingID
-     */
-    public int getBookingID() { return BookingID; }
-    /**
-     * @param bookingID the bookingID to set
-     */
-    public void setBookingID(int bookingID) { BookingID = bookingID; }
+	public void setBookingId(int bookingId) {
+		this.bookingId = bookingId;
+	}
 
-    /**
-     * @return the bookingDate
-     */
-    public String getBookingDate() { return BookingDate; }
-    /**
-     * @param bookingDate the bookingDate to set
-     */
-    public void setBookingDate(String bookingDate) { BookingDate = bookingDate; }
+	public int getUserId() {
+		return userId;
+	}
 
-    /**
-     * @return the bookingStatus
-     */
-    public String getBookingStatus() { return BookingStatus; }
-    /**
-     * @param bookingStatus the bookingStatus to set
-     */
-    public void setBookingStatus(String bookingStatus) {
-    	// convert to uppercase so badge comparison works in JSP
-    	if (bookingStatus != null) {
-    		BookingStatus = bookingStatus.toUpperCase();
-    	} else {
-    		BookingStatus = bookingStatus;
-    	}
-    }
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
-    /**
-     * @return the totalAmount
-     */
-    public float getTotalAmount() { return TotalAmount; }
-    /**
-     * @param totalAmount the totalAmount to set
-     */
-    public void setTotalAmount(float totalAmount) { TotalAmount = totalAmount; }
+	public int getShowId() {
+		return showId;
+	}
 
-    /**
-     * @return the ticketID
-     */
-    public int getTicketID() { return TicketID; }
-    /**
-     * @param ticketID the ticketID to set
-     */
-    public void setTicketID(int ticketID) { TicketID = ticketID; }
+	public void setShowId(int showId) {
+		this.showId = showId;
+	}
 
-    /**
-     * @return the paymentID
-     */
-    public int getPaymentID() { return PaymentID; }
-    /**
-     * @param paymentID the paymentID to set
-     */
-    public void setPaymentID(int paymentID) { PaymentID = paymentID; }
+	public String getBookingTime() {
+		return bookingTime;
+	}
 
-    /**
-     * @return the movieName
-     */
-    public String getMovieName() { return MovieName; }
-    /**
-     * @param movieName the movieName to set
-     */
-    public void setMovieName(String movieName) { MovieName = movieName; }
+	public void setBookingTime(String bookingTime) {
+		this.bookingTime = bookingTime;
+	}
 
-    /**
-     * @return the hallName
-     */
-    public String getHallName() { return HallName; }
-    /**
-     * @param hallName the hallName to set
-     */
-    public void setHallName(String hallName) { HallName = hallName; }
+	public double getTotalAmount() {
+		return totalAmount;
+	}
 
-    /**
-     * @return the showTiming
-     */
-    public String getShowTiming() { return ShowTiming; }
-    /**
-     * @param showTiming the showTiming to set
-     */
-    public void setShowTiming(String showTiming) { ShowTiming = showTiming; }
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 
-    /**
-     * @return the username
-     */
-    public String getUsername() { return Username; }
-    /**
-     * @param username the username to set
-     */
-    public void setUsername(String username) { Username = username; }
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getMovieName() {
+		return movieName;
+	}
+
+	public void setMovieName(String movieName) {
+		this.movieName = movieName;
+	}
+
+	public String getHallName() {
+		return hallName;
+	}
+
+	public void setHallName(String hallName) {
+		this.hallName = hallName;
+	}
+
+	public String getShowDate() {
+		return showDate;
+	}
+
+	public void setShowDate(String showDate) {
+		this.showDate = showDate;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getUserFullName() {
+		return userFullName;
+	}
+
+	public void setUserFullName(String userFullName) {
+		this.userFullName = userFullName;
+	}
+
+	// used by admin JSP pages
+	public int getBookingID() {
+		return bookingId;
+	}
+
+	public void setBookingID(int bookingId) {
+		this.bookingId = bookingId;
+	}
+
+	public String getBookingDate() {
+		return bookingTime;
+	}
+
+	public void setBookingDate(String bookingDate) {
+		this.bookingTime = bookingDate;
+	}
+
+	public String getBookingStatus() {
+		if (status != null) {
+			return status.toUpperCase();
+		}
+		return "";
+	}
+
+	public void setBookingStatus(String bookingStatus) {
+		if (bookingStatus != null) {
+			this.status = bookingStatus.toLowerCase();
+		}
+	}
+
+	public String getShowTiming() {
+		if (showDate != null && startTime != null) {
+			return showDate + " " + startTime;
+		}
+		if (showDate != null) {
+			return showDate;
+		}
+		if (startTime != null) {
+			return startTime;
+		}
+		return "";
+	}
+
+	public void setShowTiming(String showTiming) {
+		this.startTime = showTiming;
+	}
+
+	public String getUsername() {
+		return userFullName;
+	}
+
+	public void setUsername(String username) {
+		this.userFullName = username;
+	}
+
+	public int getTicketID() {
+		return 0;
+	}
+
+	public void setTicketID(int ticketId) {
+		// not used in new schema
+	}
+
+	public int getPaymentID() {
+		return 0;
+	}
+
+	public void setPaymentID(int paymentId) {
+		// not used in new schema
+	}
 
 }
