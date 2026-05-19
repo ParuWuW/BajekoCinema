@@ -46,7 +46,7 @@ public class RegisterServlet extends HttpServlet {
 			String UserPhoneNumber = request.getParameter("UserPhoneNumber");
 			String UserEmail = request.getParameter("UserEmail");
 			String Password = request.getParameter("Password");
-			Part filePart = request.getPart("Image");
+			Part filePart = request.getPart("image");
 			String fileName = (filePart != null)? filePart.getSubmittedFileName(): null;
 			
 			String Image;
@@ -67,7 +67,11 @@ public class RegisterServlet extends HttpServlet {
 		        request.getRequestDispatcher("/WEB-INF/pages/auth/Register.jsp").forward(request, response);
 		        return;
 		    }
-			
+			if (Password == null || Password.length() < 8) {
+				request.setAttribute("error", "Password must be 8 characters");
+				request.getRequestDispatcher("/WEB-INF/pages/auth/Register.jsp").forward(request, response);
+		        return;
+			}
 			RegisterService service = new RegisterService();
 			service.addUser(Username,UserPhoneNumber,UserEmail,Password,Image);
 			
@@ -76,7 +80,9 @@ public class RegisterServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-            response.getWriter().println("Error: " + e.getMessage());
+			String msg = e.getMessage() != null ? e.getMessage() : "Something went wrong. Please try again.";
+		    request.setAttribute("error", msg);
+		    request.getRequestDispatcher("/WEB-INF/pages/auth/Register.jsp").forward(request, response);
 		}
 	}
 

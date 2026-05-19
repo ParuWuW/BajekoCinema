@@ -3,6 +3,7 @@ package com.bajekocinema.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +23,23 @@ public class UserDAO {
 		pst.setString(3, userPhoneNumber);
 		pst.setString(4, Password);
 		pst.setString(5, Image);
+		try {
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			if (e.getErrorCode() == 1062) {
+				if (e.getMessage().contains("email")) {
+					throw new Exception("An account with this email exists.");
+				}else if (e.getMessage().contains("phone")) {
+					throw new Exception ("An account with this phone number exists.");
+				} else {
+					throw new Exception ("duplicate entry found");
+				}
+			}throw e;
+		} finally {
+			pst.close();
+			con.close();
+		}
 
-		pst.executeUpdate();
-		pst.close();
-		con.close();
 	}
 
 	public List<UserModel> getAllUsers() throws Exception {
