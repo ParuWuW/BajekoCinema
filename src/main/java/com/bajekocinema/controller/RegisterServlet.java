@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.MultipartConfig;
 import java.io.IOException;
 
 import com.bajekocinema.services.RegisterService;
+import com.bajekocinema.utils.ImageUtil;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -46,14 +47,18 @@ public class RegisterServlet extends HttpServlet {
 			String UserPhoneNumber = request.getParameter("UserPhoneNumber");
 			String UserEmail = request.getParameter("UserEmail");
 			String Password = request.getParameter("Password");
-			Part filePart = request.getPart("image");
-			String fileName = (filePart != null)? filePart.getSubmittedFileName(): null;
 			
+			Part filePart = request.getPart("image");
+			
+			ImageUtil imageUtil = new ImageUtil();
+			String fileName = imageUtil.getImageNameFromPart(filePart);
+			boolean uploaded = imageUtil.uploadImage(filePart, "resources/images", getServletContext());
+
 			String Image;
-			if(fileName !=null && !fileName.isEmpty()) {
-				Image = "resources/images/" + fileName;
+			if (uploaded && !fileName.equals("default.png")) {
+			    Image = "resources/images/" + fileName;
 			} else {
-				Image = "resources/images/default.png";
+			    Image = "resources/images/default.png";
 			}
 			
 			if (isBlank(Username) && isBlank(UserPhoneNumber) && isBlank(UserEmail) && isBlank(Password)) {

@@ -23,7 +23,6 @@ body {
     padding: 2rem;
 }
 
-/* ── Avatar centered at top ── */
 .avatar-section {
     display: flex;
     flex-direction: column;
@@ -37,7 +36,7 @@ body {
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #c9a84c;
+    border: 2px solid black;
 }
 
 .avatar-name {
@@ -48,7 +47,6 @@ body {
 
 .divider { display: none; }
 
-/* ── Field rows ── */
 .profile-fields {
     display: flex;
     flex-direction: column;
@@ -83,7 +81,6 @@ body {
     color: #fff;
 }
 
-/* ── Form inputs match the dark style ── */
 .form-group input {
     width: 100%;
     padding: 10px 0;
@@ -102,7 +99,6 @@ body {
 
 .form-group input::placeholder { color: #555; }
 
-/* ── Action buttons ── */
 .profile-actions {
     display: flex;
     align-items: center;
@@ -139,21 +135,20 @@ body {
 
 .btn-outline:hover { color: #c9a84c; }
 
-/* ── Success / error messages ── */
 .success-msg {
-    background: #1a3a1a;
-    color: #5cb85c;
+
+    color: #4caf50;
     padding: 10px 14px;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 16px;
     margin-bottom: 1rem;
 }
 
 .error-msg {
-    background: #3a1a1a;
-    color: #e05c5c;
+
+    color: #e53935;
     padding: 10px 14px;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 16px;
     margin-bottom: 1rem;
 }

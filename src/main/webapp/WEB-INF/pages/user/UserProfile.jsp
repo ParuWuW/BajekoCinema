@@ -29,7 +29,6 @@
 
         <hr class="divider" />
 
-        <%-- Only one of these ever shows at a time --%>
         <c:if test="${not empty successMessage}">
             <div class="success-msg">${successMessage}</div>
         </c:if>
@@ -37,7 +36,7 @@
             <div class="error-msg">${errorMessage}</div>
         </c:if>
 
-        <%-- VIEW MODE --%>
+        <%-- view mode --%>
         <div id="viewMode">
             <div class="profile-fields">
                 <div class="field-group">
@@ -63,7 +62,7 @@
             </div>
         </div>
 
-        <%-- EDIT MODE --%>
+        <%-- edit mode --%>
         <div id="editMode" style="display: none;">
             <form action="${pageContext.request.contextPath}/userProfile"
                   method="post"

@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 
 import com.bajekocinema.model.UserModel;
 import com.bajekocinema.services.UserService;
+import com.bajekocinema.utils.ImageUtil;
 
 /**
  * Servlet implementation class UserProfileServlet
@@ -83,11 +84,11 @@ public class UserProfileServlet extends HttpServlet {
         String imagePath = currentUser.getImage();
         Part filePart = request.getPart("image");
         if (filePart != null && filePart.getSize() > 0) {
-        	String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        	filePart.write(getServletContext().getRealPath("/resources/images/") + fileName);
-        	imagePath = "resources/images" + fileName;    
+            ImageUtil imageUtil = new ImageUtil();
+            String fileName = imageUtil.getImageNameFromPart(filePart);
+            imageUtil.uploadImage(filePart, "resources/images", getServletContext());
+            imagePath = "resources/images/" + fileName;
         }
-
         try {
             userService.updateUser(currentUser.getUserID(), fullName, email, phone, imagePath, password);
             // Store success in session so it survives the redirect

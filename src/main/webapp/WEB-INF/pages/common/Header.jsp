@@ -40,7 +40,7 @@
 							<button class="profile-btn" id="profileBtn">
 								<c:choose>
 									<c:when test="${not empty loggedInUser.image}">
-										<img src="${loggedInUser.image}" alt="Profile"
+										<img src="${pageContext.request.contextPath}/${loggedInUser.image}" alt="Profile"
 											class="profile-photo">
 									</c:when>
 									<c:otherwise>
@@ -55,7 +55,7 @@
 								<div class="popup-header">
 									<c:choose>
 										<c:when test="${not empty loggedInUser.image}">
-											<img src="${loggedInUser.image}" alt="Profile"
+											<img src="${pageContext.request.contextPath}/${loggedInUser.image}" alt="Profile"
 												class="popup-avatar">
 										</c:when>
 										<c:otherwise>
