@@ -16,33 +16,21 @@ import com.bajekocinema.services.SeatBookingService;
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/review" })
 public class ReviewServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-    private SeatBookingService bookingService = new SeatBookingService();	
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private static final long serialVersionUID = 1L;
+    private SeatBookingService bookingService = new SeatBookingService();
+
     public ReviewServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-    	/*DEBUG: System.out.println("=== ReviewServlet hit ===");
-    	System.out.println("request user attr: " + request.getAttribute("loggedInUser"));
-    	System.out.println("session user attr: " + 
-    	    (request.getSession(false) != null ? request.getSession(false).getAttribute("loggedInUser") : "NO SESSION"));*/
-
-        UserModel user = (UserModel) request.getAttribute("loggedInUser");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // FIX: filter sets "LoggedInUser" (capital L), not "loggedInUser"
+        UserModel user = (UserModel) request.getAttribute("LoggedInUser");
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
-        }	
-		
+        }
+
         int bookingId;
         try { bookingId = Integer.parseInt(request.getParameter("bookingId")); }
         catch (Exception e) {
@@ -55,7 +43,7 @@ public class ReviewServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/home");
             return;
         }
-        
+
         // Explode all fields into individual request attributes for JSP EL
         request.setAttribute("bookingId",    summary.bookingId);
         request.setAttribute("userId",       summary.userId);
@@ -72,16 +60,13 @@ public class ReviewServlet extends HttpServlet {
         request.setAttribute("status",       summary.status);
         request.setAttribute("seats",        summary.seats);
         request.setAttribute("seatCount",    summary.seats != null ? summary.seats.size() : 0);
-        
-        request.getRequestDispatcher("/WEB-INF/pages/user/Review.jsp").forward(request, response);        
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-        UserModel user = (UserModel) request.getAttribute("loggedInUser");
+        request.getRequestDispatcher("/WEB-INF/pages/user/Review.jsp").forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        UserModel user = (UserModel) request.getAttribute("LoggedInUser");
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
@@ -99,8 +84,8 @@ public class ReviewServlet extends HttpServlet {
         if (summary == null || summary.userId != user.getUserID()) {
             response.sendRedirect(request.getContextPath() + "/home");
             return;
-        } 
-        
+        }
+
         String action = request.getParameter("action");
         if ("confirm".equals(action)) {
             bookingService.confirmBooking(bookingId);
@@ -108,9 +93,7 @@ public class ReviewServlet extends HttpServlet {
             bookingService.cancelBooking(bookingId);
         }
 
-        // back to home after either action (simple flow)
+        // back to previous bookings after either action
         response.sendRedirect(request.getContextPath() + "/previousBooking");
-        
-    }        
-
+    }
 }
