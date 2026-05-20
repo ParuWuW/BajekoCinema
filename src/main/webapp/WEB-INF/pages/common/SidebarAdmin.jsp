@@ -1,7 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<aside class="sidebar">
-    
+<!-- Mobile Hamburger Toggle -->
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">&#9776;</button>
+
+<!-- Sidebar Overlay (for mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="adminSidebar">
+
     <!-- Logo / Brand -->
     <div class="brand">
         <span>BajekoCinema</span>
@@ -11,29 +17,34 @@
     <div class="nav-section">
         <div class="nav-title">Main Menu</div>
 
-        <a href="${pageContext.request.contextPath}/dashboard"
+        <a href="${pageContext.request.contextPath}/admin/dashboard"
            class="nav-item ${currentPage == 'dashboard' ? 'active' : ''}">
             Dashboard
         </a>
 
-        <a href="${pageContext.request.contextPath}/movies"
+        <a href="${pageContext.request.contextPath}/admin/movies"
            class="nav-item ${currentPage == 'movies' ? 'active' : ''}">
             Movies
         </a>
 
-        <a href="${pageContext.request.contextPath}/users"
+        <a href="${pageContext.request.contextPath}/admin/users"
            class="nav-item ${currentPage == 'users' ? 'active' : ''}">
             User Management
         </a>
 
-        <a href="${pageContext.request.contextPath}/shows"
+        <a href="${pageContext.request.contextPath}/admin/shows"
            class="nav-item ${currentPage == 'shows' ? 'active' : ''}">
             Shows
         </a>
 
-        <a href="${pageContext.request.contextPath}/Abooking"
+        <a href="${pageContext.request.contextPath}/admin/booking"
            class="nav-item ${currentPage == 'Abooking' ? 'active' : ''}">
             Booking
+        </a>
+
+        <a href="${pageContext.request.contextPath}/admin/management"
+           class="nav-item ${currentPage == 'management' ? 'active' : ''}">
+            Management
         </a>
     </div>
 
@@ -43,10 +54,41 @@
     <div class="nav-section">
         <div class="nav-title">System</div>
 
-
-        <a href="#" class="nav-item logout">
+        <a href="${pageContext.request.contextPath}/logout" class="nav-item logout">
             Logout
         </a>
     </div>
 
 </aside>
+
+<!-- Sidebar Toggle Script -->
+<script>
+(function() {
+    var toggle  = document.getElementById('sidebarToggle');
+    var sidebar = document.getElementById('adminSidebar');
+    var overlay = document.getElementById('sidebarOverlay');
+
+    if (toggle && sidebar && overlay) {
+        toggle.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+
+        // Close sidebar when a nav item is clicked (mobile)
+        var navItems = sidebar.querySelectorAll('.nav-item');
+        navItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                if (window.innerWidth <= 1024) {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('active');
+                }
+            });
+        });
+    }
+})();
+</script>
