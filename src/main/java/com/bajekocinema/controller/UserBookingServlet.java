@@ -23,25 +23,17 @@ import com.bajekocinema.services.SeatBookingService;
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/booking" })
 public class UserBookingServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	
+    private static final long serialVersionUID = 1L;
+
     private MovieService movieService = new MovieService();
-    private SeatBookingService bookingService = new SeatBookingService();	
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private SeatBookingService bookingService = new SeatBookingService();
+
     public UserBookingServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         // GET MOVIE DETAILS
         String movieIdStr = request.getParameter("movieId");
         if (movieIdStr == null || movieIdStr.isEmpty()) {
@@ -62,8 +54,8 @@ public class UserBookingServlet extends HttpServlet {
             return;
         }
         request.setAttribute("movie", movie);
-        
-        //get theatres for that movie
+
+        // get theatres for that movie
         List<TheatreModel> theatres = bookingService.getTheatresForMovie(movieId);
         request.setAttribute("theatres", theatres);
 
@@ -85,8 +77,8 @@ public class UserBookingServlet extends HttpServlet {
                 request.setAttribute("shows", shows);
             } catch (IllegalArgumentException ignored) {}
         }
-        
-        // load seats for shows
+
+        // load seats for show
         Integer showId = parseIntOrNull(request.getParameter("showId"));
         if (showId != null) {
             ShowModel show = bookingService.getShowDetails(showId);
@@ -96,18 +88,14 @@ public class UserBookingServlet extends HttpServlet {
                 request.setAttribute("seats", seats);
                 request.setAttribute("seatPrice", SeatBookingService.SEAT_PRICE);
             }
-        }        
-		
-		request.getRequestDispatcher("WEB-INF/pages/user/Booking.jsp").forward(request, response);
-	}
+        }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-        // Must be logged in
-        UserModel user = (UserModel) request.getAttribute("loggedInUser");
+        request.getRequestDispatcher("WEB-INF/pages/user/Booking.jsp").forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        UserModel user = (UserModel) request.getAttribute("LoggedInUser");
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
@@ -142,11 +130,11 @@ public class UserBookingServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/home");
-        }            
-	}
+        }
+    }
 
     private Integer parseIntOrNull(String s) {
         if (s == null || s.isEmpty()) return null;
         try { return Integer.parseInt(s); } catch (NumberFormatException e) { return null; }
-    }	
+    }
 }

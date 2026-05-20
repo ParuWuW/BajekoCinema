@@ -86,12 +86,8 @@ public class BookingModel {
 	/**
 	 * @param bookingStatus the bookingStatus to set
 	 */
-	public void setBookingStatus(String bookingStatus) {        
-		if (bookingStatus != null) {
-	        this.bookingStatus = bookingStatus.toUpperCase();
-	    } else {
-	        this.bookingStatus = null;
-	    }
+	public void setBookingStatus(String bookingStatus) {
+		this.bookingStatus = bookingStatus;
 	}
 
 	/**
@@ -205,6 +201,5 @@ public class BookingModel {
 	public void setSelectedSeatsLabel(String selectedSeatsLabel) {
 		this.selectedSeatsLabel = selectedSeatsLabel;
 	}
-
 
 }

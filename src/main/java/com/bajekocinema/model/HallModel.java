@@ -15,7 +15,7 @@ public class HallModel {
 	 * @param hallID the hallID to set
 	 */
 	public void setHallID(int hallID) {
-		hallID = hallID;
+		this.hallID = hallID;
 	}
 	/**
 	 * @return the hallName
@@ -27,7 +27,7 @@ public class HallModel {
 	 * @param hallName the hallName to set
 	 */
 	public void setHallName(String hallName) {
-		hallName = hallName;
+		this.hallName = hallName;
 	}
 	/**
 	 * @return the hallCapacity
@@ -39,7 +39,19 @@ public class HallModel {
 	 * @param hallCapacity the hallCapacity to set
 	 */
 	public void setHallCapacity(int hallCapacity) {
-		hallCapacity = hallCapacity;
+		this.hallCapacity = hallCapacity;
+	}
+	/**
+	 * @return the theatreID
+	 */
+	public int getTheatreID() {
+		return theatreID;
+	}
+	/**
+	 * @param theatreID the theatreID to set
+	 */
+	public void setTheatreID(int theatreID) {
+		this.theatreID = theatreID;
 	}
 
 }
