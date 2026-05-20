@@ -1,0 +1,273 @@
+/* =============================================================
+   Responsive.css  —  load LAST in every admin JSP
+   ============================================================= */
+
+/* ─────────────────────────────────────────────
+   ALWAYS — invisible swipeable table scroll
+   on ALL screen sizes
+───────────────────────────────────────────── */
+.table-scroll-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.table-scroll-wrap::-webkit-scrollbar { display: none; }
+
+/* Also target .table-container directly as fallback */
+.table-container {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+.table-container::-webkit-scrollbar { display: none; }
+
+.table-container table {
+    min-width: max-content !important;
+    width: max-content !important;
+}
+
+
+/* ─────────────────────────────────────────────
+   TABLET  ≤ 1024px
+───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+
+    .sidebar {
+        width: 72px !important;
+        min-width: 72px !important;
+        max-width: 72px !important;
+        overflow: hidden !important;
+    }
+
+    .sidebar .brand span,
+    .nav-title { display: none !important; }
+
+    .nav-item {
+        padding: 16px !important;
+        font-size: 0 !important;
+        justify-content: center !important;
+        gap: 0 !important;
+    }
+
+    .page-content  { padding: 24px !important; }
+
+    .admin-dash-cards { grid-template-columns: repeat(2,1fr) !important; }
+    .metrics-grid     { grid-template-columns: repeat(2,1fr) !important; }
+}
+
+
+/* ─────────────────────────────────────────────
+   MOBILE  ≤ 768px
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+    /* Kill the fixed-height locked layout */
+    html, body {
+        height: auto !important;
+        overflow: auto !important;
+    }
+
+    .app-container {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        overflow: visible !important;
+        width: 100% !important;
+    }
+
+    /* Sidebar → horizontal scrollable top bar */
+    .sidebar {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        flex-direction: row !important;
+        flex-shrink: 0 !important;
+        align-items: center !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--bg-border) !important;
+        padding: 0 12px !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: nowrap !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        z-index: 100 !important;
+    }
+    .sidebar::-webkit-scrollbar { display: none !important; }
+
+    .sidebar .brand {
+        padding: 12px 14px 12px 0 !important;
+        flex-shrink: 0 !important;
+        border-right: 1px solid var(--bg-border) !important;
+        margin-right: 4px !important;
+    }
+
+    .sidebar .brand span {
+        display: block !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        white-space: nowrap !important;
+    }
+
+    .nav-section {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 0 !important;
+        gap: 0 !important;
+        flex-shrink: 0 !important;
+    }
+
+    .nav-title { display: none !important; }
+
+    .nav-item {
+        display: inline-flex !important;
+        padding: 16px 14px !important;
+        font-size: 13px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        border-left: none !important;
+        border-bottom: 3px solid transparent !important;
+        justify-content: center !important;
+        gap: 0 !important;
+    }
+
+    .nav-item.active {
+        border-bottom: 3px solid var(--accent-yellow) !important;
+        border-left: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .spacer { display: none !important; }
+
+    /* Main container takes full width below top nav */
+    .main-container {
+        width: 100% !important;
+        flex: 1 !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        height: auto !important;
+    }
+
+    .page-content { padding: 16px !important; }
+
+    /* Page header stacks */
+    .page-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .page-header h1 { font-size: 22px !important; }
+
+    .header-buttons {
+        width: 100% !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+    }
+
+    .header-buttons .btn,
+    .header-buttons a {
+        flex: 1 1 auto !important;
+        text-align: center !important;
+        justify-content: center !important;
+        min-width: 100px !important;
+    }
+
+    /* Dashboard cards */
+    .admin-dash-cards {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .admin-dash-card { padding: 24px 16px !important; }
+
+    .admin-dash-card.admin-stat-card {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 18px 16px !important;
+        gap: 10px !important;
+        text-align: left !important;
+    }
+
+    .admin-dash-card.admin-stat-card .admin-card-label { font-size: 14px !important; }
+    .admin-dash-card.admin-stat-card .admin-stat-value { font-size: 18px !important; }
+
+    .metrics-grid { grid-template-columns: 1fr !important; }
+
+    /* Tables */
+    .table-container {
+        overflow-x: auto !important;
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .table-container table {
+        min-width: 600px !important;
+        width: max-content !important;
+    }
+
+    th { font-size: 11px !important; padding: 12px 12px !important; }
+    td { font-size: 12px !important; padding: 12px 12px !important; }
+
+    .actions { gap: 8px !important; flex-wrap: wrap !important; }
+
+    /* Forms */
+    .modal-content { padding: 0 !important; }
+    .modal-body    { padding: 16px !important; }
+
+    .modal-form-row {
+        flex-direction: column !important;
+        gap: 14px !important;
+    }
+
+    .form-group  { width: 100% !important; }
+    .btn-save    { width: 100% !important; justify-content: center !important; }
+
+    /* Footer */
+    .footer-row {
+        padding: 16px !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        text-align: center !important;
+    }
+
+    .footer-nav {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 10px !important;
+    }
+}
+
+
+/* ─────────────────────────────────────────────
+   SMALL MOBILE  ≤ 480px
+───────────────────────────────────────────── */
+@media (max-width: 480px) {
+
+    .sidebar .brand span { font-size: 11px !important; }
+    .nav-item { padding: 14px 10px !important; font-size: 12px !important; }
+
+    .page-header h1 { font-size: 18px !important; }
+    .page-header h4 { font-size: 10px !important; }
+
+    .admin-dash-card .admin-card-icon  { font-size: 28px !important; }
+    .admin-dash-card .admin-card-label { font-size: 13px !important; }
+
+    th { font-size: 10px !important; padding: 10px 8px !important; }
+    td { font-size: 11px !important; padding: 10px 8px !important; }
+
+    .badge { font-size: 10px !important; padding: 3px 7px !important; }
+    .btn   { padding: 9px 14px !important; font-size: 12px !important; }
+    .metric-value { font-size: 20px !important; }
+}

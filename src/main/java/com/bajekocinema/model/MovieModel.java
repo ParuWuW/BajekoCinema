@@ -95,7 +95,6 @@ public class MovieModel {
 		this.status = status;
 	}
 
-	// these are used by the admin JSP pages
 	public int getMovieID() {
 		return movieId;
 	}
@@ -123,5 +122,4 @@ public class MovieModel {
 	public String getMovieLanguage() {
 		return "";
 	}
-
 }

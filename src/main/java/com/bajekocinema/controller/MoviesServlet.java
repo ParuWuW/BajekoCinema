@@ -2,6 +2,7 @@ package com.bajekocinema.controller;
 
 import com.bajekocinema.model.MovieModel;
 import com.bajekocinema.services.MovieService;
+import com.bajekocinema.utils.ImageUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -11,21 +12,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-@MultipartConfig(maxFileSize = 50 * 1024 * 1024)
+@MultipartConfig(maxFileSize = 10 * 1024 * 1024)
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin/movies" })
 public class MoviesServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
     private MovieService movieService = new MovieService();
+    private ImageUtil    imageUtil    = new ImageUtil();
 
     public MoviesServlet() {
         super();
@@ -48,7 +46,6 @@ public class MoviesServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        // which form panel to show — driven by GET param, no JS needed
         String form = request.getParameter("form");
         if ("add".equals(form)) {
             request.setAttribute("showAddForm", true);
@@ -56,15 +53,14 @@ public class MoviesServlet extends HttpServlet {
             request.setAttribute("showGenreForm", true);
         }
 
-        // edit form — load movie from DB so JSP can pre-fill server-side
         String editIdStr = request.getParameter("editMovieID");
         if (editIdStr != null && !editIdStr.isEmpty()) {
             try {
                 int editId = Integer.parseInt(editIdStr);
                 MovieModel editMovie = movieService.getMovieById(editId);
                 if (editMovie != null) {
-                    request.setAttribute("editMovie",     editMovie);
-                    request.setAttribute("showEditForm",  true);
+                    request.setAttribute("editMovie",    editMovie);
+                    request.setAttribute("showEditForm", true);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -93,11 +89,20 @@ public class MoviesServlet extends HttpServlet {
                 movie.setImdbScore(Double.parseDouble(request.getParameter("imdbScore")));
                 movie.setStatus(request.getParameter("movieStatus"));
 
-                String posterPath = handleFileUpload(request.getPart("posterFile"), "images/posters");
-                movie.setPosterUrl(posterPath != null ? posterPath : "");
+                // poster upload via ImageUtil
+                Part posterPart = request.getPart("posterFile");
+                if (posterPart != null && posterPart.getSize() > 0) {
+                    String saveFolder = "resources/images/posters";
+                    imageUtil.uploadImage(posterPart, saveFolder, getServletContext());
+                    String imageName = imageUtil.getImageNameFromPart(posterPart);
+                    movie.setPosterUrl(saveFolder + "/" + imageName);
+                } else {
+                    movie.setPosterUrl("");
+                }
 
-                String trailerPath = handleFileUpload(request.getPart("trailerFile"), "videos");
-                movie.setTrailerUrl(trailerPath != null ? trailerPath : "");
+                // trailer is a plain YouTube embed link
+                String trailerUrl = request.getParameter("trailerUrl");
+                movie.setTrailerUrl(trailerUrl != null ? trailerUrl.trim() : "");
 
                 movieService.addMovie(movie);
 
@@ -118,11 +123,21 @@ public class MoviesServlet extends HttpServlet {
                 movie.setImdbScore(Double.parseDouble(request.getParameter("editImdbScore")));
                 movie.setStatus(request.getParameter("editMovieStatus"));
 
-                String posterPath = handleFileUpload(request.getPart("editPosterFile"), "images/posters");
-                movie.setPosterUrl(posterPath != null ? posterPath : "");
+                // poster upload via ImageUtil — only if a new file was chosen
+                Part posterPart = request.getPart("editPosterFile");
+                if (posterPart != null && posterPart.getSize() > 0) {
+                    String saveFolder = "resources/images/posters";
+                    imageUtil.uploadImage(posterPart, saveFolder, getServletContext());
+                    String imageName = imageUtil.getImageNameFromPart(posterPart);
+                    movie.setPosterUrl(saveFolder + "/" + imageName);
+                } else {
+                    // no new poster — pass empty so DAO keeps existing value
+                    movie.setPosterUrl("");
+                }
 
-                String trailerPath = handleFileUpload(request.getPart("editTrailerFile"), "videos");
-                movie.setTrailerUrl(trailerPath != null ? trailerPath : "");
+                // trailer is a plain YouTube embed link
+                String trailerUrl = request.getParameter("editTrailerUrl");
+                movie.setTrailerUrl(trailerUrl != null ? trailerUrl.trim() : "");
 
                 movieService.updateMovie(movie);
 
@@ -152,38 +167,4 @@ public class MoviesServlet extends HttpServlet {
 
         response.sendRedirect(request.getContextPath() + "/admin/movies");
     }
-
-    private String handleFileUpload(Part part, String subDir) {
-
-        if (part == null || part.getSize() == 0) {
-            return null;
-        }
-
-        try {
-            String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-            if (fileName == null || fileName.isEmpty()) {
-                return null;
-            }
-
-            String uniqueName = System.currentTimeMillis() + "_" + fileName;
-            String uploadDir  = getServletContext().getRealPath("/resources/" + subDir);
-
-            File dir = new File(uploadDir);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-
-            try (InputStream is = part.getInputStream()) {
-                Files.copy(is, new File(uploadDir + File.separator + uniqueName).toPath(),
-                        java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-            }
-
-            return "resources/" + subDir + "/" + uniqueName;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
 }
