@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 20, 2026 at 10:05 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: May 20, 2026 at 01:35 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,36 +24,37 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `booking`
+-- Table structure for table `Booking`
 --
 
-CREATE TABLE `booking` (
+CREATE TABLE `Booking` (
   `booking_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `show_id` int(11) NOT NULL,
   `booking_time` timestamp NOT NULL DEFAULT current_timestamp(),
   `total_amount` decimal(10,2) NOT NULL,
   `status` enum('pending','confirmed','cancelled') NOT NULL DEFAULT 'pending'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `genre`
+-- Table structure for table `Genre`
 --
 
-CREATE TABLE `genre` (
+CREATE TABLE `Genre` (
   `genre_name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `genre`
+-- Dumping data for table `Genre`
 --
 
-INSERT INTO `genre` (`genre_name`) VALUES
+INSERT INTO `Genre` (`genre_name`) VALUES
 ('Action'),
 ('Comedy'),
 ('Fantasy'),
+('Horror'),
 ('Romance'),
 ('SciFi'),
 ('Thriller');
@@ -61,10 +62,10 @@ INSERT INTO `genre` (`genre_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hall`
+-- Table structure for table `Hall`
 --
 
-CREATE TABLE `hall` (
+CREATE TABLE `Hall` (
   `hall_id` int(11) NOT NULL,
   `theatre_id` int(11) NOT NULL,
   `hall_name` varchar(50) NOT NULL,
@@ -72,22 +73,22 @@ CREATE TABLE `hall` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `hall`
+-- Dumping data for table `Hall`
 --
 
-INSERT INTO `hall` (`hall_id`, `theatre_id`, `hall_name`, `total_seats`) VALUES
-(1, 1, 'Hall A', 120),
-(2, 1, 'Hall B', 80),
-(3, 2, 'Hall A', 100),
-(4, 2, 'Hall B', 90);
+INSERT INTO `Hall` (`hall_id`, `theatre_id`, `hall_name`, `total_seats`) VALUES
+(1, 1, 'Hall A', 40),
+(2, 1, 'Hall B', 40),
+(3, 2, 'Hall A', 40),
+(4, 2, 'Hall B', 40);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `movie`
+-- Table structure for table `Movie`
 --
 
-CREATE TABLE `movie` (
+CREATE TABLE `Movie` (
   `movie_id` int(11) NOT NULL,
   `title` varchar(200) NOT NULL,
   `genre` varchar(20) NOT NULL,
@@ -98,13 +99,13 @@ CREATE TABLE `movie` (
   `trailer_url` text DEFAULT NULL,
   `imdb_score` decimal(3,1) DEFAULT NULL,
   `status` enum('upcoming','now_showing','ended') NOT NULL DEFAULT 'upcoming'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 --
--- Dumping data for table `movie`
+-- Dumping data for table `Movie`
 --
 
-INSERT INTO `movie` (`movie_id`, `title`, `genre`, `description`, `duration_min`, `release_date`, `poster_url`, `trailer_url`, `imdb_score`, `status`) VALUES
+INSERT INTO `Movie` (`movie_id`, `title`, `genre`, `description`, `duration_min`, `release_date`, `poster_url`, `trailer_url`, `imdb_score`, `status`) VALUES
 (1, 'Dune: Part Two', 'SciFi', 'Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.', 166, '2024-02-28', 'resources/images/dune.png', NULL, 8.7, 'now_showing'),
 (2, 'Oppenheimer', 'Thriller', 'The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.', 180, '2023-07-21', 'resources/images/oppenheimer.png', NULL, 8.5, 'now_showing'),
 (3, 'Barbie', 'Comedy', 'Barbie and Ken discover the joys and perils of living in the real world.', 114, '2023-07-21', 'resources/images/barbie.png', NULL, 7.0, 'now_showing'),
@@ -121,22 +122,22 @@ INSERT INTO `movie` (`movie_id`, `title`, `genre`, `description`, `duration_min`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payment`
+-- Table structure for table `Payment`
 --
 
-CREATE TABLE `payment` (
+CREATE TABLE `Payment` (
   `payment_id` int(11) NOT NULL,
   `booking_id` int(11) NOT NULL,
   `amount` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `seat`
+-- Table structure for table `Seat`
 --
 
-CREATE TABLE `seat` (
+CREATE TABLE `Seat` (
   `seat_id` int(11) NOT NULL,
   `hall_id` int(11) NOT NULL,
   `row_label` char(2) NOT NULL,
@@ -145,10 +146,10 @@ CREATE TABLE `seat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `seat`
+-- Dumping data for table `Seat`
 --
 
-INSERT INTO `seat` (`seat_id`, `hall_id`, `row_label`, `seat_number`, `is_booked`) VALUES
+INSERT INTO `Seat` (`seat_id`, `hall_id`, `row_label`, `seat_number`, `is_booked`) VALUES
 (1, 1, 'A', 1, 0),
 (2, 1, 'A', 2, 0),
 (3, 1, 'A', 3, 0),
@@ -313,10 +314,10 @@ INSERT INTO `seat` (`seat_id`, `hall_id`, `row_label`, `seat_number`, `is_booked
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shows`
+-- Table structure for table `Shows`
 --
 
-CREATE TABLE `shows` (
+CREATE TABLE `Shows` (
   `show_id` int(11) NOT NULL,
   `movie_id` int(11) NOT NULL,
   `theatre_id` int(11) NOT NULL,
@@ -327,10 +328,10 @@ CREATE TABLE `shows` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `shows`
+-- Dumping data for table `Shows`
 --
 
-INSERT INTO `shows` (`show_id`, `movie_id`, `theatre_id`, `hall_id`, `show_date`, `start_time`, `status`) VALUES
+INSERT INTO `Shows` (`show_id`, `movie_id`, `theatre_id`, `hall_id`, `show_date`, `start_time`, `status`) VALUES
 (1, 1, 1, 1, '2026-06-26', '12:00:00', 'scheduled'),
 (2, 1, 1, 2, '2026-06-26', '18:00:00', 'scheduled'),
 (3, 1, 2, 3, '2026-06-27', '14:00:00', 'scheduled'),
@@ -365,10 +366,10 @@ INSERT INTO `shows` (`show_id`, `movie_id`, `theatre_id`, `hall_id`, `show_date`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `theatre`
+-- Table structure for table `Theatre`
 --
 
-CREATE TABLE `theatre` (
+CREATE TABLE `Theatre` (
   `theatre_id` int(11) NOT NULL,
   `theatre_name` varchar(150) NOT NULL,
   `address` text DEFAULT NULL,
@@ -377,20 +378,20 @@ CREATE TABLE `theatre` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `theatre`
+-- Dumping data for table `Theatre`
 --
 
-INSERT INTO `theatre` (`theatre_id`, `theatre_name`, `address`, `phone`, `email`) VALUES
+INSERT INTO `Theatre` (`theatre_id`, `theatre_name`, `address`, `phone`, `email`) VALUES
 (1, 'Civil Mall', 'Kathmandu', '014444444', 'civilmall@bajekocinema.com'),
 (2, 'Labim Mall', 'Lalitpur', '015555555', 'labimmall@bajekocinema.com');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ticket`
+-- Table structure for table `Ticket`
 --
 
-CREATE TABLE `ticket` (
+CREATE TABLE `Ticket` (
   `ticket_id` int(11) NOT NULL,
   `booking_id` int(11) NOT NULL,
   `status` enum('active','cancelled') NOT NULL DEFAULT 'active'
@@ -399,23 +400,23 @@ CREATE TABLE `ticket` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ticket_seat`
+-- Table structure for table `Ticket_Seat`
 --
 
-CREATE TABLE `ticket_seat` (
+CREATE TABLE `Ticket_Seat` (
   `ticket_seat_id` int(11) NOT NULL,
   `ticket_id` int(11) NOT NULL,
   `seat_id` int(11) NOT NULL,
   `seat_price` decimal(8,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Table structure for table `User`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `User` (
   `userID` int(11) NOT NULL,
   `fullName` varchar(100) NOT NULL,
   `email` varchar(150) NOT NULL,
@@ -427,93 +428,95 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `User`
 --
 
-INSERT INTO `user` (`userID`, `fullName`, `email`, `phone`, `password`, `isVerified`, `role`, `image`) VALUES
+INSERT INTO `User` (`userID`, `fullName`, `email`, `phone`, `password`, `isVerified`, `role`, `image`) VALUES
+(4, 'Sichu', 'sichu.maharjan1@gmail.com', '9876543210', '$2a$10$oT.Qh/bc4Zte2.KrhWaq7OcKNpXDOW1enMfV45P2dJJmjv9tf6s/W', 1, 'user', 'resources/images/43800756-removebg-preview.png'),
 (5, 'Admin', 'admin@gmail.com', '0000000000', '$2a$10$2ZGxrOg5fWMsENbTWAS4H.zjvtNAxz.5r0ZlwjNWDTI5iQKnzDgk2', 1, 'admin', 'resources/images/download.png'),
-(6, 'Rabina Lama', 'rabina@gmail.com', '9840382829', '$2a$10$DlJJoDAgDrs.4bKEn0.QUOShEwyaT/tJhO3cHwfig.rH3sT6aooda', 1, 'user', 'resources/images/rabina.png');
+(6, 'Rabina Lama', 'rabina@gmail.com', '9840382829', '$2a$10$DlJJoDAgDrs.4bKEn0.QUOShEwyaT/tJhO3cHwfig.rH3sT6aooda', 1, 'user', 'resources/images/rabina.png'),
+(30, 'Donald Trumpppppp', 'donaldtrump@gmail.com', '9841226783', '$2a$10$KA4FHi4Qijl7Y0dsK8xf7eiCsEWxb4v9uyyNVn/WJy4cC4E5.i3Iq', 1, 'user', 'resources/images/2015-jeep-cherokee-4wd-4-door-trailhawk-angular-front-exterior-view_100509581_l-removebg-preview.png');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `booking`
+-- Indexes for table `Booking`
 --
-ALTER TABLE `booking`
+ALTER TABLE `Booking`
   ADD PRIMARY KEY (`booking_id`),
-  ADD KEY `fk_booking_user` (`user_id`),
-  ADD KEY `fk_booking_show` (`show_id`);
+  ADD KEY `fk_booking_show` (`show_id`),
+  ADD KEY `fk_booking_user` (`user_id`);
 
 --
--- Indexes for table `genre`
+-- Indexes for table `Genre`
 --
-ALTER TABLE `genre`
+ALTER TABLE `Genre`
   ADD PRIMARY KEY (`genre_name`);
 
 --
--- Indexes for table `hall`
+-- Indexes for table `Hall`
 --
-ALTER TABLE `hall`
+ALTER TABLE `Hall`
   ADD PRIMARY KEY (`hall_id`),
   ADD KEY `fk_hall_theatre` (`theatre_id`);
 
 --
--- Indexes for table `movie`
+-- Indexes for table `Movie`
 --
-ALTER TABLE `movie`
+ALTER TABLE `Movie`
   ADD PRIMARY KEY (`movie_id`),
-  ADD KEY `genre` (`genre`);
+  ADD KEY `movie_ibfk_1` (`genre`);
 
 --
--- Indexes for table `payment`
+-- Indexes for table `Payment`
 --
-ALTER TABLE `payment`
+ALTER TABLE `Payment`
   ADD PRIMARY KEY (`payment_id`),
   ADD UNIQUE KEY `booking_id` (`booking_id`);
 
 --
--- Indexes for table `seat`
+-- Indexes for table `Seat`
 --
-ALTER TABLE `seat`
+ALTER TABLE `Seat`
   ADD PRIMARY KEY (`seat_id`),
-  ADD KEY `hall_id` (`hall_id`);
+  ADD KEY `seat_ibfk_2` (`hall_id`);
 
 --
--- Indexes for table `shows`
+-- Indexes for table `Shows`
 --
-ALTER TABLE `shows`
+ALTER TABLE `Shows`
   ADD PRIMARY KEY (`show_id`),
   ADD KEY `fk_show_movie` (`movie_id`),
-  ADD KEY `hall_id` (`hall_id`),
-  ADD KEY `theatre_id` (`theatre_id`);
+  ADD KEY `shows_ibfk_1` (`hall_id`),
+  ADD KEY `shows_ibfk_2` (`theatre_id`);
 
 --
--- Indexes for table `theatre`
+-- Indexes for table `Theatre`
 --
-ALTER TABLE `theatre`
+ALTER TABLE `Theatre`
   ADD PRIMARY KEY (`theatre_id`);
 
 --
--- Indexes for table `ticket`
+-- Indexes for table `Ticket`
 --
-ALTER TABLE `ticket`
+ALTER TABLE `Ticket`
   ADD PRIMARY KEY (`ticket_id`),
   ADD UNIQUE KEY `booking_id` (`booking_id`);
 
 --
--- Indexes for table `ticket_seat`
+-- Indexes for table `Ticket_Seat`
 --
-ALTER TABLE `ticket_seat`
+ALTER TABLE `Ticket_Seat`
   ADD PRIMARY KEY (`ticket_seat_id`),
   ADD UNIQUE KEY `uq_ticket_seat` (`ticket_id`,`seat_id`),
   ADD KEY `fk_ts_seat` (`seat_id`);
 
 --
--- Indexes for table `user`
+-- Indexes for table `User`
 --
-ALTER TABLE `user`
+ALTER TABLE `User`
   ADD PRIMARY KEY (`userID`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `phone` (`phone`);
@@ -523,74 +526,117 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT for table `booking`
+-- AUTO_INCREMENT for table `Booking`
 --
-ALTER TABLE `booking`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `Booking`
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `hall`
+-- AUTO_INCREMENT for table `Hall`
 --
-ALTER TABLE `hall`
+ALTER TABLE `Hall`
   MODIFY `hall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `movie`
+-- AUTO_INCREMENT for table `Movie`
 --
-ALTER TABLE `movie`
-  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `Movie`
+  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `payment`
+-- AUTO_INCREMENT for table `Payment`
 --
-ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `Payment`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `seat`
+-- AUTO_INCREMENT for table `Seat`
 --
-ALTER TABLE `seat`
+ALTER TABLE `Seat`
   MODIFY `seat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
--- AUTO_INCREMENT for table `shows`
+-- AUTO_INCREMENT for table `Shows`
 --
-ALTER TABLE `shows`
+ALTER TABLE `Shows`
   MODIFY `show_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
--- AUTO_INCREMENT for table `theatre`
+-- AUTO_INCREMENT for table `Theatre`
 --
-ALTER TABLE `theatre`
+ALTER TABLE `Theatre`
   MODIFY `theatre_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `ticket`
+-- AUTO_INCREMENT for table `Ticket`
 --
-ALTER TABLE `ticket`
+ALTER TABLE `Ticket`
   MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `ticket_seat`
+-- AUTO_INCREMENT for table `Ticket_Seat`
 --
-ALTER TABLE `ticket_seat`
-  MODIFY `ticket_seat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `Ticket_Seat`
+  MODIFY `ticket_seat_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT for table `User`
 --
-ALTER TABLE `user`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `User`
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `hall`
+-- Constraints for table `Booking`
 --
-ALTER TABLE `hall`
-  ADD CONSTRAINT `fk_hall_theatre` FOREIGN KEY (`theatre_id`) REFERENCES `theatre` (`theatre_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Booking`
+  ADD CONSTRAINT `fk_booking_show` FOREIGN KEY (`show_id`) REFERENCES `Shows` (`show_id`),
+  ADD CONSTRAINT `fk_booking_user` FOREIGN KEY (`user_id`) REFERENCES `User` (`userID`);
+
+--
+-- Constraints for table `Movie`
+--
+ALTER TABLE `Movie`
+  ADD CONSTRAINT `movie_ibfk_1` FOREIGN KEY (`genre`) REFERENCES `Genre` (`genre_name`);
+
+--
+-- Constraints for table `Payment`
+--
+ALTER TABLE `Payment`
+  ADD CONSTRAINT `fk_payment_booking` FOREIGN KEY (`booking_id`) REFERENCES `Booking` (`booking_id`);
+
+--
+-- Constraints for table `Seat`
+--
+ALTER TABLE `Seat`
+  ADD CONSTRAINT `fk_seat_hall` FOREIGN KEY (`hall_id`) REFERENCES `Hall` (`hall_id`),
+  ADD CONSTRAINT `seat_ibfk_1` FOREIGN KEY (`hall_id`) REFERENCES `Hall` (`hall_id`),
+  ADD CONSTRAINT `seat_ibfk_2` FOREIGN KEY (`hall_id`) REFERENCES `Hall` (`hall_id`);
+
+--
+-- Constraints for table `Shows`
+--
+ALTER TABLE `Shows`
+  ADD CONSTRAINT `fk_show_hall` FOREIGN KEY (`hall_id`) REFERENCES `Hall` (`hall_id`),
+  ADD CONSTRAINT `fk_show_movie` FOREIGN KEY (`movie_id`) REFERENCES `Movie` (`movie_id`),
+  ADD CONSTRAINT `shows_ibfk_1` FOREIGN KEY (`hall_id`) REFERENCES `Hall` (`hall_id`),
+  ADD CONSTRAINT `shows_ibfk_2` FOREIGN KEY (`theatre_id`) REFERENCES `Theatre` (`theatre_id`);
+
+--
+-- Constraints for table `Ticket`
+--
+ALTER TABLE `Ticket`
+  ADD CONSTRAINT `fk_ticket_booking` FOREIGN KEY (`booking_id`) REFERENCES `Booking` (`booking_id`);
+
+--
+-- Constraints for table `Ticket_Seat`
+--
+ALTER TABLE `Ticket_Seat`
+  ADD CONSTRAINT `fk_ts_seat` FOREIGN KEY (`seat_id`) REFERENCES `Seat` (`seat_id`),
+  ADD CONSTRAINT `fk_ts_ticket` FOREIGN KEY (`ticket_id`) REFERENCES `Ticket` (`ticket_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
