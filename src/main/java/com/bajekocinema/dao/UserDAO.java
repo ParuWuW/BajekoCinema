@@ -15,7 +15,7 @@ public class UserDAO {
 	public void insertUser(String Username, String userPhoneNumber, String UserEmail, String Password, String Image) throws Exception {
 		Connection con = DBconfig.getConnection();
 
-		String sql = "INSERT INTO `User` (fullName, email, phone, password, isVerified, role, image) " + "VALUES (?,?,?,?,True,'user',?)";
+		String sql = "INSERT INTO `User` (fullName, email, phone, password, isVerified, role, image) " + "VALUES (?,?,?,?,False,'user',?)";
 
 		PreparedStatement pst = con.prepareStatement(sql);
 		pst.setString(1, Username);
