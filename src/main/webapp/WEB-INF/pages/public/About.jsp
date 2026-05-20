@@ -361,6 +361,7 @@
 
 <!-- Closing Banner --> 
 <section class="closing-section">
+	<img src="${pageContext.request.contextPath}/resources/images/ClosingBanner.jpg">
     <p class="closing-label">BAJEKO CINEMA</p>
     <h2 class="closing-quote">"Where Every Frame<br>Becomes a <span>Memory.</span>"</h2>
     <p class="closing-sub">The screen goes dark. The story stays with you forever.</p>

@@ -586,10 +586,15 @@
     margin-top: 120px;
     margin-bottom: 20px;
     text-align: center;
-    padding: 80px 40px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 120px 40px;
     border-radius: 24px;
-    background-color: var(--surface);
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    
 }
 
 .closing-label {
@@ -653,9 +658,7 @@
     .membership-title { font-size: 30px; }
     .closing-section { padding: 50px 24px; }
 }
-/* ══════════════════════════════════════════
-   BAJEKO FAMILY — GROUP PHOTO SECTION
-══════════════════════════════════════════ */
+/*BAJEKO FAMILY — GROUP PHOTO SECTION*/
 
 .family-section {
     margin-top: 120px;
