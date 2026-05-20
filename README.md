@@ -20,8 +20,8 @@ A full-stack cinema booking web application built with Java EE (Jakarta EE), JSP
 
 ## 🎯 Project Concept
 
-BajekoCinema is a cinema ticketing platform that replicates a real-world movie booking experience. 
-**Users** can explore currently showing and upcoming movies, pick a theatre and showtime, choose their seats on an interactive layout, and confirm a booking. 
+BajekoCinema is a cinema ticketing platform that replicates a real-world movie booking experience.\
+**Users** can explore currently showing and upcoming movies, pick a theatre and showtime, choose their seats on an interactive layout, and confirm a booking.\
 **Admins** manage movies, shows, users, and bookings through a dedicated dashboard.
 
 The project demonstrates a layered enterprise Java web application using the MVC pattern with servlet controllers, service classes, DAO-based data access, filter, utility packages and JSP views.
@@ -36,9 +36,9 @@ The project demonstrates a layered enterprise Java web application using the MVC
 | Backend | Java EE / Jakarta EE 10, HTTP Servlets |
 | Database | MySQL (MariaDB 10.4) via JDBC |
 | Security | BCrypt password hashing (`jBCrypt`), cookie-based session management |
-| Build Tool | Maven (or your IDE's project builder) |
-| Server | Apache Tomcat 10+ |
-| IDE | Eclipse / IntelliJ IDEA |
+| Build Tool | Maven |
+| Server | Apache Tomcat v10.1 |
+| IDE | Eclipse IDEA |
 
 ---
 
@@ -100,11 +100,11 @@ A `@WebFilter("/*")` that intercepts every request, validates the session cookie
 
 | Name | Role |
 |---|---|
-| Khushi Shrestha | Creative Director |
-| Pragun Bhattarai | Chief Operations |
-| Darsheel Bam | Technical Lead |
-| Sichu Maharjan | Experience Designer |
-| Aviyaan Shrestha | Strategic Vision |
+| Khushi Shrestha | Project Manager |
+| Pragun Bhattarai | Backend Developer |
+| Darsheel Bam | UI/UX |
+| Sichu Maharjan | Database Administrator |
+| Aviyaan Shrestha | Frontend Developer |
 
 ---
 
@@ -139,11 +139,12 @@ A `@WebFilter("/*")` that intercepts every request, validates the session cookie
 
 ### 🛠 Admin (Admin Role Required)
 
-- **Admin Dashboard** — navigation cards linking to all management sections
-- **Movie Management** — list all movies, add new movie (with genre, duration, release date, description), delete movie
+- **Admin Dashboard** — Analytics and navigation cards linking to all management sections
+- **Movie Management** — list all movies, add new movie (with genre, duration, release date, description), update and delete movie
 - **Show Management** — list all scheduled shows, schedule a new show (movie + hall + time)
 - **User Management** — list all registered users with their details
-- **Booking Management** — list all bookings; update booking status (pending / confirmed / cancelled); delete booking; two-step modal to book a show manually (filter by movie → select show)
+- **Booking Management** — list all bookings; update booking status; delete booking; two-step modal to book a show manually (filter by movie → select show)
+- **Theatre and Hall Management** — Lists all theatres/hall and add new ones
 
 ---
 
@@ -255,15 +256,6 @@ Unique constraint on `(ticket_id, seat_id)` prevents double-booking the same sea
 | booking_id | INT UNIQUE FK → `booking` |
 | amount | DECIMAL(10,2) |
 
-#### `sessions`
-| Column | Type | Notes |
-|---|---|---|
-| session_id | VARCHAR(128) PK | 64-char hex token |
-| user_id | INT FK → `user` | |
-| created_at | DATETIME DEFAULT NOW() | |
-| expires_at | DATETIME | |
-| is_active | TINYINT(1) DEFAULT 1 | |
-
 ### Entity Relationship Summary
 
 ```
@@ -273,7 +265,6 @@ user ──< booking >── shows ──> movie
                    ticket ──< ticket_seat >── seat
                          \
                           payment
-user ──< sessions
 movie ──> genre
 hall ──> theatre
 ```
@@ -435,17 +426,6 @@ Once Tomcat is running and the app is deployed:
 | `http://localhost:8080/bajekocinema/admin/dashboard` | Admin dashboard (requires admin login) |
 
 > The context path (`/bajekocinema`) depends on your WAR file name or server configuration. If you deploy the WAR as `ROOT.war`, the context path is omitted.
-
----
-
-### Troubleshooting
-
-- **DB connection fails:** Verify MySQL is running, the database name matches `bajekocinema`, and the credentials in `DBconfig.java` are correct.
-- **404 on all pages:** Confirm the WAR deployed successfully. Check Tomcat logs at `logs/catalina.out`.
-- **`ClassNotFoundException: com.mysql.cj.jdbc.Driver`:** The MySQL JDBC driver is not on the classpath. Ensure the JAR is in `WEB-INF/lib/` or declared in `pom.xml`.
-- **Images not loading:** The app writes uploaded images to `resources/images/` relative to the deployed application root. This path is resolved via `ServletContext.getRealPath()` and is managed automatically on deployment.
-
----
 
 ## 📄 License
 
