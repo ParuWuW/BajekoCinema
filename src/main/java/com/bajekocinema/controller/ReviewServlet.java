@@ -17,14 +17,37 @@ import com.bajekocinema.services.SeatBookingService;
 @WebServlet(asyncSupported = true, urlPatterns = { "/review" })
 public class ReviewServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private static final long BOOKING_EXPIRY_MS = 5 * 60 * 1000L; // 5 minutes
     private SeatBookingService bookingService = new SeatBookingService();
 
     public ReviewServlet() {
         super();
     }
+    
+    /**
+     * If the booking is still pending and 5 minutes have elapsed since creation,
+     * cancel it (booking + ticket). Returns true if the booking was auto-cancelled.
+     */
+    private boolean checkAndExpireBooking(HttpServletRequest request, BookingSummary summary) {
+        if (summary == null) return false;
+        if (!"pending".equalsIgnoreCase(summary.status)) return false;
+
+        Long createdAt = (Long) request.getSession()
+                .getAttribute("bookingCreatedAt_" + summary.bookingId);
+        if (createdAt == null) return false;
+
+        long elapsed = System.currentTimeMillis() - createdAt;
+        if (elapsed >= BOOKING_EXPIRY_MS) {
+            bookingService.cancelBooking(summary.bookingId);
+            request.getSession().removeAttribute("bookingCreatedAt_" + summary.bookingId);
+            summary.status = "cancelled"; // reflect in the in-memory summary
+            return true;
+        }
+        return false;
+    }    
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // FIX: filter sets "LoggedInUser" (capital L), not "loggedInUser"
+
         UserModel user = (UserModel) request.getAttribute("LoggedInUser");
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/login");
@@ -42,6 +65,13 @@ public class ReviewServlet extends HttpServlet {
         if (summary == null || summary.userId != user.getUserID()) {
             response.sendRedirect(request.getContextPath() + "/home");
             return;
+        }
+        
+     // Auto-cancel if 5 minutes elapsed since Buy Now
+        boolean expired = checkAndExpireBooking(request, summary);
+        if (expired) {
+            request.setAttribute("expiredMessage",
+                "This booking was automatically cancelled because the 5-minute payment window expired.");
         }
 
         // Explode all fields into individual request attributes for JSP EL
@@ -86,11 +116,19 @@ public class ReviewServlet extends HttpServlet {
             return;
         }
 
+        // If 5 minutes elapsed, force-cancel regardless of which button was pressed
+        if (checkAndExpireBooking(request, summary)) {
+            response.sendRedirect(request.getContextPath() + "/previousBooking");
+            return;
+        }
+        
         String action = request.getParameter("action");
         if ("confirm".equals(action)) {
             bookingService.confirmBooking(bookingId);
+            request.getSession().removeAttribute("bookingCreatedAt_" + bookingId);
         } else if ("cancel".equals(action)) {
             bookingService.cancelBooking(bookingId);
+            request.getSession().removeAttribute("bookingCreatedAt_" + bookingId);
         }
 
         // back to previous bookings after either action
