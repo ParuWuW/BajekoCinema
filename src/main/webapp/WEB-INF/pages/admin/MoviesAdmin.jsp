@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Components.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Tables.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Dashboard.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/ResponsiveAdmin.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -45,7 +44,6 @@
                     <div class="section-title" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
                         <h2 style="font-size:20px; font-weight:600;">Movie List</h2>
                     </div>
-                    <div class="table-scroll-wrap">
                     <div class="table-container">
                         <table>
                             <thead>
@@ -111,8 +109,8 @@
                             </tbody>
                         </table>
                     </div>
-                	</div>
-					</div>
+                </div>
+
             </c:if>
 
             <%-- ====== ADD MOVIE FORM ====== --%>
