@@ -125,6 +125,9 @@ public class UserBookingServlet extends HttpServlet {
                 return;
             }
 
+            // Store booking creation time in session (per booking) for 5-min expiry check
+            request.getSession().setAttribute("bookingCreatedAt_" + bookingId, System.currentTimeMillis());
+
             response.sendRedirect(request.getContextPath() + "/review?bookingId=" + bookingId);
 
         } catch (Exception e) {

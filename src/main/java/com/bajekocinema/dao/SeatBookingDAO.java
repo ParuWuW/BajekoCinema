@@ -231,12 +231,26 @@ public class SeatBookingDAO {
     public boolean updateBookingStatus(int bookingId, String status) {
         try {
             Connection conn = DBconfig.getConnection();
-            String sql = "UPDATE booking SET status = ? WHERE booking_id = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, status);
-            ps.setInt(2, bookingId);
-            int rows = ps.executeUpdate();
-            ps.close(); conn.close();
+            conn.setAutoCommit(false);
+            
+            //update booking status
+            String bSql = "UPDATE booking SET status = ? WHERE booking_id = ?";
+            PreparedStatement bp = conn.prepareStatement(bSql);
+            bp.setString(1, status);
+            bp.setInt(2, bookingId);
+            int rows = bp.executeUpdate();
+            bp.close();
+            
+            //if cancelled, cancel ticket too
+            if ("cancelled".equalsIgnoreCase(status)) {
+                String tSql = "UPDATE ticket SET status = 'cancelled' WHERE booking_id = ?";
+                PreparedStatement tp = conn.prepareStatement(tSql);
+                tp.setInt(1, bookingId);
+                tp.executeUpdate();
+                tp.close();
+            }           
+                     
+            conn.commit();
             return rows > 0;
         } catch (Exception e) {
             e.printStackTrace();

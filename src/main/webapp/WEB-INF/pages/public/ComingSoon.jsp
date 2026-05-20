@@ -11,6 +11,47 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/ComingSoon.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Front-base.css">
+
+<style type="text/css">
+    /* Modal Box */
+    .modal{
+	    display: none;
+	    position: fixed;
+	    z-index: 1000;
+	    left: 0;
+	    top: 0;
+	    width: 100%;
+	    height: 100%;
+	    background: rgba(0,0,0,0.8);
+	}
+    
+	.modal-content{
+	    position: relative;
+	    width: 70%;
+	    max-width: 900px;
+	    margin: 5% auto;
+	    background: #000;
+	    border-radius: 12px;
+	    overflow: hidden;
+	}
+	
+	/* Close Button */
+	.close{
+	    position: absolute;
+	    right: 15px;
+	    top: 10px;
+	    font-size: 30px;
+	    color: white;
+	    cursor: pointer;
+	    z-index: 10;
+	}
+	
+	iframe{
+	    width: 100%;
+	    height: 500px;
+	    border: none;
+	}
+</style>
 </head>
 <body>
   <jsp:include page="../common/Header.jsp"/>
@@ -66,9 +107,19 @@
                   <c:out value="${movie.releaseDate}"/>
                 </div>
                 <div class="card-overlay">
-                  <button class="overlay-btn secondary">
-                    <i class="fa-solid fa-play"></i> Trailer
-                  </button>
+                	<c:choose>
+						<c:when test="${not empty movie.trailerUrl}">
+							<button class="overlay-btn secondary"
+								onclick="openTrailer('${movie.trailerUrl}')">
+								<i class="fa-solid fa-play"></i> Watch Trailer
+							</button>
+						</c:when>
+						<c:otherwise>
+							<button class="overlay-btn secondary" disabled>
+								<i class="fa-solid fa-ban"></i> No Trailer
+							</button>
+						</c:otherwise>
+					</c:choose>
                 </div>
               </div>
               <div class="card-info">
@@ -89,9 +140,54 @@
     </div>
   </section>
   
+      <!-- Trailer Modal -->
+	<div class="modal" id="trailerModal">	
+	    <div class="modal-content">	
+	        <span class="close" onclick="closeTrailer()">
+	            &times;
+	        </span>	
+	        <iframe
+	            id="trailerFrame"
+	            src=""
+	            allowfullscreen>
+	        </iframe>
+	
+	    </div>
+	
+	</div>
+  
 	<jsp:include page="../common/Footer.jsp"/>
 
   <script>
+	function openTrailer(trailerUrl){
+		
+	    if(!trailerUrl || trailerUrl.trim() === ""){
+	        return;
+	    }
+	
+	    document.getElementById("trailerFrame").src = trailerUrl;
+	    document.getElementById("trailerModal").style.display = "block";
+	}
+	
+	function closeTrailer(){
+	
+	    const iframe = document.getElementById("trailerFrame");
+	
+	    // stop video playback
+	    iframe.src = "";
+	
+	    document.getElementById("trailerModal").style.display = "none";
+	}
+	
+	/* close when clicking outside */
+	window.onclick = function(event){
+	
+	    const modal = document.getElementById("trailerModal");
+	
+	    if(event.target === modal){
+	        closeTrailer();
+	    }
+	}   
     // Month pill toggle
     document.querySelectorAll('.month-pill').forEach(pill => {
       pill.addEventListener('click', () => {
