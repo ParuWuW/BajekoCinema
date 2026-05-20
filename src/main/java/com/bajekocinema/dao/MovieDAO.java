@@ -8,22 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDAO {
-	
-	public MovieModel getMovieById(int movieId) {
-	    MovieModel m = null;
-	    try {
-	        Connection conn = DBconfig.getConnection();
-	        String sql = "SELECT * FROM movie WHERE movie_id = ?";
-	        PreparedStatement ps = conn.prepareStatement(sql);
-	        ps.setInt(1, movieId);
-	        ResultSet rs = ps.executeQuery();
-	        if (rs.next()) m = mapMovie(rs);
-	        rs.close(); ps.close(); conn.close();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	    return m;
-	}
 
     public List<MovieModel> getAllMovies() {
         List<MovieModel> movies = new ArrayList<>();
