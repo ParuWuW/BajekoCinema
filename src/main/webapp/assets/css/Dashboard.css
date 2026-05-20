@@ -63,3 +63,56 @@
     font-weight: 700;
     color: var(--text-main);
 }
+
+/* Admin Dashboard Cards */
+.admin-dash-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+}
+.admin-dash-card {
+    background: var(--bg-card, #1a1a2e);
+    border: 1px solid var(--border-color, #2a2a3e);
+    border-radius: 12px;
+    padding: 80px 24px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-primary, #fff);
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+.admin-dash-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-cyan, #00bcd4);
+}
+.admin-dash-card .admin-card-icon {
+    font-size: 48px;
+}
+.admin-dash-card .admin-card-label {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.admin-dash-card.admin-full-width {
+    grid-column: span 2;
+}
+.admin-dash-card.admin-stat-card {
+    align-items: flex-start;
+    padding: 40px 32px;
+    gap: 40px;
+}
+.admin-dash-card.admin-stat-card .admin-card-label {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.admin-dash-card.admin-stat-card .admin-stat-value {
+    font-size: 24px;
+    font-weight: 700;
+}
