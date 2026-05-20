@@ -24,4 +24,12 @@ public class SessionUtil {
             session.invalidate();
         }
     }
+
+
+
+	public static String getSessionId(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		HttpSession session = req.getSession(false);
+		return (session != null)? session.getId(): null;	
+		}
 }

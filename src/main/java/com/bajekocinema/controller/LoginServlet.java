@@ -9,7 +9,6 @@ import java.io.IOException;
 import com.bajekocinema.dao.UserDAO;
 import com.bajekocinema.model.UserModel;
 import com.bajekocinema.services.LoginService;
-import com.bajekocinema.services.SessionService;
 import com.bajekocinema.utils.CookieUtil;
 import com.bajekocinema.utils.SessionUtil;
 
@@ -19,7 +18,6 @@ import com.bajekocinema.utils.SessionUtil;
 @WebServlet(asyncSupported = true, urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private SessionService sessionService = new SessionService();
 	private LoginService loginService = new LoginService();
 	private UserDAO userDAO = new UserDAO();
 
@@ -80,10 +78,14 @@ public class LoginServlet extends HttpServlet {
 				return;
 			}
 
-			String sessionId = sessionService.loginUser(dbUser.getUserID());
+			SessionUtil.setAttribute(request, "LoggedInUserId", dbUser.getUserID());
+			SessionUtil.setAttribute(request, "LoggedInUser", dbUser);
+			SessionUtil.setAttribute(request, "LoggedInRole", dbUser.getRole());
+			request.getSession().setMaxInactiveInterval(30 * 60);
 
-			int maxAge = SessionService.SESSION_MINUTES * 60;
-			CookieUtil.addCookie(response, "SESSION_ID", sessionId, maxAge);
+			
+			int maxAge = 30 * 60;
+			CookieUtil.addCookie(response, "SESSION_ID", request.getSession().getId(), maxAge);
 
 			if("admin".equalsIgnoreCase(dbUser.getRole()))
 			{

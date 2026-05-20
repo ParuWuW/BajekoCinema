@@ -10,20 +10,14 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.Set;
 
-import com.bajekocinema.dao.UserDAO;
-import com.bajekocinema.model.SessionModel;
-import com.bajekocinema.model.UserModel;
-import com.bajekocinema.services.SessionService;
 import com.bajekocinema.utils.CookieUtil;
+import com.bajekocinema.utils.SessionUtil;
 
 @WebFilter("/*")
 public class AuthenticationFilter implements Filter {
-	private final SessionService sessionService = new SessionService();
-	private final UserDAO userDAO = new UserDAO();
 	
 
 	//public pages
@@ -81,26 +75,23 @@ public class AuthenticationFilter implements Filter {
         }
   
         // 2. Validate session via cookie
-        SessionModel session = null;
-        try {
-            Cookie c = CookieUtil.getCookie(req, "SESSION_ID");
-            if (c != null) {
-                session = sessionService.validateSession(c.getValue());
-                if (session != null) {
-                    req.setAttribute("loggedInUserId", session.getUser_id());
-                    req.setAttribute("loggedInRole",   session.getRole());
-                    req.setAttribute("sessionId", session.getSession_id());
-                    
-                    UserModel user = userDAO.getUserById(session.getUser_id());
-                    request.setAttribute("loggedInUser", user);
-                }
-            }
-        } catch (Exception e) {
-            throw new ServletException(e);
-        }
+        boolean isLoggedIn = false;
+        boolean isAdmin = false;
 
-        boolean isLoggedIn = (session != null);
-        boolean isAdmin    = isLoggedIn && "admin".equals(session.getRole());
+        Cookie sessionCookie = CookieUtil.getCookie(req, "SESSION_ID");
+        if (sessionCookie != null) {
+            if (SessionUtil.getSessionId(req) != null && sessionCookie.getValue().equals(SessionUtil.getSessionId(req))) {
+                isLoggedIn = (SessionUtil.getAttribute(req, "LoggedInUser") != null);
+                isAdmin = isLoggedIn && "admin".equals(SessionUtil.getAttribute(req, "LoggedInRole"));
+            }
+            
+        }
+        if (isLoggedIn) {
+        	request.setAttribute("LoggedInUserId", SessionUtil.getAttribute(req, "LoggedInUserId"));
+        	request.setAttribute("LoggedInUser", SessionUtil.getAttribute(req, "LoggedInUser"));
+        	request.setAttribute("LoggedInRole", SessionUtil.getAttribute(req,"LoggedInRole"));
+
+        }
 
         //3. Admin path check
         if (path.startsWith("/admin")) {

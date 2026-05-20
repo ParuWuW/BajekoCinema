@@ -41,14 +41,14 @@
 			</form>
 
 				<c:choose>
-					<c:when test="${not empty loggedInUser}">
+					<c:when test="${not empty LoggedInUser}">
 						<!-- user logged in popup -->
 						<div class="profile-wrapper">
 							<!-- not clicked just on nav -->
 							<button class="profile-btn" id="profileBtn">
 								<c:choose>
-									<c:when test="${not empty loggedInUser.image}">
-										<img src="${pageContext.request.contextPath}/${loggedInUser.image}" alt="Profile"
+									<c:when test="${not empty LoggedInUser.image}">
+										<img src="${pageContext.request.contextPath}/${LoggedInUser.image}" alt="Profile"
 											class="profile-photo">
 									</c:when>
 									<c:otherwise>
@@ -62,8 +62,8 @@
 							<div class="profile-popup" id="profilePopup">
 								<div class="popup-header">
 									<c:choose>
-										<c:when test="${not empty loggedInUser.image}">
-											<img src="${pageContext.request.contextPath}/${loggedInUser.image}" alt="Profile"
+										<c:when test="${not empty LoggedInUser.image}">
+											<img src="${pageContext.request.contextPath}/${LoggedInUser.image}" alt="Profile"
 												class="popup-avatar">
 										</c:when>
 										<c:otherwise>
@@ -72,7 +72,7 @@
 											</div>
 										</c:otherwise>
 									</c:choose>
-									<span class="popup-name">${loggedInUser.fullName}</span>
+									<span class="popup-name">${LoggedInUser.fullName}</span>
 								</div>
 
 								<hr class="popup-divider">

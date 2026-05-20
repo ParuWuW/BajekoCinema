@@ -5,9 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.sql.SQLException;
 
+import java.io.IOException;
 import com.bajekocinema.services.SessionService;
 import com.bajekocinema.utils.CookieUtil;
 import com.bajekocinema.utils.SessionUtil;
@@ -35,13 +34,6 @@ public class LogoutServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		// in database mark session inactive. no delete for revival
-		String sessionId = (String) request.getAttribute("sessionId");
-		try {
-			sessionService.logoutUser(sessionId);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		SessionUtil.invalidate(request);
         // Delete the session id cookie from browser
         CookieUtil.deleteCookie(response, "SESSION_ID");
