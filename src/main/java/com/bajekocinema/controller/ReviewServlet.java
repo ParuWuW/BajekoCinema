@@ -21,6 +21,10 @@ public class ReviewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	/*DEBUG: System.out.println("=== ReviewServlet hit ===");
+    	System.out.println("request user attr: " + request.getAttribute("loggedInUser"));
+    	System.out.println("session user attr: " + 
+    	    (request.getSession(false) != null ? request.getSession(false).getAttribute("loggedInUser") : "NO SESSION"));*/
 
         UserModel user = (UserModel) request.getAttribute("loggedInUser");
         if (user == null) {
@@ -37,12 +41,27 @@ public class ReviewServlet extends HttpServlet {
 
         BookingSummary summary = bookingService.getBookingSummary(bookingId);
         if (summary == null || summary.userId != user.getUserID()) {
-            // not yours — boot
             response.sendRedirect(request.getContextPath() + "/home");
             return;
         }
 
-        request.setAttribute("summary", summary);
+     // Explode all fields into individual request attributes for JSP EL
+        request.setAttribute("bookingId",    summary.bookingId);
+        request.setAttribute("userId",       summary.userId);
+        request.setAttribute("userName",     summary.userName);
+        request.setAttribute("movieTitle",   summary.movieTitle);
+        request.setAttribute("posterUrl",    summary.posterUrl);
+        request.setAttribute("showDate",     summary.showDate);
+        request.setAttribute("startTime",    summary.startTime);
+        request.setAttribute("hallId",       summary.hallId);
+        request.setAttribute("hallName",     summary.hallName);
+        request.setAttribute("theatreId",    summary.theatreId);
+        request.setAttribute("theatreName",  summary.theatreName);
+        request.setAttribute("totalAmount",  summary.totalAmount);
+        request.setAttribute("status",       summary.status);
+        request.setAttribute("seats",        summary.seats);
+        request.setAttribute("seatCount",    summary.seats != null ? summary.seats.size() : 0);
+        
         request.getRequestDispatcher("/WEB-INF/pages/user/Review.jsp")
                .forward(request, response);
     }

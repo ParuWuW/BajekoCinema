@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -27,35 +28,35 @@
                 <div class="review-main">
 
                     <div class="booking-card dark-card">
-                        <img src="${pageContext.request.contextPath}/${summary.posterUrl}"
-                             alt="${summary.movieTitle}" class="movie-poster">
+                        <img src="${pageContext.request.contextPath}/${posterUrl}"
+                             alt="${movieTitle}" class="movie-poster">
                         <div class="booking-details">
-                            <span class="now-showing">BOOKING #${summary.bookingId}</span>
-                            <h2 class="movie-title"><c:out value="${summary.movieTitle}"/></h2>
+                            <span class="now-showing">BOOKING #${bookingId}</span>
+                            <h2 class="movie-title"><c:out value="${movieTitle}"/></h2>
 
                             <div class="details-grid">
                                 <div>
                                     <span class="detail-label">DATE &amp; TIME</span>
                                     <span class="detail-value">
-                                        <fmt:formatDate value="${summary.showDate}" pattern="MMM dd, yyyy"/>
+                                        <fmt:formatDate value="${showDate}" pattern="MMM dd, yyyy"/>
                                         &nbsp;&middot;&nbsp;
-                                        <fmt:formatDate value="${summary.startTime}" pattern="h:mm a"/>
+                                        <fmt:formatDate value="${startTime}" pattern="h:mm a"/>
                                     </span>
                                 </div>
                                 <div>
                                     <span class="detail-label">THEATRE</span>
-                                    <span class="detail-value"><c:out value="${summary.theatreName}"/></span>
+                                    <span class="detail-value"><c:out value="${theatreName}"/></span>
                                 </div>
                                 <div>
                                     <span class="detail-label">HALL</span>
                                     <span class="detail-value">
-                                        <c:out value="${summary.hallName}"/> (ID: ${summary.hallId})
+                                        <c:out value="${hallName}"/> (ID: ${hallId})
                                     </span>
                                 </div>
                                 <div>
                                     <span class="detail-label">BOOKED BY</span>
                                     <span class="detail-value">
-                                        <c:out value="${summary.userName}"/> (User #${summary.userId})
+                                        <c:out value="${userName}"/> (User #${userId})
                                     </span>
                                 </div>
                             </div>
@@ -63,7 +64,7 @@
                             <div class="seats-section">
                                 <span class="detail-label">SELECTED SEATS</span>
                                 <div class="seat-tags">
-                                    <c:forEach var="s" items="${summary.seats}">
+                                    <c:forEach var="s" items="${seats}">
                                         <div class="seat-chip">
                                             <i class="fa-solid fa-chair"></i>
                                             ${s.rowLabel}${s.seatNumber}
@@ -91,35 +92,27 @@
                         <h3 class="summary-title">Ticket Summary</h3>
 
                         <div class="summary-row">
-                            <span class="summary-item">
-                                ${fn:length(summary.seats)} <%-- replaced below with c:set --%>
-                            </span>
-                        </div>
-
-                        <c:set var="seatCount" value="${summary.seats.size()}"/>
-
-                        <div class="summary-row">
                             <span class="summary-item">${seatCount}x Premium Seats</span>
-                            <span class="summary-price">NPR ${summary.totalAmount}</span>
+                            <span class="summary-price">NPR ${totalAmount}</span>
                         </div>
 
                         <hr class="summary-divider">
 
                         <div class="summary-total-row">
                             <span class="total-label">Total Amount</span>
-                            <span class="total-amount">NPR ${summary.totalAmount}</span>
+                            <span class="total-amount">NPR ${totalAmount}</span>
                         </div>
 
                         <div class="summary-row" style="margin-top:14px;">
                             <span class="summary-item">Status</span>
                             <span class="summary-price" style="text-transform:uppercase;color:var(--accent-gold);">
-                                <c:out value="${summary.status}"/>
+                                <c:out value="${status}"/>
                             </span>
                         </div>
 
                         <%-- Confirm form --%>
                         <form method="post" action="${pageContext.request.contextPath}/review">
-                            <input type="hidden" name="bookingId" value="${summary.bookingId}">
+                            <input type="hidden" name="bookingId" value="${bookingId}">
                             <input type="hidden" name="action" value="confirm">
                             <button type="submit" class="btn-confirm">
                                 CONFIRM &amp; PAY <i class="fa-solid fa-arrow-right"></i>
@@ -129,7 +122,7 @@
                         <%-- Cancel form --%>
                         <form method="post" action="${pageContext.request.contextPath}/review"
                               onsubmit="return confirm('Cancel this booking?');">
-                            <input type="hidden" name="bookingId" value="${summary.bookingId}">
+                            <input type="hidden" name="bookingId" value="${bookingId}">
                             <input type="hidden" name="action" value="cancel">
                             <button type="submit" class="btn-cancel">CANCEL TRANSACTION</button>
                         </form>
