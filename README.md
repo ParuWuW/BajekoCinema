@@ -368,10 +368,14 @@ If your MySQL is running on a non-default port, update the URL accordingly.
 
 ---
 
-### Step 4 — Default Admin
-A default admin user has been stored in the dump file.
-Email: admin@gmail.com
-Password: admin@123
+### Step 4 — Default Attributes
+A default admin and user have been stored in the dump file.
+|Email|Password|
+|---|---|
+|admin@gmail.com|admin@123|
+|rabina@gmail.com|rabina@123|
+
+The theatre, hall, seat, movie, genre and show tables are also populated with default values for wasy viewing of functionalities.
 
 ---
 
