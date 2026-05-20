@@ -281,6 +281,65 @@ body.booking-page-body {
     transition: transform 0.1s ease, background-color 0.2s ease;
 }
 
+.seat-grid { 
+	display: flex; 
+	flex-direction: column; 
+	gap: 10px; 
+	align-items: center; 
+	margin-bottom: 30px; 
+}
+
+.seat-row { 
+	display: flex; 
+	align-items: center; 
+	gap: 8px; 
+}
+
+.row-label { 
+	width: 24px; 
+	text-align: center; 
+	color: #aaa; 
+	font-weight: 600; 
+	font-size: 0.9rem; 
+}
+
+.seat-btn {
+    width: 34px; 
+    height: 34px; 
+    border-radius: 6px;
+    background: #333; 
+    border: none; 
+    cursor: pointer;
+    color: transparent; 
+    font-size: 0.7rem; 
+    font-weight: 700;
+    transition: background 0.15s, color 0.15s;
+}
+
+.seat-btn:hover:not(.sold-out) { 
+	background: #555; 
+}
+
+.seat-btn.sold-out { 
+	background: #d12a2a; 
+	cursor: not-allowed; 
+}
+.seat-btn.selected { 
+	background: #e5b022; 
+	color: #0a0a0a;
+}
+
+.movie-meta-line { 
+	color: #aaa; 
+	font-size: 0.9rem; 
+	margin-top: 0.5rem;
+}
+
+.movie-meta-line span { 
+	color: var(--accent-gold); 
+	font-weight: 600; 
+}
+
 .seat:hover:not(.sold-out) {
     transform: scale(1.1);
 }

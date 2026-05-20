@@ -12,6 +12,10 @@ public class MovieService {
     private MovieDAO movieDAO = new MovieDAO();
     private GenreDAO genreDAO = new GenreDAO();
 
+    public MovieModel getMovieById(int movieId) {
+        return movieDAO.getMovieById(movieId);
+    }    
+    
     public List<MovieModel> getAllMovies() {
         return movieDAO.getAllMovies();
     }
@@ -20,7 +24,7 @@ public class MovieService {
         return movieDAO.getDistinctScheduledShowDates();
     }
 
-    // Genres come straight from the genre table now
+    // genres from genre table
     public List<GenreModel> getAllGenres() {
         return genreDAO.getAllGenres();
     }
