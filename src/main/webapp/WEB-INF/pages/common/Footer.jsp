@@ -38,9 +38,9 @@
 	
 	            <div class="social-icons">
 	                <a href="#"><i class="fa-brands fa-dribbble"></i></a>
-	                <a href="" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-	                <a href="" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-	                <a href="" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+	                <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+	                <a href="https://www.tiktok.com/en/" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+	                <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
 	            </div>
 	
 	            <div class="contact-info">
