@@ -1,5 +1,10 @@
 package com.bajekocinema.model;
 
+/**
+ * Model class representing a Cinema Hall in the admin panel.
+ * 
+ * @author bajekocinema
+ */
 public class HallAdminModel {
 
 	private int hallId;
@@ -48,7 +53,7 @@ public class HallAdminModel {
 		this.totalSeats = totalSeats;
 	}
 
-	// used by JSP pages
+	// Helper methods to match names used in JSP pages
 	public int getHallID() {
 		return hallId;
 	}

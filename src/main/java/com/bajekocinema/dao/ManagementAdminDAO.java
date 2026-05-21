@@ -11,6 +11,11 @@ import com.bajekocinema.model.HallAdminModel;
 import com.bajekocinema.model.TheatreAdminModel;
 import com.bajekocinema.utils.DBconfig;
 
+/**
+ * Admin Data Access Object for managing theatres and halls.
+ *
+ * @author bajekocinema
+ */
 public class ManagementAdminDAO {
 
     public List<TheatreAdminModel> getAllTheatres() throws Exception {
@@ -56,7 +61,7 @@ public class ManagementAdminDAO {
     public List<HallAdminModel> getAllHalls() throws Exception {
         List<HallAdminModel> halls = new ArrayList<>();
         Connection con = DBconfig.getConnection();
-        // Join with Theatre to get theatre name
+        // Join with Theatre table to fetch the theatre name for each hall
         String sql = "SELECT h.*, t.theatre_name FROM `Hall` h LEFT JOIN `Theatre` t ON h.theatre_id = t.theatre_id";
         PreparedStatement pst = con.prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
@@ -78,10 +83,10 @@ public class ManagementAdminDAO {
 
     public void addHall(int theatreId, String name) throws Exception {
         Connection con = DBconfig.getConnection();
-        // Disable auto-commit to perform a transaction
+        // Use a transaction to create hall and seats together
         con.setAutoCommit(false);
         try {
-            int totalSeats = 150; // Hardcoded requirement
+            int totalSeats = 150; // Default capacity for a new hall
             String sql = "INSERT INTO `Hall` (theatre_id, hall_name, total_seats) VALUES (?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, theatreId);

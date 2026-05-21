@@ -9,6 +9,11 @@ import java.util.List;
 import com.bajekocinema.model.UserAdminModel;
 import com.bajekocinema.utils.DBconfig;
 
+/**
+ * Admin Data Access Object for managing users.
+ *
+ * @author bajekocinema
+ */
 public class UserAdminDAO {
 
     public void insertUser(String Username, String userPhoneNumber, String UserEmail, String Password, String Image) throws Exception {
@@ -54,7 +59,7 @@ public class UserAdminDAO {
         return users;
     }
 
-    // ADDED - used by LoginService
+    // Used by LoginService
     public UserAdminModel getUserByEmail(String email) throws Exception {
         Connection con = DBconfig.getConnection();
         String sql = "SELECT * FROM `User` WHERE email = ?";
@@ -149,7 +154,7 @@ public class UserAdminDAO {
         return true;
     }
 
-    // ADDED - used by UsersServlet to toggle isVerified from admin panel
+    // Used by UsersServlet to toggle verification status
     public boolean updateVerifiedStatus(int userID, boolean isVerified) throws Exception {
         Connection conn = DBconfig.getConnection();
         String sql = "UPDATE `User` SET isVerified = ? WHERE userID = ?";

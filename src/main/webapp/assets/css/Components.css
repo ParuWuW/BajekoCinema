@@ -32,16 +32,6 @@
     transform: translateY(-2px);
 }
 
-.btn-purple {
-    background-color: var(--accent-purple);
-    color: var(--text-main);
-    box-shadow: 0 0 15px var(--accent-purple-glow);
-}
-
-.btn-purple:hover {
-    box-shadow: 0 0 25px var(--accent-purple-glow);
-    transform: translateY(-2px);
-}
 
 .badge {
     display: inline-flex;
@@ -75,39 +65,3 @@
     border: 1px solid var(--text-muted);
     background-color: rgba(136, 136, 136, 0.1);
 }
-
-.user-profile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: var(--bg-panel);
-    border: 1px solid var(--bg-border);
-    border-radius: 50%;
-    color: var(--accent-yellow);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-.user-profile:hover {
-    border-color: var(--accent-yellow);
-}
-
-.user-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-main);
-    flex-shrink: 0;
-}
-.user-avatar.purple { background-color: rgba(168, 85, 247, 0.2); border: 1px solid rgba(168, 85, 247, 0.3); }
-.user-avatar.blue { background-color: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.3); }
-.user-avatar.green { background-color: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.3); }
-.user-avatar.gray { background-color: rgba(136, 136, 136, 0.2); border: 1px solid rgba(136, 136, 136, 0.3); }
-
-

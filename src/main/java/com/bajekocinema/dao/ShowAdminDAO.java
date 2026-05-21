@@ -11,6 +11,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Admin Data Access Object for managing shows, theatres, and halls.
+ *
+ * @author bajekocinema
+ */
 public class ShowAdminDAO {
 
     public List<ShowAdminModel> getAllShows() {
@@ -160,7 +165,7 @@ public class ShowAdminDAO {
         return show;
     }
 
-    // ── Theatre methods ───────────────────────────────────────────────────────
+    // Theatre Methods
 
     public List<TheatreAdminModel> getAllTheatres() {
         List<TheatreAdminModel> theatres = new ArrayList<>();
@@ -265,7 +270,7 @@ public class ShowAdminDAO {
         }
     }
 
-    // ── Hall methods ──────────────────────────────────────────────────────────
+    // Hall Methods
 
     public List<HallAdminModel> getAllHalls() {
         List<HallAdminModel> halls = new ArrayList<>();

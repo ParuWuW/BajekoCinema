@@ -5,6 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * Admin Data Access Object for fetching dashboard statistics.
+ *
+ * @author bajekocinema
+ */
 public class DashboardAdminDAO {
 
     public int getTotalBookings() {

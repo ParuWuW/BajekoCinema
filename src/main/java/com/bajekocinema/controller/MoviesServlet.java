@@ -16,6 +16,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * Handles adding, editing, and deleting movies in the admin dashboard.
+ *
+ * @author bajekocinema
+ */
 @MultipartConfig(maxFileSize = 10 * 1024 * 1024)
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin/movies" })
 public class MoviesServlet extends HttpServlet {
@@ -89,7 +94,7 @@ public class MoviesServlet extends HttpServlet {
                 movie.setImdbScore(Double.parseDouble(request.getParameter("imdbScore")));
                 movie.setStatus(request.getParameter("movieStatus"));
 
-                // poster upload via ImageUtil
+                // Handle poster image upload
                 Part posterPart = request.getPart("posterFile");
                 if (posterPart != null && posterPart.getSize() > 0) {
                     String saveFolder = "resources/images/posters";
@@ -100,7 +105,7 @@ public class MoviesServlet extends HttpServlet {
                     movie.setPosterUrl("");
                 }
 
-                // trailer is a plain YouTube embed link
+                // Save the YouTube embed link for the trailer
                 String trailerUrl = request.getParameter("trailerUrl");
                 movie.setTrailerUrl(trailerUrl != null ? trailerUrl.trim() : "");
 
@@ -123,7 +128,7 @@ public class MoviesServlet extends HttpServlet {
                 movie.setImdbScore(Double.parseDouble(request.getParameter("editImdbScore")));
                 movie.setStatus(request.getParameter("editMovieStatus"));
 
-                // poster upload via ImageUtil — only if a new file was chosen
+                // Only upload a new poster if a file was provided
                 Part posterPart = request.getPart("editPosterFile");
                 if (posterPart != null && posterPart.getSize() > 0) {
                     String saveFolder = "resources/images/posters";
@@ -131,11 +136,11 @@ public class MoviesServlet extends HttpServlet {
                     String imageName = imageUtil.getImageNameFromPart(posterPart);
                     movie.setPosterUrl(saveFolder + "/" + imageName);
                 } else {
-                    // no new poster — pass empty so DAO keeps existing value
+                    // No new poster selected, keep the existing one
                     movie.setPosterUrl("");
                 }
 
-                // trailer is a plain YouTube embed link
+                // Save the YouTube embed link for the trailer
                 String trailerUrl = request.getParameter("editTrailerUrl");
                 movie.setTrailerUrl(trailerUrl != null ? trailerUrl.trim() : "");
 

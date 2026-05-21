@@ -9,6 +9,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Admin Data Access Object for managing bookings.
+ *
+ * @author bajekocinema
+ */
 public class BookingAdminDAO {
 
 	public List<BookingAdminModel> getAllBookings() {
@@ -148,13 +153,13 @@ public class BookingAdminDAO {
 			Connection conn = DBconfig.getConnection();
 			conn.setAutoCommit(false);
 
-			// delete payment first since it has no cascade from booking
+			// Delete associated payment manually as it does not cascade
 			PreparedStatement ps1 = conn.prepareStatement("DELETE FROM Payment WHERE booking_id = ?");
 			ps1.setInt(1, bookingId);
 			ps1.executeUpdate();
 			ps1.close();
 
-			// deleting booking cascades to ticket and ticket_seat
+			// Delete booking (automatically cascades to ticket and ticket_seat)
 			PreparedStatement ps2 = conn.prepareStatement("DELETE FROM Booking WHERE booking_id = ?");
 			ps2.setInt(1, bookingId);
 			ps2.executeUpdate();

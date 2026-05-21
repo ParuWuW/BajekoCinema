@@ -61,34 +61,3 @@
 
 </aside>
 
-<!-- Sidebar Toggle Script -->
-<script>
-(function() {
-    var toggle  = document.getElementById('sidebarToggle');
-    var sidebar = document.getElementById('adminSidebar');
-    var overlay = document.getElementById('sidebarOverlay');
-
-    if (toggle && sidebar && overlay) {
-        toggle.addEventListener('click', function() {
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('active');
-        });
-
-        overlay.addEventListener('click', function() {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('active');
-        });
-
-        // Close sidebar when a nav item is clicked (mobile)
-        var navItems = sidebar.querySelectorAll('.nav-item');
-        navItems.forEach(function(item) {
-            item.addEventListener('click', function() {
-                if (window.innerWidth <= 1024) {
-                    sidebar.classList.remove('open');
-                    overlay.classList.remove('active');
-                }
-            });
-        });
-    }
-})();
-</script>

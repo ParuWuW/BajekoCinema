@@ -1,5 +1,10 @@
 package com.bajekocinema.model;
 
+/**
+ * Model class for Admin Bookings.
+ * 
+ * @author bajekocinema
+ */
 public class BookingAdminModel {
 
 	private int bookingId;
@@ -9,7 +14,7 @@ public class BookingAdminModel {
 	private double totalAmount;
 	private String status;
 
-	// joined fields for display
+	// Fields fetched from other tables for display
 	private String movieName;
 	private String hallName;
 	private String showDate;
@@ -104,7 +109,7 @@ public class BookingAdminModel {
 		this.userFullName = userFullName;
 	}
 
-	// used by admin JSP pages
+	// Getters and setters for older JSP pages
 	public int getBookingID() {
 		return bookingId;
 	}
@@ -164,7 +169,7 @@ public class BookingAdminModel {
 	}
 
 	public void setTicketID(int ticketId) {
-		// not used in new schema
+		// Not in use
 	}
 
 	public int getPaymentID() {
@@ -172,7 +177,7 @@ public class BookingAdminModel {
 	}
 
 	public void setPaymentID(int paymentId) {
-		// not used in new schema
+		// Not in use
 	}
 
 }

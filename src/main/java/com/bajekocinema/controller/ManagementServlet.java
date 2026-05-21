@@ -13,13 +13,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Handles management of theatres and halls for the admin dashboard.
+ *
+ * @author bajekocinema
+ */
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin/management" })
 public class ManagementServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private final ShowAdminDAO showAdminDAO = new ShowAdminDAO();
 
-	// ── GET ──────────────────────────────────────────────────────────────────
+	// Handle GET requests to display the management forms
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -45,7 +50,7 @@ public class ManagementServlet extends HttpServlet {
 						request.setAttribute("showEditTheatreForm", true);
 					}
 				} catch (NumberFormatException e) {
-					// bad ID — fall through to default view
+					// Invalid ID format, fallback to default view
 				}
 			}
 
@@ -83,7 +88,7 @@ public class ManagementServlet extends HttpServlet {
 						request.setAttribute("showEditHallForm", true);
 					}
 				} catch (NumberFormatException e) {
-					// bad ID — fall through to default view
+					// Invalid ID format, fallback to default view
 				}
 			}
 		}
@@ -93,7 +98,7 @@ public class ManagementServlet extends HttpServlet {
 				.forward(request, response);
 	}
 
-	// ── POST ─────────────────────────────────────────────────────────────────
+	// Handle POST requests for adding/updating/deleting records
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -186,7 +191,7 @@ public class ManagementServlet extends HttpServlet {
 		response.sendRedirect(request.getContextPath() + "/admin/management");
 	}
 
-	// ── Helper ───────────────────────────────────────────────────────────────
+	// Helper method to handle empty strings
 	private String nullIfBlank(String s) {
 		return (s == null || s.trim().isEmpty()) ? null : s.trim();
 	}

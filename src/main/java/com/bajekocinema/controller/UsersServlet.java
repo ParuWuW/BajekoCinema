@@ -10,6 +10,11 @@ import java.util.List;
 import com.bajekocinema.model.UserAdminModel;
 import com.bajekocinema.services.UserAdminService;
 
+/**
+ * Handles user management operations in the admin dashboard.
+ *
+ * @author bajekocinema
+ */
 @WebServlet(asyncSupported = true, urlPatterns = {"/admin/users"})
 public class UsersServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -33,7 +38,7 @@ public class UsersServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        // ADDED - handles isVerified toggle from admin panel checkbox
+        // Handle isVerified toggle from the admin panel checkbox
         if ("updateVerified".equals(action)) {
             try {
                 int userID = Integer.parseInt(request.getParameter("userID"));

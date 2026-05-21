@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Layout.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Components.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Tables.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Tables.css?v=2">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Dashboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/ResponsiveAdmin.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 

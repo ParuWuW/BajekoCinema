@@ -15,10 +15,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * BookingServlet — updated for new bajekocinema-2.sql schema.
+ * Handles movie bookings for the admin dashboard.
  *
- * New Booking table: booking_id | user_id | show_id | booking_time | total_amount | status
- * No showBooking junction table — user_id and show_id are stored directly.
+ * @author bajekocinema
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin/booking", "/Abooking" })
 public class BookingServlet extends HttpServlet {
@@ -36,7 +35,7 @@ public class BookingServlet extends HttpServlet {
             List<ShowAdminModel>    scheduledShows  = showAdminService.getScheduledShows();
             List<MovieAdminModel>   movieList       = movieAdminService.getAllMovies();
 
-            // Step-1 filter: admin selects a movie to see its shows
+            // Filter shows when an admin selects a specific movie
             String selectedMovie = request.getParameter("selectedMovieID");
             List<ShowAdminModel> filteredShows = null;
             if (selectedMovie != null && !selectedMovie.isEmpty()) {
@@ -68,7 +67,7 @@ public class BookingServlet extends HttpServlet {
             try {
                 int showID = Integer.parseInt(request.getParameter("showID"));
 
-                // Resolve userId from session (fall back to 1 for admin-side bookings)
+                // Get user ID from session, default to 1 for admin bookings
                 Integer userId = (Integer) request.getSession().getAttribute("userId");
                 if (userId == null) userId = 1;
 
