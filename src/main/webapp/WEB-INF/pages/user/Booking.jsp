@@ -46,7 +46,7 @@
         <!-- 2. Booking Filters Section -->
         <section class="booking-filters">
         
-            <!-- Cinema Filter -->
+            <!-- Theatre Filter -->
             <div class="filter-row">
                 <h3 class="filter-label">Theatre</h3>
                 <div class="filter-options">

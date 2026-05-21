@@ -40,7 +40,7 @@ public class ReviewServlet extends HttpServlet {
         if (elapsed >= BOOKING_EXPIRY_MS) {
             bookingService.cancelBooking(summary.bookingId);
             request.getSession().removeAttribute("bookingCreatedAt_" + summary.bookingId);
-            summary.status = "cancelled"; // reflect in the in-memory summary
+            summary.status = "cancelled"; 
             return true;
         }
         return false;

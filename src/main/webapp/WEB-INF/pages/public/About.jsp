@@ -55,32 +55,32 @@
 
             <div class="founders-grid-top">
                 <div class="founder-card">
-                    <img src="${pageContext.request.contextPath}/assets/resources/images/marcus.jpg" alt="Khushi Shrestha" class="founder-img" onerror="this.src='https://ui-avatars.com/api/?name=K+S&background=1c1d21&color=fff&size=250'">
+                    <img src="${pageContext.request.contextPath}/resources/images/khushi.jpg" alt="Khushi Shrestha" class="founder-img" onerror="this.src='https://ui-avatars.com/api/?name=K+S&background=1c1d21&color=fff&size=250'">
                     <h4 class="founder-name">Khushi Shrestha</h4>
-                    <span class="founder-role">CREATIVE DIRECTOR</span>
+                    <span class="founder-role">PROJECT MANAGER</span>
                 </div>
                 <div class="founder-card">
-                    <img src="${pageContext.request.contextPath}/assets/resources/images/marcus.jpg" alt="Pragun Bhattarai" class="founder-img" onerror="this.src='https://ui-avatars.com/api/?name=P+B&background=1c1d21&color=fff&size=250'">
+                    <img src="${pageContext.request.contextPath}/resources/images/paru.jpg" alt="Pragun Bhattarai" class="founder-img" onerror="this.src='https://ui-avatars.com/api/?name=P+B&background=1c1d21&color=fff&size=250'">
                     <h4 class="founder-name">Pragun Bhattarai</h4>
-                    <span class="founder-role">CHIEF OPERATIONS</span>
+                    <span class="founder-role">BACKEND DEVELOPER</span>
                 </div>
                 <div class="founder-card">
-                    <img src="${pageContext.request.contextPath}/assets/resources/images/marcus.jpg" alt="Darsheel Bam" class="founder-img" onerror="this.src='https://ui-avatars.com/api/?name=D+B&background=1c1d21&color=fff&size=250'">
+                    <img src="${pageContext.request.contextPath}/resources/images/darsheel.jpg" alt="Darsheel Bam" class="founder-img" onerror="this.src='https://ui-avatars.com/api/?name=D+B&background=1c1d21&color=fff&size=250'">
                     <h4 class="founder-name">Darsheel Bam</h4>
-                    <span class="founder-role">TECHNICAL LEAD</span>
+                    <span class="founder-role">UI / UX</span>
                 </div>
             </div>
 
             <div class="founders-grid-bottom">
                 <div class="founder-card" style="width: 250px;">
-                    <img src="${pageContext.request.contextPath}/assets/img/sasha.jpg" alt="Sichu Maharjan" class="founder-img" onerror="this.src='https://ui-avatars.com/api/?name=S+M&background=1c1d21&color=fff&size=250'">
+                    <img src="${pageContext.request.contextPath}/resources/images/sichu.jpg" alt="Sichu Maharjan" class="founder-img" onerror="this.src='https://ui-avatars.com/api/?name=S+M&background=1c1d21&color=fff&size=250'">
                     <h4 class="founder-name">Sichu Maharjan</h4>
-                    <span class="founder-role">EXPERIENCE DESIGNER</span>
+                    <span class="founder-role">DATBASE ADMINISTRATOR</span>
                 </div>
                 <div class="founder-card" style="width: 250px;">
-                    <img src="${pageContext.request.contextPath}/assets/img/arthur.jpg" alt="Aviyaan Shrestha" class="founder-img" onerror="this.src='https://ui-avatars.com/api/?name=A+S&background=1c1d21&color=fff&size=250'">
+                    <img src="${pageContext.request.contextPath}/resources/images/aviyaan.jpg" alt="Aviyaan Shrestha" class="founder-img" onerror="this.src='https://ui-avatars.com/api/?name=A+S&background=1c1d21&color=fff&size=250'">
                     <h4 class="founder-name">Aviyaan Shrestha</h4>
-                    <span class="founder-role">STRATEGIC VISION</span>
+                    <span class="founder-role">FRONTEND DEVELOPER</span>
                 </div>
             </div>
         </section>

@@ -101,7 +101,7 @@ public class MovieDAO {
     public List<MovieModel> getNowShowingMovies(String dateFilter, String genreFilter) {
         List<MovieModel> movies = new ArrayList<>();
 
-        // Build SQL with plain concatenation. Both filters are optional.
+        // Both filters are optional.
         String sql = "SELECT DISTINCT m.* FROM movie m " +
                      "JOIN shows s ON s.movie_id = m.movie_id " +
                      "WHERE m.status = 'now_showing' " +
