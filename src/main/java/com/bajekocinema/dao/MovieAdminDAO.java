@@ -7,6 +7,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Admin Data Access Object for managing movies.
+ *
+ * @author bajekocinema
+ */
 public class MovieAdminDAO {
 
     public List<MovieAdminModel> getAllMovies() {
@@ -126,7 +131,7 @@ public class MovieAdminDAO {
             PreparedStatement ps;
 
             if (movie.getPosterUrl() != null && !movie.getPosterUrl().isEmpty()) {
-                // new poster uploaded — update poster_url too
+                // Update with new poster URL
                 sql = "UPDATE Movie SET title=?, genre=?, description=?, duration_min=?, release_date=?, "
                         + "poster_url=?, trailer_url=?, imdb_score=?, status=? WHERE movie_id=?";
                 ps = conn.prepareStatement(sql);
@@ -141,7 +146,7 @@ public class MovieAdminDAO {
                 ps.setString(9, movie.getStatus());
                 ps.setInt(10, movie.getMovieId());
             } else {
-                // no new poster — keep existing poster_url in DB
+                // Keep existing poster URL
                 sql = "UPDATE Movie SET title=?, genre=?, description=?, duration_min=?, release_date=?, "
                         + "trailer_url=?, imdb_score=?, status=? WHERE movie_id=?";
                 ps = conn.prepareStatement(sql);

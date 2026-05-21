@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Components.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Tables.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Dashboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/ResponsiveAdmin.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -51,14 +52,6 @@
                                     <c:when test="${not empty bookingList}">
                                         <c:forEach var="b" items="${bookingList}">
 
-                                            <c:set var="statusClass" value="badge-pending" />
-                                            <c:if test="${b.bookingStatus == 'CONFIRMED'}">
-                                                <c:set var="statusClass" value="badge-confirmed" />
-                                            </c:if>
-                                            <c:if test="${b.bookingStatus == 'CANCELLED'}">
-                                                <c:set var="statusClass" value="badge-cancelled" />
-                                            </c:if>
-
                                             <tr>
                                                 <td>#${b.bookingId}</td>
                                                 <td>${b.userId}</td>
@@ -69,9 +62,7 @@
                                                 <td><c:out value="${not empty b.hallName ? b.hallName : 'N/A'}" /></td>
                                                 <td>NRs. ${b.totalAmount}</td>
                                                 <td>${b.bookingTime}</td>
-                                                <td>
-                                                    <span class="badge ${statusClass}">${b.bookingStatus}</span>
-                                                </td>
+                                                <td>${b.status}</td>
                                             </tr>
 
                                         </c:forEach>

@@ -2,6 +2,11 @@ package com.bajekocinema.model;
 
 import java.util.Date;
 
+/**
+ * Model class for Movies in the admin panel.
+ * 
+ * @author bajekocinema
+ */
 public class MovieAdminModel {
 
 	private int movieId;

@@ -1,5 +1,10 @@
 package com.bajekocinema.model;
 
+/**
+ * Model class for Theatres in the admin panel.
+ * 
+ * @author bajekocinema
+ */
 public class TheatreAdminModel {
 
 	private int theatreId;

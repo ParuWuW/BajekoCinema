@@ -16,6 +16,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Manages movie shows, including scheduling and theatre assignments.
+ *
+ * @author bajekocinema
+ */
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin/shows", "/shows" })
 public class ShowsServlet extends HttpServlet {
 

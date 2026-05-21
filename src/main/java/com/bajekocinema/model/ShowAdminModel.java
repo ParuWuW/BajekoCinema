@@ -1,5 +1,10 @@
 package com.bajekocinema.model;
 
+/**
+ * Model class for Movie Shows in the admin panel.
+ * 
+ * @author bajekocinema
+ */
 public class ShowAdminModel {
 
 	private int showId;
@@ -10,7 +15,7 @@ public class ShowAdminModel {
 	private String startTime;
 	private String status;
 
-	// joined fields for display
+	// Extra fields from other tables used for display
 	private String movieTitle;
 	private String hallName;
 	private String theatreName;
@@ -95,7 +100,7 @@ public class ShowAdminModel {
 		this.theatreName = theatreName;
 	}
 
-	// used by admin JSP pages
+	// Helper methods for older JSP pages
 	public int getShowID() {
 		return showId;
 	}
@@ -150,7 +155,7 @@ public class ShowAdminModel {
 	}
 
 	public void setShowDuration(String showDuration) {
-		// no duration field in new schema
+		// Left empty because duration comes from the movie table
 	}
 
 }

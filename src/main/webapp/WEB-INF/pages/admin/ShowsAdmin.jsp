@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Layout.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Components.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Tables.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Tables.css?v=2">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Dashboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/ResponsiveAdmin.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -70,10 +71,7 @@
                                                     <div class="actions">
                                                         <%-- Edit button --%>
                                                         <a href="${pageContext.request.contextPath}/admin/shows?form=edit&showID=${show.showId}"
-                                                           class="delete"
-                                                           style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">
-                                                            Edit
-                                                        </a>
+                                                           class="edit">Edit</a>
                                                         <%-- Delete button --%>
                                                         <form method="post"
                                                               action="${pageContext.request.contextPath}/admin/shows"

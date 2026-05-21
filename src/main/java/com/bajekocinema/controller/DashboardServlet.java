@@ -11,7 +11,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * DashboardServlet — loads stat cards from the new bajekocinema-2.sql schema.
+ * Prepares statistics for the admin dashboard.
+ *
+ * @author bajekocinema
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin/dashboard" })
 public class DashboardServlet extends HttpServlet {
@@ -29,7 +31,7 @@ public class DashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // ── stat cards ────────────────────────────────────────────────────────
+        // Load dashboard statistics
         try {
             request.setAttribute("totalBookings",  bookingAdminDAO.getTotalBookings());
             request.setAttribute("totalRevenue",   bookingAdminDAO.getTotalRevenue());
@@ -37,7 +39,7 @@ public class DashboardServlet extends HttpServlet {
             request.setAttribute("registeredUsers",userAdminDAO.getAllUsers().size());
         } catch (Exception e) {
             e.printStackTrace();
-            // set zeros so EL expressions don't throw NPE
+            // Provide default zeros on error so the JSP doesn't crash
             request.setAttribute("totalBookings",  0);
             request.setAttribute("totalRevenue",   0.0);
             request.setAttribute("activeMovies",   0);

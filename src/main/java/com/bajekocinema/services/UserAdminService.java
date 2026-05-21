@@ -11,7 +11,7 @@ public class UserAdminService {
         return userAdminDAO.getAllUsers();
     }
 
-    // ADDED - used by UsersServlet to toggle isVerified from admin panel
+    
     public boolean updateVerifiedStatus(int userID, boolean isVerified) throws Exception {
         return userAdminDAO.updateVerifiedStatus(userID, isVerified);
     }
