@@ -64,22 +64,22 @@
                                     </div>
 
                                     <!-- Navigation Cards -->
-                                    <a href="${pageContext.request.contextPath}/movies" class="admin-dash-card">
+                                    <a href="${pageContext.request.contextPath}/admin/movies" class="admin-dash-card">
                                         <span class="admin-card-icon">🎬</span>
                                         <span class="admin-card-label">Movies</span>
                                     </a>
 
-                                    <a href="${pageContext.request.contextPath}/users" class="admin-dash-card">
+                                    <a href="${pageContext.request.contextPath}/admin/users" class="admin-dash-card">
                                         <span class="admin-card-icon">👥</span>
                                         <span class="admin-card-label">Users</span>
                                     </a>
 
-                                    <a href="${pageContext.request.contextPath}/shows" class="admin-dash-card">
+                                    <a href="${pageContext.request.contextPath}/admin/shows" class="admin-dash-card">
                                         <span class="admin-card-icon">🎭</span>
                                         <span class="admin-card-label">Shows</span>
                                     </a>
 
-                                    <a href="${pageContext.request.contextPath}/Abooking" class="admin-dash-card">
+                                    <a href="${pageContext.request.contextPath}/admin/Abooking" class="admin-dash-card">
                                         <span class="admin-card-icon">🎟️</span>
                                         <span class="admin-card-label">Bookings</span>
                                     </a>

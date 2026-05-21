@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author bajekocinema
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/admin/shows", "/shows" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/admin/shows" })
 public class ShowsServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
