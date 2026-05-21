@@ -2,6 +2,8 @@ package com.bajekocinema.services;
 
 import com.bajekocinema.dao.UserDAO;
 import com.bajekocinema.model.UserModel;
+import com.bajekocinema.utils.PasswordUtil;
+
 import java.util.List;
 
 public class UserService {
@@ -13,7 +15,9 @@ public class UserService {
 
     public void updateUser(int userId, String fullName, String email,
                            String phone, String image, String password) throws Exception {
-        userDAO.updateUser(userId, fullName, email, phone, image, password);
+    	password = PasswordUtil.getHashPassword(password);
+        UserDAO dao = new UserDAO();
+        dao.updateUser(userId, fullName, email, phone, image, password);
     }
 		
 	}
